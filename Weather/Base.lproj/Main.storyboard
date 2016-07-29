@@ -211,7 +211,7 @@
                                 <state key="normal" image="sync"/>
                                 <connections>
                                     <action selector="syncButtonPressedDown:" destination="BYZ-38-t0r" eventType="touchDown" id="nb8-RW-McJ"/>
-                                    <action selector="updateWeather:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QiW-rg-5F2"/>
+                                    <action selector="syncButtonPressedUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BkJ-Ej-cKF"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temprature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gue-Qb-OOh">
@@ -226,8 +226,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pressure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRv-qd-BXw">
-                                <rect key="frame" x="20" y="136" width="61" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pressure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRv-qd-BXw">
+                                <rect key="frame" x="20" y="136" width="61" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>

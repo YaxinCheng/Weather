@@ -39,23 +39,25 @@ class ViewController: UIViewController {
 		WeatherStation.sharedStation.locationStorage.refreshLocation()
 		let station = WeatherStation.sharedStation
 		station.all(weatherDidRefresh)
+		infoPanel.layer.opacity = 0.7
 		
 		tabBarController?.tabBar.backgroundImage = UIImage()
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshLocation), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		infoPanel.layer.opacity = 0.7
 	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		player?.pause()
 	}
 	
 	func weatherDidRefresh(result: Result<Weather>) {
@@ -110,11 +112,15 @@ class ViewController: UIViewController {
 		alterPressureLabel.text = "Pressure: " + weather.pressure + "IN"
 	}
 	
+	func refreshWeather() {
+		WeatherStation.sharedStation.all(weatherDidRefresh)
+	}
+	
 	@IBAction func syncButtonPressedDown(sender: UIButton) {
 		refreshLocation()
 	}
 	
-	@IBAction func updateWeather(sender: UIButton) {
+	@IBAction func syncButtonPressedUp(sender: UIButton) {
 		let animation = CABasicAnimation(keyPath: "transform.rotation.z")
 		animation.duration = 2
 		animation.removedOnCompletion = false
@@ -122,7 +128,7 @@ class ViewController: UIViewController {
 		animation.fromValue = 2 * M_PI
 		animation.toValue = 0
 		sender.layer.addAnimation(animation, forKey: "rotation")
-		WeatherStation.sharedStation.all(weatherDidRefresh)
+		refreshWeather()
 	}
 	
 	@IBAction func touchToFullScreen() {

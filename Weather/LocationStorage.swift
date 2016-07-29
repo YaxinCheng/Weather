@@ -27,6 +27,9 @@ class LocationStorage: NSObject {
 			let locationData = NSKeyedArchiver.archivedDataWithRootObject(newValue!)
 			let userDefault = NSUserDefaults.standardUserDefaults()
 			userDefault.setObject(locationData, forKey: Common.locationIdentifier)
+			let centre = NSNotificationCenter.defaultCenter()
+			let notification = NSNotification(name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
+			centre.postNotification(notification)
 		} get {
 			let userDefault = NSUserDefaults.standardUserDefaults()
 			guard let locationData = userDefault.objectForKey(Common.locationIdentifier) as? NSData,
@@ -48,4 +51,8 @@ extension LocationStorage: CLLocationManagerDelegate {
 		let location = locations.last!
 		self.location = location
 	}
+}
+
+enum LocationStorageNotification: String {
+	case locationUpdated
 }
