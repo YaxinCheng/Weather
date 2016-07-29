@@ -49,8 +49,12 @@ struct Weather {
 		self.country = country
 		self.region = region
 		self.city = city
-		self.conditionText = condition
+		self.conditionText = Weather.formatWeather(condition)
 		let hour = NSDate.date(from: NSDate().localTime())!.hour
 		self.condition = WeatherCondition(rawValue: condition, day: hour > sunsetTime)!
+	}
+	
+	private static func formatWeather(weather: String) -> String {
+		return weather.stringByReplacingOccurrencesOfString(" (day)", withString: "").stringByReplacingOccurrencesOfString(" (night)", withString: "")
 	}
 }

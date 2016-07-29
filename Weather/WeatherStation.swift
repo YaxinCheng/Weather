@@ -12,28 +12,20 @@ import CoreLocation
 struct WeatherStation {
 	static var sharedStation = WeatherStation()
 	private let weatherManager: YWeatherAPI
-	let locaitonManager: CLLocationManager
+	let locationStorage: LocationStorage
 	
 	private init() {
 		weatherManager = YWeatherAPI.sharedManager()
 		weatherManager.cacheEnabled = true
 		weatherManager.cacheExpiryInMinutes = 20
 		weatherManager.defaultTemperatureUnit = C
-		locaitonManager = CLLocationManager()
-		locaitonManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locaitonManager.requestWhenInUseAuthorization()
-		}
+		locationStorage = LocationStorage()
 	}
 	
 	func all(completion: (Result<Weather>) -> Void) {
-		defer {
-			self.locaitonManager.stopUpdatingLocation()
-		}
 		let location: CLLocation?
 		if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == .AuthorizedAlways {
-			locaitonManager.startUpdatingLocation()
-			location = locaitonManager.location
+			location = locationStorage.location
 		} else {
 			let error = WeatherError.NotAuthorized("Location service of the weather app is blocked, please turn it on in the setting app")
 			let result = Result<Weather>.Failure(error)
