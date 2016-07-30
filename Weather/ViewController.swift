@@ -31,6 +31,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var alterHumidLabel: UILabel!
 	@IBOutlet weak var alterPressureLabel: UILabel!
 	
+	private var animating: Bool = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -45,8 +46,8 @@ class ViewController: UIViewController {
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshLocation), name: UIApplicationDidEnterBackgroundNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -116,10 +117,6 @@ class ViewController: UIViewController {
 		WeatherStation.sharedStation.all(weatherDidRefresh)
 	}
 	
-	@IBAction func syncButtonPressedDown(sender: UIButton) {
-		refreshLocation()
-	}
-	
 	@IBAction func syncButtonPressedUp(sender: UIButton) {
 		let animation = CABasicAnimation(keyPath: "transform.rotation.z")
 		animation.duration = 2
@@ -128,10 +125,12 @@ class ViewController: UIViewController {
 		animation.fromValue = 2 * M_PI
 		animation.toValue = 0
 		sender.layer.addAnimation(animation, forKey: "rotation")
-		refreshWeather()
+		refreshLocation()
 	}
 	
 	@IBAction func touchToFullScreen() {
+		if animating == true { return }
+		animating = true
 		if infoPanel.hidden == false {
 			UIView.animateWithDuration(0.3, animations: { [unowned self] in
 				self.infoPanel.center.y += (self.infoPanel.bounds.height + 48)
@@ -140,15 +139,18 @@ class ViewController: UIViewController {
 				self.alterPressureLabel.alpha = 1
 			}) { [unowned self] _ in
 				self.infoPanel.hidden = true
+				self.animating = false
 			}
 		} else {
 			infoPanel.hidden = false
 			syncButton.hidden = false
-			UIView.animateWithDuration(0.3) { [unowned self] in
+			UIView.animateWithDuration(0.3, animations: { [unowned self] in
 				self.alterPressureLabel.alpha = 0
 				self.alterHumidLabel.alpha = 0
 				self.alterTempLabel.alpha = 0
 				self.infoPanel.center.y -= (self.infoPanel.bounds.height + 48)
+			}) { [unowned self] _ in
+				self.animating = false
 			}
 		}
 	}
@@ -159,7 +161,7 @@ class ViewController: UIViewController {
 	
 	func enterForeground() {
 		player?.play()
-		refreshLocation()
+		syncButtonPressedUp(syncButton)
 	}
 	
 	func refreshLocation() {

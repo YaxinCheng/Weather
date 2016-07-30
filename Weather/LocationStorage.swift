@@ -47,7 +47,11 @@ class LocationStorage: NSObject {
 extension LocationStorage: CLLocationManagerDelegate {
 	func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		defer { manager.stopUpdatingLocation() }
-		if locations.isEmpty { return }
+		if locations.isEmpty {
+			let notification = NSNotification(name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
+			NSNotificationCenter.defaultCenter().postNotification(notification)
+			return
+		}
 		let location = locations.last!
 		self.location = location
 	}
@@ -55,4 +59,5 @@ extension LocationStorage: CLLocationManagerDelegate {
 
 enum LocationStorageNotification: String {
 	case locationUpdated
+	case noNewLocation
 }

@@ -206,11 +206,10 @@
                                     <constraint firstAttribute="height" constant="48" id="0rO-qc-IBa"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-xJ-Kag">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-xJ-Kag">
                                 <rect key="frame" x="531" y="43" width="33" height="33"/>
                                 <state key="normal" image="sync"/>
                                 <connections>
-                                    <action selector="syncButtonPressedDown:" destination="BYZ-38-t0r" eventType="touchDown" id="nb8-RW-McJ"/>
                                     <action selector="syncButtonPressedUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BkJ-Ej-cKF"/>
                                 </connections>
                             </button>

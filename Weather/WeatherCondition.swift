@@ -43,7 +43,7 @@ enum WeatherCondition {
 			self = .partlyCloudy(day: dayTime)
 		case "snow", "mixed rain and snow", "mixed snow and sleet", "snow flurries", "light snow showers", "blowing snow", "hail", "cold":
 			self = .snow(day: dayTime)
-		case "thunderstorm", "tornado", "tropical storm", "hurricane", "severe thunderstorms":
+		case "thunderstorm", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
 			self = .thunderstorm(day: dayTime)
 		case "windy", "blustery":
 			self = .thunderstorm(day: dayTime)
