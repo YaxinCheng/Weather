@@ -105,8 +105,8 @@ class ViewController: UIViewController {
 		humidityLabel.text = weather.humidity + "%"
 		windDirectionLabel.text = weather.windsDirection
 		visibilityLabel.text = weather.visibility
-		sunriseLabel.text = "\(weather.sunriseTime):00"
-		sunsetLabel.text = "\(weather.sunsetTime):00"
+		sunriseLabel.text = "\(weather.sunriseTime.hour):\(weather.sunriseTime.minute)"
+		sunsetLabel.text = "\(weather.sunsetTime.hour):\(weather.sunsetTime.minute)"
 		
 		alterTempLabel.text = "Temprature: " + weather.temprature + "°C"
 		alterHumidLabel.text = "Humidity: " + weather.humidity + "%"

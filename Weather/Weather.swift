@@ -14,8 +14,8 @@ struct Weather {
 	let temprature: String
 	let pressure: String
 	let windTemperatue: String
-	let sunriseTime: Int
-	let sunsetTime: Int
+	let sunriseTime: NSDateComponents
+	let sunsetTime: NSDateComponents
 	let visibility: String
 	let windsDirection: String
 	let humidity: String
@@ -26,10 +26,11 @@ struct Weather {
 	init?(with JSON: NSDictionary) {
 		guard
 			let temprature = JSON["temperatureInC"] as? String,
+			let tempDouble = Double(temprature),
 			let pressure = JSON["pressureInIN"] as? String,
 			let windTemperatue = JSON["windChillInC"] as? String,
-			let sunsetTime = (JSON["sunsetInLocalTime"] as? NSDateComponents)?.hour,
-			let sunriseTime = (JSON["sunriseInLocalTime"] as? NSDateComponents)?.hour,
+			let sunsetTime = JSON["sunsetInLocalTime"] as? NSDateComponents,
+			let sunriseTime = JSON["sunriseInLocalTime"] as? NSDateComponents,
 			let visibility = JSON["visibilityInMI"] as? String,
 			let windsDirection = JSON["windDirectionInCompassPoints"] as? String,
 			let humidity = JSON["humidity"] as? String,
@@ -38,7 +39,7 @@ struct Weather {
 			let region = JSON["region"] as? String,
 			let city = JSON["city"] as? String
 		else { return nil }
-		self.temprature = temprature
+		self.temprature = "\(Int(ceil(tempDouble)))"
 		self.pressure = pressure
 		self.windTemperatue = windTemperatue
 		self.sunriseTime = sunriseTime
@@ -51,7 +52,8 @@ struct Weather {
 		self.city = city
 		self.conditionText = Weather.formatWeather(condition)
 		let hour = NSDate.date(from: NSDate().localTime())!.hour
-		self.condition = WeatherCondition(rawValue: condition, day: hour > sunsetTime)!
+		let sunset = round(Double(sunsetTime.hour) + Double(sunsetTime.minute) / 60)
+		self.condition = WeatherCondition(rawValue: condition, day: Double(hour) > sunset)!
 	}
 	
 	private static func formatWeather(weather: String) -> String {
