@@ -10,4 +10,6 @@ import Foundation
 
 struct Common {
 	static let locationIdentifier = "LocationIdentifier"
+	static let cityCellIdentifier = "plainTextCell"
+	static let segueCityView = "showCityView"
 }

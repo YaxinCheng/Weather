@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import YWeatherAPI
 
 struct WeatherStation {
 	static var sharedStation = WeatherStation()
@@ -45,6 +46,19 @@ struct WeatherStation {
 			let result = Result<Weather>.Success(weather)
 			completion(result)
 			}) { (response, error) in
+			let result = Result<Weather>.Failure(error)
+			completion(result)
+		}
+	}
+	
+	func all(for city: City, completion: (Result<Weather>) -> Void) {
+		weatherManager.allCurrentConditionsForLocation(city.description, success: { (JSON) in
+			guard let weather = Weather(with: JSON) else {
+				return
+			}
+			let result = Result<Weather>.Success(weather)
+			completion(result)
+			}) { (response,  error) in
 			let result = Result<Weather>.Failure(error)
 			completion(result)
 		}

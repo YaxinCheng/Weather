@@ -8,6 +8,14 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
+        <!--cityView-->
+        <scene sceneID="hfv-4X-c4c">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Cities" referencedIdentifier="cityView" id="kro-Vb-0ib" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gyR-Ia-Tbn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="671.5" y="-353"/>
+        </scene>
         <!--Now-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -198,6 +206,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="cityButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U1o-QK-Zhe"/>
+                                </connections>
                             </button>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSD-PT-hhj">
                                 <rect key="frame" x="0.0" y="551" width="600" height="48"/>
@@ -206,7 +217,7 @@
                                     <constraint firstAttribute="height" constant="48" id="0rO-qc-IBa"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-xJ-Kag">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-xJ-Kag">
                                 <rect key="frame" x="531" y="43" width="33" height="33"/>
                                 <state key="normal" image="sync"/>
                                 <connections>
@@ -302,6 +313,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="3El-Fa-RPf"/>
+                        <segue destination="kro-Vb-0ib" kind="presentation" identifier="showCityView" id="bqD-I2-LlM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C5P-7Z-DHR" userLabel="First Responder" sceneMemberID="firstResponder"/>

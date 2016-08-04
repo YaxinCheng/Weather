@@ -155,6 +155,10 @@ class ViewController: UIViewController {
 		}
 	}
 	
+	@IBAction func cityButtonPressed(sender: UIButton) {
+		parentViewController?.performSegueWithIdentifier(Common.segueCityView, sender: nil)
+	}
+	
 	@IBAction func swipeDownPanel(sender: UISwipeGestureRecognizer) {
 		touchToFullScreen()
 	}

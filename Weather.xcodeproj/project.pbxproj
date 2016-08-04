@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		422B8E10EC2EBF9A514CB9B9 /* libPods-Weather.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8652FD3446397253AA8B201A /* libPods-Weather.a */; };
+		D71F6116225E8825D1AB8405 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EB11A7FD31FD77F6F72846 /* Pods_Weather.framework */; };
 		E347AC751D4BEF820012C9E2 /* LocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E347AC741D4BEF810012C9E2 /* LocationStorage.swift */; };
 		E347AC771D4BF0900012C9E2 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E347AC761D4BF0900012C9E2 /* Common.swift */; };
 		E3C739641D4A910500F51623 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739631D4A910500F51623 /* AppDelegate.swift */; };
@@ -61,6 +61,11 @@
 		E3C739EE1D4BD02400F51623 /* NSDate+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739ED1D4BD02400F51623 /* NSDate+Localization.swift */; };
 		E3C739F01D4BD65C00F51623 /* UIAlertAction+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */; };
 		E3C739F21D4BD72F00F51623 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739F11D4BD72F00F51623 /* Weather.swift */; };
+		E3F0FBCA1D538D6E002DB74E /* Cities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F0FBC91D538D6E002DB74E /* Cities.storyboard */; };
+		E3F0FBCC1D538DD3002DB74E /* CityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FBCB1D538DD3002DB74E /* CityViewController.swift */; };
+		E3F0FBCE1D539237002DB74E /* PlaceLoadProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FBCD1D539237002DB74E /* PlaceLoadProtocol.swift */; };
+		E3F0FBD01D53956C002DB74E /* CityLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FBCF1D53956C002DB74E /* CityLoader.swift */; };
+		E3F0FBD21D5398E4002DB74E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FBD11D5398E4002DB74E /* City.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +86,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50EB11A7FD31FD77F6F72846 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AC8962AF5412D7D6D88CA96 /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
-		8652FD3446397253AA8B201A /* libPods-Weather.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weather.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96FED51B22E5711E12C1C00E /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 		E347AC741D4BEF810012C9E2 /* LocationStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStorage.swift; sourceTree = "<group>"; };
 		E347AC761D4BF0900012C9E2 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -136,7 +141,6 @@
 		E3C739B81D4A93BA00F51623 /* weather_thunderstorm_night.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = weather_thunderstorm_night.mp4; sourceTree = "<group>"; };
 		E3C739B91D4A93BA00F51623 /* weather_windy_day.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = weather_windy_day.mp4; sourceTree = "<group>"; };
 		E3C739BA1D4A93BA00F51623 /* weather_windy_night.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = weather_windy_night.mp4; sourceTree = "<group>"; };
-		E3C739DF1D4ABA6000F51623 /* Weather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Weather-Bridging-Header.h"; sourceTree = "<group>"; };
 		E3C739E31D4AC7C900F51623 /* WeatherStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStation.swift; sourceTree = "<group>"; };
 		E3C739E51D4AC9A500F51623 /* WeatherCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		E3C739E91D4BCE5200F51623 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -144,6 +148,11 @@
 		E3C739ED1D4BD02400F51623 /* NSDate+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Localization.swift"; sourceTree = "<group>"; };
 		E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Cancel.swift"; sourceTree = "<group>"; };
 		E3C739F11D4BD72F00F51623 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		E3F0FBC91D538D6E002DB74E /* Cities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cities.storyboard; sourceTree = "<group>"; };
+		E3F0FBCB1D538DD3002DB74E /* CityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityViewController.swift; sourceTree = "<group>"; };
+		E3F0FBCD1D539237002DB74E /* PlaceLoadProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceLoadProtocol.swift; sourceTree = "<group>"; };
+		E3F0FBCF1D53956C002DB74E /* CityLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityLoader.swift; sourceTree = "<group>"; };
+		E3F0FBD11D5398E4002DB74E /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				422B8E10EC2EBF9A514CB9B9 /* libPods-Weather.a in Frameworks */,
+				D71F6116225E8825D1AB8405 /* Pods_Weather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +193,7 @@
 		7CC2668FB5D6CEA50CC7F893 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8652FD3446397253AA8B201A /* libPods-Weather.a */,
+				50EB11A7FD31FD77F6F72846 /* Pods_Weather.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -198,7 +207,6 @@
 				E3C739611D4A910500F51623 /* Products */,
 				0743C71AEDB33068460F53DE /* Pods */,
 				7CC2668FB5D6CEA50CC7F893 /* Frameworks */,
-				E3C739DF1D4ABA6000F51623 /* Weather-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -226,7 +234,12 @@
 				E3C739E51D4AC9A500F51623 /* WeatherCondition.swift */,
 				E3C739F11D4BD72F00F51623 /* Weather.swift */,
 				E3C739E91D4BCE5200F51623 /* Result.swift */,
+				E3F0FBCD1D539237002DB74E /* PlaceLoadProtocol.swift */,
+				E3F0FBD11D5398E4002DB74E /* City.swift */,
+				E3F0FBCF1D53956C002DB74E /* CityLoader.swift */,
+				E3F0FBCB1D538DD3002DB74E /* CityViewController.swift */,
 				E3C739671D4A910500F51623 /* Main.storyboard */,
+				E3F0FBC91D538D6E002DB74E /* Cities.storyboard */,
 				E3C7396D1D4A910500F51623 /* Assets.xcassets */,
 				E3C7396F1D4A910500F51623 /* LaunchScreen.storyboard */,
 				E3C739721D4A910500F51623 /* Info.plist */,
@@ -429,6 +442,7 @@
 				E3C739CF1D4A93BA00F51623 /* weather_l_thunderstorm_night.mp4 in Resources */,
 				E3C739C11D4A93BA00F51623 /* weather_l_cloudy_day.mp4 in Resources */,
 				E3C739BC1D4A93BA00F51623 /* weather_cloudy_night.mp4 in Resources */,
+				E3F0FBCA1D538D6E002DB74E /* Cities.storyboard in Resources */,
 				E3C739D21D4A93BA00F51623 /* weather_partly_cloud_day.mp4 in Resources */,
 				E3C739D71D4A93BA00F51623 /* weather_snow_day.mp4 in Resources */,
 				E3C739DD1D4A93BA00F51623 /* weather_windy_night.mp4 in Resources */,
@@ -516,6 +530,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3C739EA1D4BCE5200F51623 /* Result.swift in Sources */,
+				E3F0FBCC1D538DD3002DB74E /* CityViewController.swift in Sources */,
 				E3C7396C1D4A910500F51623 /* Weather.xcdatamodeld in Sources */,
 				E3C739E41D4AC7C900F51623 /* WeatherStation.swift in Sources */,
 				E3C739661D4A910500F51623 /* ViewController.swift in Sources */,
@@ -523,9 +538,12 @@
 				E3C739F21D4BD72F00F51623 /* Weather.swift in Sources */,
 				E347AC751D4BEF820012C9E2 /* LocationStorage.swift in Sources */,
 				E3C739641D4A910500F51623 /* AppDelegate.swift in Sources */,
+				E3F0FBCE1D539237002DB74E /* PlaceLoadProtocol.swift in Sources */,
 				E3C739E61D4AC9A500F51623 /* WeatherCondition.swift in Sources */,
 				E3C739EC1D4BCE9F00F51623 /* WeatherError.swift in Sources */,
+				E3F0FBD01D53956C002DB74E /* CityLoader.swift in Sources */,
 				E3C739EE1D4BD02400F51623 /* NSDate+Localization.swift in Sources */,
+				E3F0FBD21D5398E4002DB74E /* City.swift in Sources */,
 				E3C739F01D4BD65C00F51623 /* UIAlertAction+Cancel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -676,7 +694,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guofeng.Jch.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Weather-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -691,7 +709,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guofeng.Jch.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Weather-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
