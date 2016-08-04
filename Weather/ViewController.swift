@@ -32,14 +32,14 @@ class ViewController: UIViewController {
 	@IBOutlet weak var alterPressureLabel: UILabel!
 	
 	private var animating: Bool = false
+	var city: City? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		
 		WeatherStation.sharedStation.locationStorage.refreshLocation()
-		let station = WeatherStation.sharedStation
-		station.all(weatherDidRefresh)
+		
 		infoPanel.layer.opacity = 0.7
 		
 		tabBarController?.tabBar.backgroundImage = UIImage()
@@ -53,6 +53,12 @@ class ViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		let station = WeatherStation.sharedStation
+		if city == nil {
+			station.all(weatherDidRefresh)
+		} else {
+			station.all(for: city!, completion: weatherDidRefresh)
+		}
 	}
 	
 	override func viewWillDisappear(animated: Bool) {
@@ -125,7 +131,12 @@ class ViewController: UIViewController {
 		animation.fromValue = 2 * M_PI
 		animation.toValue = 0
 		sender.layer.addAnimation(animation, forKey: "rotation")
-		refreshLocation()
+		WeatherStation.sharedStation.clearCache()
+		if city == nil {
+			refreshLocation()
+		} else {
+			WeatherStation.sharedStation.all(for: city!, completion: weatherDidRefresh)
+		}
 	}
 	
 	@IBAction func touchToFullScreen() {
@@ -161,6 +172,10 @@ class ViewController: UIViewController {
 	
 	@IBAction func swipeDownPanel(sender: UISwipeGestureRecognizer) {
 		touchToFullScreen()
+	}
+	
+	@IBAction func prepareForUnwindSegue(segue: UIStoryboardSegue) {
+		
 	}
 	
 	func enterForeground() {

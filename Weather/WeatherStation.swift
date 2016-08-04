@@ -18,7 +18,7 @@ struct WeatherStation {
 	private init() {
 		weatherManager = YWeatherAPI.sharedManager()
 		weatherManager.cacheEnabled = true
-		weatherManager.cacheExpiryInMinutes = 20
+		weatherManager.cacheExpiryInMinutes = 2
 		weatherManager.defaultTemperatureUnit = C
 		locationStorage = LocationStorage()
 	}
@@ -62,5 +62,9 @@ struct WeatherStation {
 			let result = Result<Weather>.Failure(error)
 			completion(result)
 		}
+	}
+	
+	func clearCache() {
+		weatherManager.clearCache()
 	}
 }
