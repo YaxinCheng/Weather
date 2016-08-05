@@ -23,9 +23,7 @@ struct Forecast {
 			let cond = WeatherCondition(rawValue: conditionString, day: true)
 		else { return nil }
 		let time = "\(timeComponents.year)-\(timeComponents.month)-\(timeComponents.day)"
-		let dateFmt = NSDateFormatter()
-		dateFmt.dateFormat = "yyyy-MM-dd"
-		let date = dateFmt.dateFromString(time)
+		let date = NSDate.date(string: time, format: "yyyy-MM-dd")
 		self.date = date?.formatDate() ?? time
 		highTemp = high
 		lowTemp = low

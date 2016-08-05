@@ -30,9 +30,9 @@ extension NSDate {
 		return component.hour
 	}
 	
-	static func date(from string: String) -> NSDate? {
+	static func date(string string: String, format: String) -> NSDate? {
 		let dateFmt = NSDateFormatter()
-		dateFmt.dateFormat = "yyyy-MM-dd hh:mm:ss"
+		dateFmt.dateFormat = format
 		let localTimeZone = NSTimeZone.localTimeZone()
 		dateFmt.timeZone = localTimeZone
 		guard let date = dateFmt.dateFromString(string) else { return nil }
