@@ -101,7 +101,7 @@
                             <outlet property="delegate" destination="y5D-q9-5R2" id="lY5-LB-7V5"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="150" height="200"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="150" height="300"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="200" height="400"/>
                     <connections>

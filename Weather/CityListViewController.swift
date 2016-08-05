@@ -21,6 +21,11 @@ class CityListViewController: UITableViewController {
 			print("Error: \(error)")
 		}
 		popoverPresentationController?.backgroundColor = .clearColor()
+		let count = cityList.count
+		if count < 6 {
+			let height = (count + 1) * 44
+			preferredContentSize = CGSize(width: 150, height: height)
+		}
 	}
 	
 	override func viewWillAppear(animated: Bool) {
