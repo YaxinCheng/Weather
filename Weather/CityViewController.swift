@@ -20,6 +20,7 @@ class CityViewController: UITableViewController {
 		
 		let searchBar = UISearchBar()
 		searchBar.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50)
+		searchBar.placeholder = "Search your city"
 		searchBar.backgroundImage = UIImage()
 		searchBar.delegate = self
 		tableView.tableHeaderView = searchBar
@@ -44,21 +45,18 @@ class CityViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		performSegueWithIdentifier(Common.unwindBackMain, sender: nil)
+		let city = cityList[indexPath.row]
+		do {
+			try city.saveToCache()
+		} catch {
+			print(error)
+		}
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	
 	// MARK: - Navigation
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else { return }
-		if identifier == Common.unwindBackMain {
-			let city = cityList[indexPath.row]
-			let destinationVC = segue.destinationViewController as! ViewController
-			destinationVC.city = city
-		}
-	}
 	
 	@IBAction func cancelButtonPressed(sender: AnyObject) {
 		dismissViewControllerAnimated(true, completion: nil)

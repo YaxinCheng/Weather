@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
-		
+		definesPresentationContext = true
 		WeatherStation.sharedStation.locationStorage.refreshLocation()
 		
 		infoPanel.layer.opacity = 0.7
@@ -53,12 +53,7 @@ class ViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		let station = WeatherStation.sharedStation
-		if city == nil {
-			station.all(weatherDidRefresh)
-		} else {
-			station.all(for: city!, completion: weatherDidRefresh)
-		}
+		refreshWeather()
 	}
 	
 	override func viewWillDisappear(animated: Bool) {
@@ -120,7 +115,11 @@ class ViewController: UIViewController {
 	}
 	
 	func refreshWeather() {
-		WeatherStation.sharedStation.all(weatherDidRefresh)
+		if city != nil {
+			WeatherStation.sharedStation.all(for: city!, completion: weatherDidRefresh)
+		} else {
+			WeatherStation.sharedStation.all(weatherDidRefresh)
+		}
 	}
 	
 	@IBAction func syncButtonPressedUp(sender: UIButton) {
@@ -167,15 +166,30 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func cityButtonPressed(sender: UIButton) {
-		parentViewController?.performSegueWithIdentifier(Common.segueCityView, sender: nil)
+		performSegueWithIdentifier(Common.segueCityView, sender: nil)
+	}
+	
+	@IBAction func cityButtonLongPressed(sender: UILongPressGestureRecognizer) {
+		performSegueWithIdentifier(Common.segueCitySearch, sender: nil)
 	}
 	
 	@IBAction func swipeDownPanel(sender: UISwipeGestureRecognizer) {
 		touchToFullScreen()
 	}
 	
+	// MARK: - Navigation
 	@IBAction func prepareForUnwindSegue(segue: UIStoryboardSegue) {
-		
+		refreshWeather()
+	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		guard let identifier = segue.identifier else { return }
+		if identifier == Common.segueCityView {
+			let destinationVC = segue.destinationViewController as! CityListViewController
+			destinationVC.modalPresentationStyle = .Popover
+			destinationVC.popoverPresentationController?.sourceView = cityButton
+			destinationVC.popoverPresentationController?.delegate = self
+		}
 	}
 	
 	func enterForeground() {
@@ -185,5 +199,11 @@ class ViewController: UIViewController {
 	
 	func refreshLocation() {
 		WeatherStation.sharedStation.locationStorage.refreshLocation()
+	}
+}
+
+extension ViewController: UIPopoverPresentationControllerDelegate {
+	func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+		return .None
 	}
 }

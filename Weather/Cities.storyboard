@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--City View Controller-->
@@ -12,7 +13,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="int-v5-lQ3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="plainTextCell" textLabel="IEK-zj-4oM" detailTextLabel="Jg4-1Z-VMS" style="IBUITableViewCellStyleSubtitle" id="bag-lT-fZn">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
@@ -52,19 +53,67 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="mfc-hY-y8H" kind="unwind" identifier="citySelected" unwindAction="prepareForUnwindSegue:" id="H6V-eC-tkI"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="klB-du-kZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="mfc-hY-y8H" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1141" y="373"/>
+        </scene>
+        <!--City List View Controller-->
+        <scene sceneID="vIu-nl-8R8">
+            <objects>
+                <tableViewController storyboardIdentifier="cityList" id="y5D-q9-5R2" customClass="CityListViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="41c-Pf-LWE">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="basicTextCell" id="uNJ-0h-1oH" customClass="CityCell" customModule="Weather" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="200" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uNJ-0h-1oH" id="xsY-mq-5zD">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7R-WV-ToS">
+                                            <rect key="frame" x="8" y="11" width="184" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Q7R-WV-ToS" secondAttribute="trailing" id="8A8-17-mgA"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Q7R-WV-ToS" secondAttribute="bottom" constant="3" id="PRX-w2-8GF"/>
+                                        <constraint firstItem="Q7R-WV-ToS" firstAttribute="top" secondItem="xsY-mq-5zD" secondAttribute="topMargin" constant="3" id="Wev-Wa-S4I"/>
+                                        <constraint firstItem="Q7R-WV-ToS" firstAttribute="leading" secondItem="xsY-mq-5zD" secondAttribute="leadingMargin" id="m8z-9v-HpN"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cityLabel" destination="Q7R-WV-ToS" id="Ur3-35-o0k"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="y5D-q9-5R2" id="zb8-Ts-7RZ"/>
+                            <outlet property="delegate" destination="y5D-q9-5R2" id="lY5-LB-7V5"/>
+                        </connections>
+                    </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="100"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="400"/>
+                    <connections>
+                        <segue destination="v5P-Lz-3nd" kind="unwind" identifier="citySelected" unwindAction="prepareForUnwindSegue:" id="3nK-0h-Zh8"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r0K-CW-YTV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="v5P-Lz-3nd" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="538" y="-321"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kvL-uT-aC5">
             <objects>
-                <navigationController storyboardIdentifier="cityView" automaticallyAdjustsScrollViewInsets="NO" id="zJb-He-cZA" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="citySearch" automaticallyAdjustsScrollViewInsets="NO" id="zJb-He-cZA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QDX-ve-9xf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -11,6 +11,8 @@ import Foundation
 struct Common {
 	static let locationIdentifier = "LocationIdentifier"
 	static let cityCellIdentifier = "plainTextCell"
+	static let cityListCellIdentifier = "basicTextCell"
 	static let segueCityView = "showCityView"
+	static let segueCitySearch = "showCitySearch"
 	static let unwindBackMain = "citySelected"
 }
