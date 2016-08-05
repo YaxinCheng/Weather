@@ -51,7 +51,7 @@ struct Weather {
 		self.region = region
 		self.city = city
 		self.conditionText = Weather.formatWeather(condition)
-		let hour = NSDate.date(from: NSDate().localTime())!.hour
+		let hour = NSDate.date(string: NSDate().localTime(), format: "yyyy-MM-dd hh:mm:ss")!.hour
 		let sunset = round(Double(sunsetTime.hour) + Double(sunsetTime.minute) / 60)
 		self.condition = WeatherCondition(rawValue: condition, day: Double(hour) < sunset)!
 	}

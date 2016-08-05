@@ -23,7 +23,7 @@ class CityViewController: UITableViewController {
 		searchBar.placeholder = "Search your city"
 		searchBar.backgroundImage = UIImage()
 		searchBar.delegate = self
-		tableView.tableHeaderView = searchBar
+		navigationItem.titleView = searchBar
 	}
 	
 	// MARK: - Table view data source

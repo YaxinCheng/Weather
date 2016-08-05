@@ -10,10 +10,10 @@
         <scene sceneID="emp-JH-qPf">
             <objects>
                 <tableViewController id="YgV-EM-pex" customClass="CityViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="int-v5-lQ3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="int-v5-lQ3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="plainTextCell" textLabel="IEK-zj-4oM" detailTextLabel="Jg4-1Z-VMS" style="IBUITableViewCellStyleSubtitle" id="bag-lT-fZn">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
@@ -47,6 +47,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="LhE-qj-1Ua">
+                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="nZV-H8-w4f">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="YgV-EM-pex" id="Fxn-UP-LaN"/>
