@@ -23,11 +23,11 @@ enum WeatherCondition {
 	init?(rawValue: String, day: Bool?) {
 		let dayTime = day ?? false
 		switch rawValue.lowercaseString {
-		case "sunny", "fair (day)":
+		case "sunny", "fair", "fair (day)":
 			self = .sunny(day: dayTime)
-		case "clear (night)", "fair (night)":
+		case "clear", "clear (night)", "fair (night)":
 			self = .sunny(day: false)
-		case "cloudy":
+		case "cloudy", "mostly cloudy":
 			self = .cloudy(day: dayTime)
 		case "mostly cloudy (night)", "partly cloudy (night)":
 			self = .cloudy(day: false)
@@ -37,13 +37,13 @@ enum WeatherCondition {
 			self = .rainy(day: dayTime)
 		case "foggy", "dust", "haze", "smoky":
 			self = .fog(day: dayTime)
-		case "partly cloudy (day)":
+		case "partly cloudy (day)", "mostly sunny":
 			self = .partlySunny
-		case "partlycloudy":
+		case "partlycloudy", "partly cloudy":
 			self = .partlyCloudy(day: dayTime)
 		case "snow", "mixed rain and snow", "mixed snow and sleet", "snow flurries", "light snow showers", "blowing snow", "hail", "cold":
 			self = .snow(day: dayTime)
-		case "thunderstorm", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
+		case "thunderstorm", "thunderstorms", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
 			self = .thunderstorm(day: dayTime)
 		case "windy", "blustery":
 			self = .thunderstorm(day: dayTime)

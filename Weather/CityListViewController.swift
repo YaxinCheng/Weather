@@ -20,6 +20,12 @@ class CityListViewController: UITableViewController {
 		} catch {
 			print("Error: \(error)")
 		}
+		popoverPresentationController?.backgroundColor = .clearColor()
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+	
 	}
 	
 	// MARK: - Table view data source
@@ -36,6 +42,7 @@ class CityListViewController: UITableViewController {
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier(Common.cityListCellIdentifier, forIndexPath: indexPath) as! CityCell
+		
 		if indexPath.section == 0 {
 			cell.cityLabel.text = "Local"
 		} else {

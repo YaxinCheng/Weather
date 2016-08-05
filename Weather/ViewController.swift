@@ -31,7 +31,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var alterHumidLabel: UILabel!
 	@IBOutlet weak var alterPressureLabel: UILabel!
 	
-	private var animating: Bool = false
+	private var animating = false
 	var city: City? = nil
 	
 	override func viewDidLoad() {
@@ -43,6 +43,7 @@ class ViewController: UIViewController {
 		infoPanel.layer.opacity = 0.7
 		
 		tabBarController?.tabBar.backgroundImage = UIImage()
+		tabBarController?.tabBar.shadowImage = UIImage()
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
@@ -134,34 +135,61 @@ class ViewController: UIViewController {
 		if city == nil {
 			refreshLocation()
 		} else {
-			WeatherStation.sharedStation.all(for: city!, completion: weatherDidRefresh)
+			refreshWeather()
 		}
 	}
 	
 	@IBAction func touchToFullScreen() {
-		if animating == true { return }
+		guard animating == false else { return }
 		animating = true
+		let moveAnimation = CABasicAnimation(keyPath: "position.y")
+		moveAnimation.duration = 0.3
+		moveAnimation.removedOnCompletion = false
+		moveAnimation.fillMode = kCAFillModeForwards
+		
+		let opacityAnimation = CABasicAnimation(keyPath: "opacity")
+		opacityAnimation.duration = moveAnimation.duration
+		opacityAnimation.removedOnCompletion = moveAnimation.removedOnCompletion
+		opacityAnimation.fillMode = kCAFillModeForwards
 		if infoPanel.hidden == false {
-			UIView.animateWithDuration(0.3, animations: { [unowned self] in
-				self.infoPanel.center.y += (self.infoPanel.bounds.height + 48)
-				self.alterTempLabel.alpha = 1
-				self.alterHumidLabel.alpha = 1
-				self.alterPressureLabel.alpha = 1
-			}) { [unowned self] _ in
-				self.infoPanel.hidden = true
-				self.animating = false
+			moveAnimation.fromValue = infoPanel.center.y
+			moveAnimation.toValue = view.bounds.height + 100
+			
+			opacityAnimation.fromValue = 0
+			opacityAnimation.toValue = 1
+			
+			infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
+			alterPressureLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			alterHumidLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			alterTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			
+			Delay(moveAnimation.duration) { [weak self] in
+				self?.infoPanel.hidden = true
+				self?.alterTempLabel.layer.opacity = 1
+				self?.alterHumidLabel.layer.opacity = 1
+				self?.alterPressureLabel.layer.opacity = 1
+				self?.animating = false
 			}
 		} else {
 			infoPanel.hidden = false
-			syncButton.hidden = false
-			UIView.animateWithDuration(0.3, animations: { [unowned self] in
-				self.alterPressureLabel.alpha = 0
-				self.alterHumidLabel.alpha = 0
-				self.alterTempLabel.alpha = 0
-				self.infoPanel.center.y -= (self.infoPanel.bounds.height + 48)
-			}) { [unowned self] _ in
-				self.animating = false
+			
+			opacityAnimation.fromValue = 1
+			opacityAnimation.toValue = 0
+			moveAnimation.fromValue = view.bounds.height + 100
+			moveAnimation.toValue = infoPanel.center.y
+			
+			alterTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			alterHumidLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			alterPressureLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			
+			infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
+			Delay(moveAnimation.duration) { [weak self] in
+				self?.alterTempLabel.layer.opacity = 0
+				self?.alterHumidLabel.layer.opacity = 0
+				self?.alterPressureLabel.layer.opacity = 0
+				self?.animating = false
 			}
+			
 		}
 	}
 	
@@ -189,6 +217,8 @@ class ViewController: UIViewController {
 			destinationVC.modalPresentationStyle = .Popover
 			destinationVC.popoverPresentationController?.sourceView = cityButton
 			destinationVC.popoverPresentationController?.delegate = self
+			guard let popOver = destinationVC.popoverPresentationController else { return }
+			popOver.sourceRect = CGRect(x: 0, y: 0, width: cityButton.frame.width, height: cityButton.frame.height)
 		}
 	}
 	

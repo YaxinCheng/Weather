@@ -45,7 +45,7 @@ struct WeatherStation {
 			}
 			let result = Result<Weather>.Success(weather)
 			completion(result)
-			}) { (response, error) in
+			}) { (_, error) in
 			let result = Result<Weather>.Failure(error)
 			completion(result)
 		}
@@ -53,13 +53,50 @@ struct WeatherStation {
 	
 	func all(for city: City, completion: (Result<Weather>) -> Void) {
 		weatherManager.allCurrentConditionsForLocation(city.description, success: { (JSON) in
-			guard let weather = Weather(with: JSON) else {
-				return
-			}
+			guard let weather = Weather(with: JSON) else { return }
 			let result = Result<Weather>.Success(weather)
 			completion(result)
-			}) { (response,  error) in
+			}) { (_,  error) in
 			let result = Result<Weather>.Failure(error)
+			completion(result)
+		}
+	}
+	
+	func forecast(completion: (Result<[Forecast]>) -> Void) {
+		let location: CLLocation?
+		if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+			location = locationStorage.location
+		} else {
+			let error = WeatherError.NotAuthorized("Location service of the weather app is blocked, please turn it on in the setting app")
+			let result = Result<[Forecast]>.Failure(error)
+			completion(result)
+			return
+		}
+		guard let currentLocation = location else {
+			let error = WeatherError.NoAvailableLocation("Location is not available")
+			let result = Result<[Forecast]>.Failure(error)
+			completion(result)
+			return
+		}
+		weatherManager.fiveDayForecastForCoordinate(currentLocation, success: { (JSON) in
+			guard let forecastJSON = JSON["fiveDayForecasts"] as? [NSDictionary] else { return }
+			let forecasts = forecastJSON.flatMap { Forecast(with: $0) }
+			let result = Result<[Forecast]>.Success(forecasts)
+			completion(result)
+			}) { (_, error) in
+			let result = Result<[Forecast]>.Failure(error)
+			completion(result)
+		}
+	}
+	
+	func forecast(for city: City, completion: (Result<[Forecast]>) -> Void) {
+		weatherManager.fiveDayForecastForLocation(city.description, success: { (JSON) in
+			guard let forecastJSON = JSON["fiveDayForecasts"] as? [NSDictionary] else { return }
+			let forecasts = forecastJSON.flatMap { Forecast(with: $0) }
+			let result = Result<[Forecast]>.Success(forecasts)
+			completion(result)
+			}) { (_, error) in
+			let result = Result<[Forecast]>.Failure(error)
 			completion(result)
 		}
 	}
