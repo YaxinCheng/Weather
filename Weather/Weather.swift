@@ -12,7 +12,6 @@ import APTimeZones
 
 struct Weather {
 	let condition: WeatherCondition
-	let conditionText: String
 	let temprature: String
 	let pressure: String
 	let windTemperatue: String
@@ -53,7 +52,6 @@ struct Weather {
 		self.country = country
 		self.region = region
 		self.city = city
-		self.conditionText = Weather.formatWeather(condition)
 		let location = CLLocation(latitude: latitude, longitude: longitude)
 		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
 		let time = NSDate().time(timeZone: timeZone)

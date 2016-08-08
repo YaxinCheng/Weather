@@ -18,7 +18,7 @@ struct WeatherCondition {
 		let initializer: (String) -> (String, Bool) = {
 			if let range = $0.rangeOfString(" (day)") {
 				return ($0.stringByReplacingCharactersInRange(range, withString: ""), true)
-			} else if let range = $0.rangeOfString(" (night") {
+			} else if let range = $0.rangeOfString(" (night)") {
 				return ($0.stringByReplacingCharactersInRange(range, withString: ""), false)
 			} else {
 				return ($0, day)

@@ -111,7 +111,7 @@ class ViewController: UIViewController {
 		
 		cityButton.setTitle(weather.city, forState: .Normal)
 		tempLabel.text = weather.temprature + "°C"
-		weatherConditionLabel.text = weather.conditionText
+		weatherConditionLabel.text = weather.condition.rawValue
 		realFeelingLabel.text = weather.windTemperatue  + "°C"
 		humidityLabel.text = weather.humidity + "%"
 		windDirectionLabel.text = weather.windsDirection
