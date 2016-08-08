@@ -12,6 +12,7 @@ struct Forecast {
 	let highTemp: String
 	let lowTemp: String
 	let condition: WeatherCondition
+	let conditionDescription: String
 	let date: String
 	
 	init?(with JSON: NSDictionary) {
@@ -25,6 +26,7 @@ struct Forecast {
 		let time = "\(timeComponents.year)-\(timeComponents.month)-\(timeComponents.day)"
 		let date = NSDate.date(string: time, format: "yyyy-MM-dd")
 		self.date = date?.formatDate() ?? time
+		conditionDescription = conditionString
 		highTemp = high
 		lowTemp = low
 		condition = cond

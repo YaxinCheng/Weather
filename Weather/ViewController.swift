@@ -32,7 +32,6 @@ class ViewController: UIViewController {
 	@IBOutlet weak var alterPressureLabel: UILabel!
 	
 	private var animating = false
-	var city: City? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -107,8 +106,8 @@ class ViewController: UIViewController {
 		humidityLabel.text = weather.humidity + "%"
 		windDirectionLabel.text = weather.windsDirection
 		visibilityLabel.text = weather.visibility
-		sunriseLabel.text = "\(weather.sunriseTime.hour):\(weather.sunriseTime.minute)"
-		sunsetLabel.text = "\(weather.sunsetTime.hour):\(weather.sunsetTime.minute)"
+		sunriseLabel.text = String(format: "%02d:$02d", weather.sunriseTime.hour, weather.sunriseTime.minute)
+		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour, weather.sunsetTime.minute)
 		
 		alterTempLabel.text = "Temprature: " + weather.temprature + "°C"
 		alterHumidLabel.text = "Humidity: " + weather.humidity + "%"
@@ -116,6 +115,7 @@ class ViewController: UIViewController {
 	}
 	
 	func refreshWeather() {
+		let city = CityManager.sharedManager.currentCity
 		if city != nil {
 			WeatherStation.sharedStation.all(for: city!, completion: weatherDidRefresh)
 		} else {
@@ -132,6 +132,7 @@ class ViewController: UIViewController {
 		animation.toValue = 0
 		sender.layer.addAnimation(animation, forKey: "rotation")
 		WeatherStation.sharedStation.clearCache()
+		let city = CityManager.sharedManager.currentCity
 		if city == nil {
 			refreshLocation()
 		} else {

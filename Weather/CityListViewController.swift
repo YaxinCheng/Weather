@@ -68,12 +68,11 @@ class CityListViewController: UITableViewController {
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else { return }
 		if identifier == Common.unwindBackMain {
-			let destinationVC = segue.destinationViewController as! ViewController
 			if indexPath.section != 0 {
 				let city = cityList[indexPath.row]
-				destinationVC.city = city
+				CityManager.sharedManager.currentCity = city
 			} else {
-				destinationVC.city = nil
+				CityManager.sharedManager.currentCity = nil
 			}
 		}
 	}
