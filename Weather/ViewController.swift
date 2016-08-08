@@ -107,6 +107,8 @@ class ViewController: UIViewController {
 		}
 		let name = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? weather.condition.videoName : weather.condition.landscapeVideoName
 		backgroundView = UIImageView(image: UIImage(named: name)!)
+		backgroundView.frame = UIScreen.mainScreen().bounds
+		backgroundView.contentMode = .ScaleToFill
 		view.insertSubview(backgroundView, atIndex: 0)
 		
 		cityButton.setTitle(weather.city, forState: .Normal)
