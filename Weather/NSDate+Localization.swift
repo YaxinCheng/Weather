@@ -24,10 +24,11 @@ extension NSDate {
 		return dateFmt.stringFromDate(self)
 	}
 	
-	var hour: Int {
-		let calendar = NSCalendar.currentCalendar()
-		let component = calendar.components([.Hour], fromDate: self)
-		return component.hour
+	func time(timeZone zone: NSTimeZone = .localTimeZone()) -> NSDateComponents {
+		let calendar = NSCalendar.autoupdatingCurrentCalendar()
+		calendar.timeZone = zone
+		let component = calendar.components([.Hour, .Minute], fromDate: self)
+		return component
 	}
 	
 	static func date(string string: String, format: String, timeZone zone: NSTimeZone = .localTimeZone()) -> NSDate? {
@@ -38,11 +39,8 @@ extension NSDate {
 		return date
 	}
 	
-	func localized(format: String = "yyyy-MM-dd hh:mm:ss", timeZone zone: NSTimeZone = .localTimeZone()) -> NSDate {
-		let dateFmt = NSDateFormatter()
-		dateFmt.dateFormat = format
-		dateFmt.timeZone = zone
-		let string = dateFmt.stringFromDate(self)
-		return dateFmt.dateFromString(string)!
+	func localized(timeZone zone: NSTimeZone = .localTimeZone()) -> NSDate {
+		let seconds = Double(zone.secondsFromGMTForDate(self))
+		return NSDate(timeInterval: seconds, sinceDate: self)
 	}
 }

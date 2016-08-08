@@ -26,6 +26,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var visibilityLabel: UILabel!
 	@IBOutlet weak var sunriseLabel: UILabel!
 	@IBOutlet weak var sunsetLabel: UILabel!
+	@IBOutlet weak var conditionIcon: UIImageView!
 	
 	@IBOutlet weak var alterTempLabel: UILabel!
 	@IBOutlet weak var alterHumidLabel: UILabel!
@@ -43,6 +44,7 @@ class ViewController: UIViewController {
 		
 		tabBarController?.tabBar.backgroundImage = UIImage()
 		tabBarController?.tabBar.shadowImage = UIImage()
+		tabBarController?.tabBar.tintColor = view.tintColor
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
@@ -62,19 +64,6 @@ class ViewController: UIViewController {
 		super.viewWillDisappear(animated)
 		
 		player?.pause()
-	}
-	
-	func weatherDidRefresh(result: Result<Weather>) {
-		switch result {
-		case .Success(let weather):
-			setupPlayer(weather.condition)
-			setupLabels(weather)
-		case .Failure(let error):
-			let alert = UIAlertController(title: nil, message: "\(error)", preferredStyle: .Alert)
-			alert.addAction(.Cancel)
-			self.parentViewController?.presentViewController(alert, animated: true, completion: nil)
-			break
-		}
 	}
 	
 	func loopVideo() {
@@ -108,8 +97,9 @@ class ViewController: UIViewController {
 		humidityLabel.text = weather.humidity + "%"
 		windDirectionLabel.text = weather.windsDirection
 		visibilityLabel.text = weather.visibility
-		sunriseLabel.text = String(format: "%02d:$02d", weather.sunriseTime.hour, weather.sunriseTime.minute)
+		sunriseLabel.text = String(format: "%02d:%02d", weather.sunriseTime.hour, weather.sunriseTime.minute)
 		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour, weather.sunsetTime.minute)
+		conditionIcon.image = weather.condition.icon
 		
 		alterTempLabel.text = "Temprature: " + weather.temprature + "°C"
 		alterHumidLabel.text = "Humidity: " + weather.humidity + "%"
@@ -118,6 +108,18 @@ class ViewController: UIViewController {
 	
 	func refreshWeather() {
 		let city = CityManager.sharedManager.currentCity
+		let weatherDidRefresh: (Result<Weather>) -> Void = { [weak self] result in
+			switch result {
+			case .Success(let weather):
+				self?.setupPlayer(weather.condition)
+				self?.setupLabels(weather)
+			case .Failure(let error):
+				let alert = UIAlertController(title: nil, message: "\(error)", preferredStyle: .Alert)
+				alert.addAction(.Cancel)
+				self?.parentViewController?.presentViewController(alert, animated: true, completion: nil)
+				break
+			}
+		}
 		if city != nil {
 			WeatherStation.sharedStation.all(for: city!, completion: weatherDidRefresh)
 		} else {

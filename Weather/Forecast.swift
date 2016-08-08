@@ -18,8 +18,8 @@ struct Forecast {
 	init?(with JSON: NSDictionary) {
 		guard
 			let timeComponents = JSON["kYWADateComponents"] as? NSDateComponents,
-			let high = JSON["highTemperatureForDay"] as? String,
-			let low = JSON["lowTemperatureForDay"] as? String,
+			let high = (JSON["highTemperatureForDay"] as? NSString)?.doubleValue,
+			let low = (JSON["lowTemperatureForDay"] as? NSString)?.doubleValue,
 			let conditionString = JSON["shortDescription"] as? String,
 			let cond = WeatherCondition(rawValue: conditionString, day: true)
 		else { return nil }
@@ -27,8 +27,8 @@ struct Forecast {
 		let date = NSDate.date(string: time, format: "yyyy-MM-dd")
 		self.date = date?.formatDate() ?? time
 		conditionDescription = conditionString
-		highTemp = high
-		lowTemp = low
+		highTemp = String(Int(round(high)))
+		lowTemp = String(Int(round(low)))
 		condition = cond
 	}
 }

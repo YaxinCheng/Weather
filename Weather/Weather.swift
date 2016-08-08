@@ -29,7 +29,7 @@ struct Weather {
 		guard
 			let temprature = (JSON["temperatureInC"] as? NSString)?.doubleValue,
 			let pressure = JSON["pressureInIN"] as? String,
-			let windTemperatue = JSON["windChillInC"] as? String,
+			let windTemperatue = (JSON["windChillInC"] as? NSString)?.doubleValue,
 			let sunsetTime = JSON["sunsetInLocalTime"] as? NSDateComponents,
 			let sunriseTime = JSON["sunriseInLocalTime"] as? NSDateComponents,
 			let visibility = JSON["visibilityInMI"] as? String,
@@ -44,7 +44,7 @@ struct Weather {
 		else { return nil }
 		self.temprature = "\(Int(round(temprature)))"
 		self.pressure = pressure
-		self.windTemperatue = windTemperatue
+		self.windTemperatue = String(Int(round(windTemperatue)))
 		self.sunriseTime = sunriseTime
 		self.sunsetTime = sunsetTime
 		self.visibility = visibility
@@ -56,10 +56,11 @@ struct Weather {
 		self.conditionText = Weather.formatWeather(condition)
 		let location = CLLocation(latitude: latitude, longitude: longitude)
 		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
-		let hour = NSDate().localized(timeZone: timeZone).hour + 12 % 24
+		let time = NSDate().time(timeZone: timeZone)
+		let currentTime = Double(time.hour) + Double(time.minute) / 60
 		let sunset = Double(sunsetTime.hour) + Double(sunsetTime.minute) / 60
 		let sunrise = Double(sunriseTime.hour) + Double(sunriseTime.minute) / 60
-		self.condition = WeatherCondition(rawValue: condition, day: Double(hour) < sunset && Double(hour) > sunrise)!
+		self.condition = WeatherCondition(rawValue: condition, day: currentTime < sunset && currentTime >= sunrise)!
 	}
 	
 	private static func formatWeather(weather: String) -> String {

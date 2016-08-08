@@ -18,6 +18,7 @@ class CityViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		UIApplication.sharedApplication().statusBarStyle = .Default
 		let searchBar = UISearchBar()
 		searchBar.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50)
 		searchBar.placeholder = "Search your city"

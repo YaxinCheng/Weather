@@ -16,9 +16,9 @@ struct WeatherCondition {
 	init?(rawValue: String, day: Bool) {
 		
 		let initializer: (String) -> (String, Bool) = {
-			if let range = $0.rangeOfString("(day)") {
+			if let range = $0.rangeOfString(" (day)") {
 				return ($0.stringByReplacingCharactersInRange(range, withString: ""), true)
-			} else if let range = $0.rangeOfString("(night") {
+			} else if let range = $0.rangeOfString(" (night") {
 				return ($0.stringByReplacingCharactersInRange(range, withString: ""), false)
 			} else {
 				return ($0, day)
@@ -42,9 +42,9 @@ struct WeatherCondition {
 			return "weather_partly_sunny"
 		case "partlycloudy", "partly cloudy":
 			return dayTime ? "weather_partly_cloud_day" : "weather_partly_cloud_night"
-		case "snow", "mixed rain and snow", "mixed snow and sleet", "snow flurries", "light snow showers", "blowing snow", "hail", "cold":
+		case "snow", "mixed rain and snow", "mixed snow and sleet", "snow flurries", "light snow showers", "blowing snow", "hail", "cold", "heavy snow":
 			return dayTime ? "weather_snow_day" : "weather_snow_night"
-		case "thunderstorm", "thunderstorms", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
+		case "thunderstorms", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
 			return dayTime ? "weather_thunderstorm_day" : "weather_thunderstorm_night"
 		case "windy", "blustery":
 			return dayTime ? "weather_windy_day" : "weather_windy_night"
@@ -56,6 +56,26 @@ struct WeatherCondition {
 	}
 	
 	var icon: UIImage {
-		return UIImage(named: "\(self)") ?? UIImage()
+		switch rawValue.lowercaseString {
+		case "foggy":
+			let name = dayTime ? "foggy day" : "haze"
+			return UIImage(named: name)!
+		case "fair":
+			return UIImage(named: dayTime ? "sunny" : "clear")!
+		case "mixed rain and sleet", "freezing rain":
+			return UIImage(named: "mixed snow and sleet")!
+		case "sleet":
+			return UIImage(named: dayTime ? "light snow shower day" : "light snow shower night")!
+		case "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
+			return UIImage(named: "thunderstorms")!
+		case "blustery":
+			return UIImage(named: "windy")!
+		case "heavy snow", "light snow showers", "mostly cloudy", "partly cloudy", "showers":
+			let suffix = dayTime ? "day" : "night"
+			return UIImage(named: rawValue.lowercaseString + " " + suffix)!
+		default:
+			return UIImage(named: rawValue.lowercaseString) ?? UIImage(named: "not available")!
+		}
+		
 	}
 }

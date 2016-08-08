@@ -248,7 +248,6 @@
 				E3C739631D4A910500F51623 /* AppDelegate.swift */,
 				E347AC761D4BF0900012C9E2 /* Common.swift */,
 				E33291111D589EB100C5AED3 /* ForecastController.swift */,
-				E33291131D58A1D400C5AED3 /* CityManager.swift */,
 				E3F0FBD91D53C654002DB74E /* Persistable.swift */,
 				E3F0FBDA1D53C654002DB74E /* PropertySerializable.swift */,
 				E347AC741D4BEF810012C9E2 /* LocationStorage.swift */,
@@ -357,6 +356,7 @@
 		E3F0FBDF1D53C67B002DB74E /* City */ = {
 			isa = PBXGroup;
 			children = (
+				E33291131D58A1D400C5AED3 /* CityManager.swift */,
 				E3F0FBCD1D539237002DB74E /* PlaceLoadProtocol.swift */,
 				E3F0FBD11D5398E4002DB74E /* City.swift */,
 				E3F0FBCF1D53956C002DB74E /* CityLoader.swift */,
