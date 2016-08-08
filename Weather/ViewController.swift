@@ -32,6 +32,8 @@ class ViewController: UIViewController {
 	@IBOutlet weak var alterHumidLabel: UILabel!
 	@IBOutlet weak var alterPressureLabel: UILabel!
 	
+	
+	var backgroundView: UIImageView!
 	private var animating = false
 	
 	override func viewDidLoad() {
@@ -85,11 +87,17 @@ class ViewController: UIViewController {
 		playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
 		playerLayer.zPosition = -1
 		playerLayer.frame = view.frame
-		view.layer.addSublayer(playerLayer)
+		backgroundView.layer.addSublayer(playerLayer)
 		player?.play()
 	}
 	
 	func setupLabels(weather: Weather) {
+		if backgroundView != nil {
+			backgroundView.removeFromSuperview()
+		}
+		backgroundView = UIImageView(image: UIImage(named: weather.condition.videoName)!)
+		view.insertSubview(backgroundView, atIndex: 0)
+		
 		cityButton.setTitle(weather.city, forState: .Normal)
 		tempLabel.text = weather.temprature + "°C"
 		weatherConditionLabel.text = weather.conditionText
@@ -111,8 +119,8 @@ class ViewController: UIViewController {
 		let weatherDidRefresh: (Result<Weather>) -> Void = { [weak self] result in
 			switch result {
 			case .Success(let weather):
-				self?.setupPlayer(weather.condition)
 				self?.setupLabels(weather)
+				self?.setupPlayer(weather.condition)
 			case .Failure(let error):
 				let alert = UIAlertController(title: nil, message: "\(error)", preferredStyle: .Alert)
 				alert.addAction(.Cancel)
