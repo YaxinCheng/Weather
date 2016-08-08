@@ -19,5 +19,6 @@ struct Common {
 	static let segueCityView = "showCityView"
 	static let segueCitySearch = "showCitySearch"
 	static let unwindBackMain = "citySelected"
+	static let unwindFromCityView = "backFromCityView"
 	
 }

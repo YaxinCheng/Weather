@@ -53,13 +53,22 @@ class CityViewController: UITableViewController {
 		} catch {
 			print(error)
 		}
+		performSegueWithIdentifier(Common.unwindFromCityView, sender: nil)
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		cancelButtonPressed(tableView)
 	}
 	
 	// MARK: - Navigation
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else {
+			return
+		}
+		if identifier == Common.unwindFromCityView {
+			let city = cityList[indexPath.row]
+			CityManager.sharedManager.currentCity = city
+		}
+	}
 	
 	@IBAction func cancelButtonPressed(sender: AnyObject) {
 		dismissViewControllerAnimated(true, completion: nil)

@@ -20,8 +20,7 @@ struct Forecast {
 			let timeComponents = JSON["kYWADateComponents"] as? NSDateComponents,
 			let high = (JSON["highTemperatureForDay"] as? NSString)?.doubleValue,
 			let low = (JSON["lowTemperatureForDay"] as? NSString)?.doubleValue,
-			let conditionString = JSON["shortDescription"] as? String,
-			let cond = WeatherCondition(rawValue: conditionString, day: true)
+			let conditionString = JSON["shortDescription"] as? String
 		else { return nil }
 		let time = "\(timeComponents.year)-\(timeComponents.month)-\(timeComponents.day)"
 		let date = NSDate.date(string: time, format: "yyyy-MM-dd")
@@ -29,6 +28,6 @@ struct Forecast {
 		conditionDescription = conditionString
 		highTemp = String(Int(round(high)))
 		lowTemp = String(Int(round(low)))
-		condition = cond
+		condition = WeatherCondition(rawValue: conditionString, day: true)
 	}
 }

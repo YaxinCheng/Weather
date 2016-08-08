@@ -13,7 +13,7 @@ struct WeatherCondition {
 	let rawValue: String
 	let dayTime: Bool
 	
-	init?(rawValue: String, day: Bool) {
+	init(rawValue: String, day: Bool) {
 		
 		let initializer: (String) -> (String, Bool) = {
 			if let range = $0.rangeOfString(" (day)") {
@@ -38,7 +38,7 @@ struct WeatherCondition {
 			return dayTime ? "weather_rain_day" : "weather_rain_night"
 		case "foggy", "dust", "haze", "smoky":
 			return dayTime ? "weather_fog_day" : "weather_fog_night"
-		case "partly cloudy", "mostly sunny":
+		case "mostly sunny":
 			return "weather_partly_sunny"
 		case "partlycloudy", "partly cloudy":
 			return dayTime ? "weather_partly_cloud_day" : "weather_partly_cloud_night"
@@ -65,7 +65,7 @@ struct WeatherCondition {
 			return dayTime ? "weather_l_rain_day" : "weather_l_rain_night"
 		case "foggy", "dust", "haze", "smoky":
 			return dayTime ? "weather_l_fog_day" : "weather_l_fog_night"
-		case "partly cloudy", "mostly sunny":
+		case "mostly sunny":
 			return "weather_l_partly_sunny"
 		case "partlycloudy", "partly cloudy":
 			return dayTime ? "weather_l_partly_cloud_day" : "weather_l_partly_cloud_night"

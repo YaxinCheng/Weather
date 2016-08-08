@@ -58,7 +58,7 @@ struct Weather {
 		let currentTime = Double(time.hour) + Double(time.minute) / 60
 		let sunset = Double(sunsetTime.hour) + Double(sunsetTime.minute) / 60
 		let sunrise = Double(sunriseTime.hour) + Double(sunriseTime.minute) / 60
-		self.condition = WeatherCondition(rawValue: condition, day: currentTime < sunset && currentTime >= sunrise)!
+		self.condition = WeatherCondition(rawValue: condition, day: currentTime < sunset && currentTime >= sunrise)
 	}
 	
 	private static func formatWeather(weather: String) -> String {

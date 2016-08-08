@@ -55,8 +55,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="99D-rs-Lh3" kind="unwind" identifier="backFromCityView" unwindAction="prepareForUnwindSegue:" id="emt-No-otP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="klB-du-kZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="99D-rs-Lh3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1141" y="373"/>
         </scene>

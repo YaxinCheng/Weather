@@ -62,6 +62,28 @@ class CityListViewController: UITableViewController {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	
+	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		return indexPath.section != 0
+	}
+	
+	override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		return false
+	}
+	
+	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		if editingStyle == .Delete {
+			let city = cityList[indexPath.row]
+			do {
+				try city.deleteFromCache()
+				cityList.removeAtIndex(indexPath.row)
+				tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+			} catch {
+				let alert = UIAlertController(title: "City Delete Failed", message: nil, preferredStyle: .Alert)
+				alert.addAction(.Cancel)
+				presentViewController(alert, animated: true, completion: nil)
+			}
+		}
+	}
 	// MARK: - Navigation
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
