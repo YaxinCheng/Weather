@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 enum WeatherCondition {
 	case sunny(day: Bool)
@@ -77,5 +78,9 @@ enum WeatherCondition {
 		case .hot:
 			return "weather_hot"
 		}
+	}
+	
+	var icon: UIImage {
+		return UIImage(named: "\(self)") ?? UIImage()
 	}
 }

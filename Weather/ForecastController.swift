@@ -21,6 +21,12 @@ class ForecastController: UIViewController {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
+		forcastWeather()
+		let centre = NSNotificationCenter.defaultCenter()
+		centre.addObserver(self, selector: #selector(forcastWeather), name: CityNotification.CityDidChange.rawValue, object: nil)
+	}
+	
+	func forcastWeather() {
 		let weatherStation = WeatherStation.sharedStation
 		let city = CityManager.sharedManager.currentCity
 		let completion: (Result<[Forecast]> -> Void) = { [weak self] in
@@ -60,15 +66,16 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 		} else {
 			let cell = tableView.dequeueReusableCellWithIdentifier(Common.forcastCellidentifier, forIndexPath: indexPath) as! ForecastCell
 			let forecast = dataSource[indexPath.row]
+			cell.weatherImageView.image = forecast.condition.icon
 			cell.forecastLabel.text = forecast.conditionDescription
 			cell.weekdayLabel.text = forecast.date
-			cell.highTempLabel.text = forecast.highTemp
-			cell.lowTempLabel.text = forecast.lowTemp
+			cell.highTempLabel.text = forecast.highTemp + "°C"
+			cell.lowTempLabel.text = forecast.lowTemp + "°C"
 			return cell
 		}
 	}
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		return indexPath.section == 0 ? 114 : 80
+		return indexPath.section == 0 ? 114 : 70
 	}
 }

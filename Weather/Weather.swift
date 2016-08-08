@@ -39,7 +39,7 @@ struct Weather {
 			let region = JSON["region"] as? String,
 			let city = JSON["city"] as? String
 		else { return nil }
-		self.temprature = "\(Int(ceil(tempDouble)))"
+		self.temprature = "\(Int(round(tempDouble)))"
 		self.pressure = pressure
 		self.windTemperatue = windTemperatue
 		self.sunriseTime = sunriseTime
