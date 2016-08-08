@@ -55,6 +55,33 @@ struct WeatherCondition {
 		}
 	}
 	
+	var landscapeVideoName: String {
+		switch rawValue.lowercaseString {
+		case "sunny", "fair":
+			return dayTime ? "weather_l_sunny" : "weather_l_clear"
+		case "cloudy", "mostly cloudy":
+			return dayTime ? "weather_l_cloudy_day" : "weather_l_cloudy_night"
+		case "mixed rain and sleet", "drizzle", "freezing rain", "showers", "sleet":
+			return dayTime ? "weather_l_rain_day" : "weather_l_rain_night"
+		case "foggy", "dust", "haze", "smoky":
+			return dayTime ? "weather_l_fog_day" : "weather_l_fog_night"
+		case "partly cloudy", "mostly sunny":
+			return "weather_l_partly_sunny"
+		case "partlycloudy", "partly cloudy":
+			return dayTime ? "weather_l_partly_cloud_day" : "weather_l_partly_cloud_night"
+		case "snow", "mixed rain and snow", "mixed snow and sleet", "snow flurries", "light snow showers", "blowing snow", "hail", "cold", "heavy snow":
+			return dayTime ? "weather_l_snow_day" : "weather_l_snow_night"
+		case "thunderstorms", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
+			return dayTime ? "weather_l_thunderstorm_day" : "weather_l_thunderstorm_night"
+		case "windy", "blustery":
+			return dayTime ? "weather_l_windy_day" : "weather_l_windy_night"
+		case "hot":
+			return "weather_l_hot"
+		default:
+			return ""
+		}
+	}
+	
 	var icon: UIImage {
 		switch rawValue.lowercaseString {
 		case "foggy":

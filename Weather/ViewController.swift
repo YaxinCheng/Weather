@@ -32,6 +32,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var alterHumidLabel: UILabel!
 	@IBOutlet weak var alterPressureLabel: UILabel!
 	
+	var currentWeather: Weather!
 	
 	var backgroundView: UIImageView!
 	private var animating = false
@@ -53,6 +54,7 @@ class ViewController: UIViewController {
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: CityNotification.CityDidChange.rawValue, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -68,13 +70,21 @@ class ViewController: UIViewController {
 		player?.pause()
 	}
 	
+	func orientationDidChange() {
+		if let weather = currentWeather {
+			setupLabels(weather)
+			setupPlayer(weather.condition)
+		}
+	}
+	
 	func loopVideo() {
 		player?.seekToTime(kCMTimeZero)
 		player?.play()
 	}
 	
 	func setupPlayer(weather: WeatherCondition) {
-		guard let videoURL = NSBundle.mainBundle().URLForResource(weather.videoName, withExtension: "mp4") else { return }
+		let name = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? weather.videoName : weather.landscapeVideoName
+		guard let videoURL = NSBundle.mainBundle().URLForResource(name, withExtension: "mp4") else { return }
 		if player == nil {
 			player = AVPlayer(URL: videoURL)
 			player?.actionAtItemEnd = .None
@@ -95,7 +105,8 @@ class ViewController: UIViewController {
 		if backgroundView != nil {
 			backgroundView.removeFromSuperview()
 		}
-		backgroundView = UIImageView(image: UIImage(named: weather.condition.videoName)!)
+		let name = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? weather.condition.videoName : weather.condition.landscapeVideoName
+		backgroundView = UIImageView(image: UIImage(named: name)!)
 		view.insertSubview(backgroundView, atIndex: 0)
 		
 		cityButton.setTitle(weather.city, forState: .Normal)
@@ -119,6 +130,7 @@ class ViewController: UIViewController {
 		let weatherDidRefresh: (Result<Weather>) -> Void = { [weak self] result in
 			switch result {
 			case .Success(let weather):
+				self?.currentWeather = weather
 				self?.setupLabels(weather)
 				self?.setupPlayer(weather.condition)
 			case .Failure(let error):
