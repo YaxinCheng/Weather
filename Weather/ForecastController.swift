@@ -45,6 +45,12 @@ class ForecastController: UIViewController {
 			weatherStation.forecast(completion)
 		}
 	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		UIApplication.sharedApplication().statusBarStyle = .Default
+	}
 }
 
 extension ForecastController: UITableViewDelegate, UITableViewDataSource {

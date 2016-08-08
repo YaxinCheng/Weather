@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreLocation.CLLocation
+import APTimeZones
 
 struct Weather {
 	let condition: WeatherCondition
@@ -25,8 +27,7 @@ struct Weather {
 	
 	init?(with JSON: NSDictionary) {
 		guard
-			let temprature = JSON["temperatureInC"] as? String,
-			let tempDouble = Double(temprature),
+			let temprature = (JSON["temperatureInC"] as? NSString)?.doubleValue,
 			let pressure = JSON["pressureInIN"] as? String,
 			let windTemperatue = JSON["windChillInC"] as? String,
 			let sunsetTime = JSON["sunsetInLocalTime"] as? NSDateComponents,
@@ -37,9 +38,11 @@ struct Weather {
 			let condition = JSON["condition"] as? String,
 			let country = JSON["country"] as? String,
 			let region = JSON["region"] as? String,
-			let city = JSON["city"] as? String
+			let city = JSON["city"] as? String,
+			let latitude = (JSON["latitude"] as? NSString)?.doubleValue,
+			let longitude = (JSON["longitude"] as? NSString)?.doubleValue
 		else { return nil }
-		self.temprature = "\(Int(round(tempDouble)))"
+		self.temprature = "\(Int(round(temprature)))"
 		self.pressure = pressure
 		self.windTemperatue = windTemperatue
 		self.sunriseTime = sunriseTime
@@ -51,9 +54,12 @@ struct Weather {
 		self.region = region
 		self.city = city
 		self.conditionText = Weather.formatWeather(condition)
-		let hour = NSDate.date(string: NSDate().localTime(), format: "yyyy-MM-dd hh:mm:ss")!.hour
-		let sunset = round(Double(sunsetTime.hour) + Double(sunsetTime.minute) / 60)
-		self.condition = WeatherCondition(rawValue: condition, day: Double(hour) < sunset)!
+		let location = CLLocation(latitude: latitude, longitude: longitude)
+		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
+		let hour = NSDate().localized(timeZone: timeZone).hour + 12 % 24
+		let sunset = Double(sunsetTime.hour) + Double(sunsetTime.minute) / 60
+		let sunrise = Double(sunriseTime.hour) + Double(sunriseTime.minute) / 60
+		self.condition = WeatherCondition(rawValue: condition, day: Double(hour) < sunset && Double(hour) > sunrise)!
 	}
 	
 	private static func formatWeather(weather: String) -> String {

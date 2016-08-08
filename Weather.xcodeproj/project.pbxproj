@@ -12,6 +12,7 @@
 		E33291101D589E2C00C5AED3 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332910F1D589E2C00C5AED3 /* HeaderCell.swift */; };
 		E33291121D589EB100C5AED3 /* ForecastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33291111D589EB100C5AED3 /* ForecastController.swift */; };
 		E33291141D58A1D400C5AED3 /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33291131D58A1D400C5AED3 /* CityManager.swift */; };
+		E33291161D58E33000C5AED3 /* timezonesDB.json in Resources */ = {isa = PBXBuildFile; fileRef = E33291151D58E33000C5AED3 /* timezonesDB.json */; };
 		E347AC751D4BEF820012C9E2 /* LocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E347AC741D4BEF810012C9E2 /* LocationStorage.swift */; };
 		E347AC771D4BF0900012C9E2 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E347AC761D4BF0900012C9E2 /* Common.swift */; };
 		E34C665C1D55119F00DE277C /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34C665B1D55119F00DE277C /* Delay.swift */; };
@@ -103,6 +104,7 @@
 		E332910F1D589E2C00C5AED3 /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		E33291111D589EB100C5AED3 /* ForecastController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastController.swift; sourceTree = "<group>"; };
 		E33291131D58A1D400C5AED3 /* CityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityManager.swift; sourceTree = "<group>"; };
+		E33291151D58E33000C5AED3 /* timezonesDB.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timezonesDB.json; sourceTree = "<group>"; };
 		E347AC741D4BEF810012C9E2 /* LocationStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStorage.swift; sourceTree = "<group>"; };
 		E347AC761D4BF0900012C9E2 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		E34C665B1D55119F00DE277C /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				E3C7396F1D4A910500F51623 /* LaunchScreen.storyboard */,
 				E3C739721D4A910500F51623 /* Info.plist */,
 				E3C7396A1D4A910500F51623 /* Weather.xcdatamodeld */,
+				E33291151D58E33000C5AED3 /* timezonesDB.json */,
 				E3C739951D4A913700F51623 /* Videos */,
 			);
 			path = Weather;
@@ -471,6 +474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E33291161D58E33000C5AED3 /* timezonesDB.json in Resources */,
 				E3C739BF1D4A93BA00F51623 /* weather_hot.mp4 in Resources */,
 				E3C739C81D4A93BA00F51623 /* weather_l_partly_sunny.mp4 in Resources */,
 				E3C739CD1D4A93BA00F51623 /* weather_l_sunny.mp4 in Resources */,

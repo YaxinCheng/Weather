@@ -55,6 +55,7 @@ class ViewController: UIViewController {
 		super.viewWillAppear(animated)
 		
 		refreshWeather()
+		UIApplication.sharedApplication().statusBarStyle = .LightContent
 	}
 	
 	override func viewWillDisappear(animated: Bool) {

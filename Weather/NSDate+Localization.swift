@@ -30,12 +30,19 @@ extension NSDate {
 		return component.hour
 	}
 	
-	static func date(string string: String, format: String) -> NSDate? {
+	static func date(string string: String, format: String, timeZone zone: NSTimeZone = .localTimeZone()) -> NSDate? {
 		let dateFmt = NSDateFormatter()
 		dateFmt.dateFormat = format
-		let localTimeZone = NSTimeZone.localTimeZone()
-		dateFmt.timeZone = localTimeZone
+		dateFmt.timeZone = zone
 		guard let date = dateFmt.dateFromString(string) else { return nil }
 		return date
+	}
+	
+	func localized(format: String = "yyyy-MM-dd hh:mm:ss", timeZone zone: NSTimeZone = .localTimeZone()) -> NSDate {
+		let dateFmt = NSDateFormatter()
+		dateFmt.dateFormat = format
+		dateFmt.timeZone = zone
+		let string = dateFmt.stringFromDate(self)
+		return dateFmt.dateFromString(string)!
 	}
 }
