@@ -15,19 +15,27 @@ struct City: CustomStringConvertible {
 	let country: String
 	let id: String
 	var region: String {
-		return province + ", " + country
+		return province.isEmpty ? country : province + ", " + country
 	}
 	
 	init?(from JSON: NSDictionary) {
-		guard let terms = JSON["terms"] as? [NSDictionary] where terms.count > 2,
-			let name = terms[0]["value"] as? String,
-			let province = terms[1]["value"] as? String,
-			let country = terms[2]["value"] as? String,
-			let id = JSON["id"] as? String
-			else { return nil }
+		guard
+			let terms = JSON["terms"] as? [NSDictionary] where terms.count > 0,
+			let id = JSON["id"] as? String,
+			let name = terms[0]["value"] as? String
+		else { return nil }
+		
+		let province = terms[1]["value"] as? String ?? ""
+		let country: String
+		if terms.count > 2 {
+			country = terms[2]["value"] as? String ?? ""
+		} else {
+			country = ""
+		}
+	
 		self.name = name
-		self.province = province
-		self.country = country
+		self.province = country.isEmpty ? "" : province
+		self.country = country.isEmpty ? province : country
 		self.id = id
 	}
 	
