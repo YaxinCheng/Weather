@@ -110,7 +110,7 @@ class ViewController: UIViewController {
 		self.playerLayer = playerLayer
 		playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
 		playerLayer.zPosition = -1
-		playerLayer.frame = view.frame
+		playerLayer.frame = backgroundView?.frame ?? CGRect(x: 0, y: 0, width: 0, height: 0)
 		backgroundView.layer.addSublayer(playerLayer)
 		player?.play()
 	}
@@ -121,7 +121,15 @@ class ViewController: UIViewController {
 		}
 		let name = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? weather.condition.videoName : weather.condition.landscapeVideoName
 		backgroundView = UIImageView(image: UIImage(named: name)!)
-		backgroundView.frame = UIScreen.mainScreen().bounds
+		if UI_USER_INTERFACE_IDIOM() == .Phone {
+			backgroundView.frame = UIScreen.mainScreen().bounds
+		} else if UI_USER_INTERFACE_IDIOM() == .Pad {
+			let screenFrame = (UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height)
+			let width = max(screenFrame.0, screenFrame.1)
+			let height = screenFrame.0 == width ? screenFrame.1 : screenFrame.0
+			let frame = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? CGRect(x: 0, y: 0, width: height, height: width) : CGRect(x: 0, y: 0, width: width, height: height)
+			backgroundView.frame = frame
+		}
 		backgroundView.contentMode = .ScaleToFill
 		view.insertSubview(backgroundView, atIndex: 0)
 		
