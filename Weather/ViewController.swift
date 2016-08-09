@@ -67,6 +67,11 @@ class ViewController: UIViewController {
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 		
+		for eachLayer in backgroundView.layer.sublayers ?? [] {
+			if eachLayer is AVPlayerLayer {
+				eachLayer.removeFromSuperlayer()
+			}
+		}
 		player?.pause()
 	}
 	

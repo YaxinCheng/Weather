@@ -34,7 +34,7 @@ extension PlaceLoadProtocol {
 	}
 	
 	func sendRequest(method: Alamofire.Method = .GET, callback: ((Any?) -> Void)? = nil ) {
-		Alamofire.request(method, api + "/" + responseType + "?input=" + input + "&types=" + types + "&key=" + key).responseJSON { (response) in
+		Alamofire.request(method, api + "/" + responseType + "?input=" + input.lowercaseString + "&types=" + types + "&key=" + key).responseJSON { (response) in
 			switch response.result {
 			case .Success(let value):
 				guard let json = value as? NSDictionary else { return }
