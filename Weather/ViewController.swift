@@ -178,13 +178,14 @@ class ViewController: UIViewController {
 		animating = true
 		let moveAnimation = CABasicAnimation(keyPath: "position.y")
 		moveAnimation.duration = 0.3
-		moveAnimation.removedOnCompletion = false
+		moveAnimation.removedOnCompletion = true
 		moveAnimation.fillMode = kCAFillModeForwards
 		
 		let opacityAnimation = CABasicAnimation(keyPath: "opacity")
 		opacityAnimation.duration = moveAnimation.duration
 		opacityAnimation.removedOnCompletion = moveAnimation.removedOnCompletion
 		opacityAnimation.fillMode = kCAFillModeForwards
+		
 		if infoPanel.hidden == false {
 			moveAnimation.fromValue = infoPanel.center.y
 			moveAnimation.toValue = view.bounds.height + 100
