@@ -37,6 +37,8 @@ class ViewController: UIViewController {
 	var backgroundView: UIImageView!
 	private var animating = false
 	
+	// MARK: - Set up the view
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
@@ -133,6 +135,8 @@ class ViewController: UIViewController {
 		alterPressureLabel.text = "Pressure: " + weather.pressure + "IN"
 	}
 	
+	// MARK: - Weather and location
+	
 	func refreshWeather() {
 		let city = CityManager.sharedManager.currentCity
 		let weatherDidRefresh: (Result<Weather>) -> Void = { [weak self] result in
@@ -151,6 +155,12 @@ class ViewController: UIViewController {
 			WeatherStation.sharedStation.all(weatherDidRefresh)
 		}
 	}
+	
+	func refreshLocation() {
+		WeatherStation.sharedStation.locationStorage.refreshLocation()
+	}
+	
+	// MARK: - Outlet actions
 	
 	@IBAction func syncButtonPressedUp(sender: UIButton) {
 		syncButton.setImage(UIImage(named: "sync")!, forState: .Normal)
@@ -185,7 +195,7 @@ class ViewController: UIViewController {
 		let opacityAnimation = CABasicAnimation(keyPath: "opacity")
 		opacityAnimation.duration = moveAnimation.duration
 		opacityAnimation.removedOnCompletion = moveAnimation.removedOnCompletion
-		opacityAnimation.fillMode = kCAFillModeForwards
+		opacityAnimation.fillMode = kCAFillModeBoth
 		
 		if infoPanel.hidden == false {
 			moveAnimation.fromValue = infoPanel.center.y
@@ -199,7 +209,7 @@ class ViewController: UIViewController {
 			alterHumidLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 			alterTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 			
-			Delay(moveAnimation.duration) { [weak self] in
+			Delay(moveAnimation.duration - 0.05) { [weak self] in
 				self?.infoPanel.hidden = true
 				self?.alterTempLabel.layer.opacity = 1
 				self?.alterHumidLabel.layer.opacity = 1
@@ -219,7 +229,7 @@ class ViewController: UIViewController {
 			alterPressureLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 			
 			infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
-			Delay(moveAnimation.duration) { [weak self] in
+			Delay(moveAnimation.duration - 0.05) { [weak self] in
 				self?.alterTempLabel.layer.opacity = 0
 				self?.alterHumidLabel.layer.opacity = 0
 				self?.alterPressureLabel.layer.opacity = 0
@@ -258,6 +268,7 @@ class ViewController: UIViewController {
 		}
 	}
 	
+	// MARK: - App out and in
 	func enterForeground() {
 		do {
 			if let weather = try Weather.restoreFromCache().first {
@@ -277,10 +288,6 @@ class ViewController: UIViewController {
 		} catch {
 			print("\(error)")
 		}
-	}
-	
-	func refreshLocation() {
-		WeatherStation.sharedStation.locationStorage.refreshLocation()
 	}
 }
 
