@@ -54,6 +54,17 @@ extension Persistable {
 		return result.map { Self.init(with: $0) }
 	}
 	
+	static func deleteAllFromCache() throws {
+		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		let context = appDelegate.managedObjectContext
+		let fetch = NSFetchRequest(entityName: entityName)
+		let result = try context.executeFetchRequest(fetch) as! [NSManagedObject]
+		for each in result {
+			context.deleteObject(each)
+		}
+		appDelegate.saveContext()
+	}
+	
 	func deleteFromCache() throws {
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		let context = appDelegate.managedObjectContext

@@ -34,6 +34,10 @@ struct City: CustomStringConvertible {
 	var description: String {
 		return name + ", " + region
 	}
+	
+	var fullLocation: String {
+		return country + "," + region + "," + name
+	}
 }
 
 extension City: PropertySerializable {

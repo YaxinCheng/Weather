@@ -51,6 +51,7 @@ class ViewController: UIViewController {
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterBackground), name: UIApplicationWillResignActiveNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: CityNotification.CityDidChange.rawValue, object: nil)
@@ -67,7 +68,7 @@ class ViewController: UIViewController {
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 		
-		for eachLayer in backgroundView.layer.sublayers ?? [] {
+		for eachLayer in backgroundView?.layer.sublayers ?? [] {
 			if eachLayer is AVPlayerLayer {
 				eachLayer.removeFromSuperlayer()
 			}
@@ -258,8 +259,24 @@ class ViewController: UIViewController {
 	}
 	
 	func enterForeground() {
+		do {
+			if let weather = try Weather.restoreFromCache().first {
+				self.currentWeather = weather
+			}
+		} catch {
+			print(error)
+		}
 		player?.play()
 		syncButtonPressedUp(syncButton)
+	}
+	
+	func enterBackground() {
+		do {
+			try Weather.deleteAllFromCache()
+			try currentWeather?.saveToCache()
+		} catch {
+			print("\(error)")
+		}
 	}
 	
 	func refreshLocation() {
