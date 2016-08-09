@@ -117,7 +117,7 @@ class ViewController: UIViewController {
 		realFeelingLabel.text = weather.windTemperatue  + "°C"
 		humidityLabel.text = weather.humidity + "%"
 		windDirectionLabel.text = weather.windsDirection
-		visibilityLabel.text = weather.visibility
+		visibilityLabel.text = weather.visibility + "M"
 		sunriseLabel.text = String(format: "%02d:%02d", weather.sunriseTime.hour, weather.sunriseTime.minute)
 		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour, weather.sunsetTime.minute)
 		conditionIcon.image = weather.condition.icon
@@ -135,11 +135,8 @@ class ViewController: UIViewController {
 				self?.currentWeather = weather
 				self?.setupLabels(weather)
 				self?.setupPlayer(weather.condition)
-			case .Failure(let error):
-				let alert = UIAlertController(title: nil, message: "\(error)", preferredStyle: .Alert)
-				alert.addAction(.Cancel)
-				self?.parentViewController?.presentViewController(alert, animated: true, completion: nil)
-				break
+			case .Failure(_):
+				self?.syncButton.setImage(UIImage(named: "errorsync")!, forState: .Normal)
 			}
 		}
 		if city != nil {
@@ -150,6 +147,7 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func syncButtonPressedUp(sender: UIButton) {
+		syncButton.setImage(UIImage(named: "sync")!, forState: .Normal)
 		let animation = CABasicAnimation(keyPath: "transform.rotation.z")
 		animation.duration = 2
 		animation.removedOnCompletion = false
@@ -164,6 +162,10 @@ class ViewController: UIViewController {
 		} else {
 			refreshWeather()
 		}
+	}
+	
+	@IBAction func addButtonPressed(sender: UIButton) {
+		performSegueWithIdentifier(Common.segueCitySearch, sender: nil)
 	}
 	
 	@IBAction func touchToFullScreen() {

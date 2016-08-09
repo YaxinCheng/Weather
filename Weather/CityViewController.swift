@@ -76,22 +76,20 @@ class CityViewController: UITableViewController {
 }
 
 extension CityViewController: UISearchBarDelegate {
-	func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-		searchBar.resignFirstResponder()
-		guard let name = searchBar.text where !name.isEmpty else { return }
-		let loader = CityLoader(input: name)
-		loader.sendRequest { [weak self] in
-			guard let cities = $0 as? [City] else {
-				self?.cityList = []
-				return
-			}
-			self?.cityList = cities
-		}
-	}
-	
 	func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
 		if text == "\n" {
-			searchBarTextDidEndEditing(searchBar)
+			searchBar.resignFirstResponder()
+			guard
+				let name = searchBar.text?.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet()).stringByFoldingWithOptions(.DiacriticInsensitiveSearch, locale: NSLocale(localeIdentifier: "en_CA")).stringByReplacingOccurrencesOfString(" ", withString: "") where !name.isEmpty
+				else { return true }
+			let loader = CityLoader(input: name)
+			loader.sendRequest { [weak self] in
+				guard let cities = $0 as? [City] else {
+					self?.cityList = []
+					return
+				}
+				self?.cityList = cities
+			}
 		}
 		return true
 	}

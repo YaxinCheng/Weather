@@ -91,6 +91,8 @@ struct WeatherCondition {
 			return UIImage(named: dayTime ? "sunny" : "clear")!
 		case "mixed rain and sleet", "freezing rain":
 			return UIImage(named: "mixed snow and sleet")!
+		case "rain":
+			return UIImage(named: "showers day")!
 		case "sleet":
 			return UIImage(named: dayTime ? "light snow shower day" : "light snow shower night")!
 		case "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":

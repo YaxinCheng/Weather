@@ -220,6 +220,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E332912C1D5957C000C5AED3 /* Forecasts */ = {
+			isa = PBXGroup;
+			children = (
+				E3F0FBE01D54E123002DB74E /* Forecast.swift */,
+				E33291111D589EB100C5AED3 /* ForecastController.swift */,
+				E332910D1D589E2100C5AED3 /* ForecastCell.swift */,
+				E332910F1D589E2C00C5AED3 /* HeaderCell.swift */,
+			);
+			name = Forecasts;
+			sourceTree = "<group>";
+		};
 		E3C739571D4A910500F51623 = {
 			isa = PBXGroup;
 			children = (
@@ -247,14 +258,12 @@
 			children = (
 				E3C739631D4A910500F51623 /* AppDelegate.swift */,
 				E347AC761D4BF0900012C9E2 /* Common.swift */,
-				E33291111D589EB100C5AED3 /* ForecastController.swift */,
 				E3F0FBD91D53C654002DB74E /* Persistable.swift */,
 				E3F0FBDA1D53C654002DB74E /* PropertySerializable.swift */,
 				E347AC741D4BEF810012C9E2 /* LocationStorage.swift */,
 				E34C665B1D55119F00DE277C /* Delay.swift */,
-				E332910D1D589E2100C5AED3 /* ForecastCell.swift */,
-				E332910F1D589E2C00C5AED3 /* HeaderCell.swift */,
 				E3F0FBDD1D53C662002DB74E /* Extension */,
+				E332912C1D5957C000C5AED3 /* Forecasts */,
 				E3F0FBDE1D53C66E002DB74E /* Weather */,
 				E3F0FBDF1D53C67B002DB74E /* City */,
 				E3C739671D4A910500F51623 /* Main.storyboard */,
@@ -347,7 +356,6 @@
 				E3C739EB1D4BCE9F00F51623 /* WeatherError.swift */,
 				E3C739E51D4AC9A500F51623 /* WeatherCondition.swift */,
 				E3C739F11D4BD72F00F51623 /* Weather.swift */,
-				E3F0FBE01D54E123002DB74E /* Forecast.swift */,
 				E3C739E91D4BCE5200F51623 /* Result.swift */,
 			);
 			name = Weather;
