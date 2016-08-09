@@ -152,6 +152,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="forecastLabel" destination="3Hi-qZ-BJe" id="ep8-oc-xVA"/>
                                             <outlet property="highTempLabel" destination="BrJ-ma-LF0" id="vDB-Oz-hqg"/>
@@ -465,7 +466,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-xJ-Kag">
-                                <rect key="frame" x="541" y="41" width="23" height="23"/>
+                                <rect key="frame" x="557" y="41" width="23" height="23"/>
                                 <state key="normal" image="sync"/>
                                 <connections>
                                     <action selector="syncButtonPressedUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BkJ-Ej-cKF"/>
@@ -505,7 +506,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgM-8F-Ko2">
-                                <rect key="frame" x="510" y="41" width="23" height="23"/>
+                                <rect key="frame" x="526" y="41" width="23" height="23"/>
                                 <state key="normal" image="add"/>
                                 <connections>
                                     <action selector="addButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Kd-2c-nee"/>
@@ -532,7 +533,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="3NY-kM-6vJ" secondAttribute="trailing" constant="-20" id="cKi-2v-yuT"/>
                             <constraint firstItem="3hS-xJ-Kag" firstAttribute="bottom" secondItem="q9E-EU-m2O" secondAttribute="bottom" id="dVW-rm-300"/>
                             <constraint firstItem="VRv-qd-BXw" firstAttribute="top" secondItem="anJ-6Q-gCm" secondAttribute="bottom" constant="8" id="dfP-qR-z5b"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3hS-xJ-Kag" secondAttribute="trailing" constant="16" id="gOj-IX-UER"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3hS-xJ-Kag" secondAttribute="trailing" id="gOj-IX-UER"/>
                             <constraint firstItem="3hS-xJ-Kag" firstAttribute="centerY" secondItem="q9E-EU-m2O" secondAttribute="centerY" id="kDN-hz-dES"/>
                             <constraint firstItem="3hS-xJ-Kag" firstAttribute="leading" secondItem="hgM-8F-Ko2" secondAttribute="trailing" constant="8" id="xLU-kz-CI8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XSD-PT-hhj" secondAttribute="trailing" constant="-20" id="y8g-Ww-yjm"/>

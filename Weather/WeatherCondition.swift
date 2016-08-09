@@ -32,6 +32,8 @@ struct WeatherCondition {
 		switch rawValue.lowercaseString {
 		case "sunny", "fair":
 			return dayTime ? "weather_sunny" : "weather_clear"
+		case "clear":
+			return "weather_clear"
 		case "cloudy", "mostly cloudy":
 			return dayTime ? "weather_cloudy_day" : "weather_cloudy_night"
 		case "mixed rain and sleet", "drizzle", "freezing rain", "showers", "sleet":
@@ -59,6 +61,8 @@ struct WeatherCondition {
 		switch rawValue.lowercaseString {
 		case "sunny", "fair":
 			return dayTime ? "weather_l_sunny" : "weather_l_clear"
+		case "clear":
+			return "weather_l_clear"
 		case "cloudy", "mostly cloudy":
 			return dayTime ? "weather_l_cloudy_day" : "weather_l_cloudy_night"
 		case "mixed rain and sleet", "drizzle", "freezing rain", "showers", "sleet":

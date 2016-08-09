@@ -80,7 +80,8 @@ extension CityViewController: UISearchBarDelegate {
 		if text == "\n" {
 			searchBar.resignFirstResponder()
 			guard
-				let name = searchBar.text?.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet()).stringByFoldingWithOptions(.DiacriticInsensitiveSearch, locale: NSLocale(localeIdentifier: "en_CA")).stringByReplacingOccurrencesOfString(" ", withString: "") where !name.isEmpty
+				let name = searchBar.text?.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet()).stringByFoldingWithOptions(.DiacriticInsensitiveSearch, locale: NSLocale(localeIdentifier: "en_CA")).stringByReplacingOccurrencesOfString(" ", withString: "") where !name.isEmpty,
+				let _ = NSURL(string: name)
 				else { return true }
 			let loader = CityLoader(input: name)
 			loader.sendRequest { [weak self] in
