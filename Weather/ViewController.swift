@@ -32,7 +32,13 @@ class ViewController: UIViewController {
 	@IBOutlet weak var alterHumidLabel: UILabel!
 	@IBOutlet weak var alterPressureLabel: UILabel!
 	
-	var currentWeather: Weather!
+	var currentWeather: Weather! {
+		didSet {
+			guard let weather = currentWeather else { return }
+			setupLabels(weather)
+			setupPlayer(weather.condition)
+		}
+	}
 	
 	var backgroundView: UIImageView!
 	private var animating = false
@@ -143,8 +149,6 @@ class ViewController: UIViewController {
 			switch result {
 			case .Success(let weather):
 				self?.currentWeather = weather
-				self?.setupLabels(weather)
-				self?.setupPlayer(weather.condition)
 			case .Failure(_):
 				self?.syncButton.setImage(UIImage(named: "errorsync")!, forState: .Normal)
 			}
