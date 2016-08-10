@@ -15,6 +15,7 @@ protocol Persistable: PropertySerializable {
 	var primaryKeyValue: AnyObject { get }
 	func saveToCache() throws
 	static func restoreFromCache() throws -> [Self]
+	static func searchFromCache() throws -> [Self]
 	func deleteFromCache() throws
 }
 
@@ -75,6 +76,15 @@ extension Persistable {
 		for model in try context.executeFetchRequest(fetch) {
 			context.deleteObject(model as! NSManagedObject)
 		}
+	}
+	
+	static func searchFromCache(predicate: NSPredicate) throws -> [Self] {
+		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		let context = appDelegate.managedObjectContext
+		
+		let fetch = NSFetchRequest(entityName: Self.entityName)
+		fetch.predicate = predicate
+		return (try context.executeFetchRequest(fetch) as! [NSManagedObject]).map { Self.init(with: $0) }
 	}
 	
 	var existing: Bool {
