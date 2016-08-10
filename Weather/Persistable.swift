@@ -15,7 +15,7 @@ protocol Persistable: PropertySerializable {
 	var primaryKeyValue: AnyObject { get }
 	func saveToCache() throws
 	static func restoreFromCache() throws -> [Self]
-	static func searchFromCache() throws -> [Self]
+	static func searchFromCache(predicate: NSPredicate) throws -> [Self]
 	func deleteFromCache() throws
 }
 

@@ -28,6 +28,6 @@ struct Forecast {
 		conditionDescription = conditionString
 		highTemp = String(Int(round(high)))
 		lowTemp = String(Int(round(low)))
-		condition = WeatherCondition(rawValue: conditionString, day: true)
+		condition = WeatherCondition(rawValue: conditionString, day: CityManager.sharedManager.day ?? true)
 	}
 }

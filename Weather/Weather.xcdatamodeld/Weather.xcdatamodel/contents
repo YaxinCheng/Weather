@@ -23,10 +23,11 @@
         <attribute name="temperature" attributeType="String" syncable="YES"/>
         <attribute name="visibility" attributeType="String" syncable="YES"/>
         <attribute name="windsDirection" attributeType="String" syncable="YES"/>
+        <attribute name="windsSpeed" attributeType="String" syncable="YES"/>
         <attribute name="windTemperature" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="City" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Weather" positionX="-63" positionY="9" width="128" height="300"/>
+        <element name="Weather" positionX="-63" positionY="9" width="128" height="315"/>
     </elements>
 </model>

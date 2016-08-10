@@ -24,6 +24,7 @@ struct Weather {
 	let country: String
 	let region: String
 	let city: String
+	let windsSpeed: String
 	private let location: (Double, Double)
 	
 	init?(with JSON: NSDictionary) {
@@ -31,6 +32,7 @@ struct Weather {
 			let temprature = (JSON["temperatureInC"] as? NSString)?.doubleValue,
 			let pressure = JSON["pressureInIN"] as? String,
 			let windTemperatue = (JSON["windChillInC"] as? NSString)?.doubleValue,
+			let windsSpeed = JSON["windSpeedInMPH"] as? String,
 			let sunsetTime = JSON["sunsetInLocalTime"] as? NSDateComponents,
 			let sunriseTime = JSON["sunriseInLocalTime"] as? NSDateComponents,
 			let visibility = JSON["visibilityInMI"] as? String,
@@ -54,14 +56,12 @@ struct Weather {
 		self.country = country
 		self.region = region
 		self.city = city
+		self.windsSpeed = windsSpeed
 		self.location = (latitude, longitude)
 		let location = CLLocation(latitude: latitude, longitude: longitude)
 		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
-		let time = NSDate().time(timeZone: timeZone)
-		let currentTime = Double(time.hour) + Double(time.minute) / 60
-		let sunset = Double(sunsetTime.hour) + Double(sunsetTime.minute) / 60
-		let sunrise = Double(sunriseTime.hour) + Double(sunriseTime.minute) / 60
-		self.condition = WeatherCondition(rawValue: condition, day: currentTime < sunset && currentTime >= sunrise)
+		CityManager.sharedManager.dayNight(sunriseTime, sunset: sunsetTime, timeZone: timeZone)
+		self.condition = WeatherCondition(rawValue: condition, day: CityManager.sharedManager.day!)
 	}
 }
 
@@ -82,6 +82,7 @@ extension Weather: PropertySerializable {
 		properties["region"] = region
 		properties["city"] = city
 		properties["condition"] = condition.rawValue
+		properties["windsSpeed"] = windsSpeed
 		properties["latitude"] = location.0
 		properties["longitude"] = location.1
 		properties["fullLocation"] = country + "," + region + "," + city
@@ -104,6 +105,7 @@ extension Weather: PropertySerializable {
 		country = managedObject.valueForKey("country") as! String
 		region = managedObject.valueForKey("region") as! String
 		city = managedObject.valueForKey("city") as! String
+		windsSpeed = managedObject.valueForKey("windsSpeed") as! String
 		location = (managedObject.valueForKey("latitude") as! Double, managedObject.valueForKey("longitude") as! Double)
 		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(CLLocation(latitude: location.0, longitude: location.1))
 		let time = NSDate().time(timeZone: timeZone)

@@ -20,17 +20,16 @@ class ViewController: UIViewController {
 	@IBOutlet weak var cityButton: UIButton!
 	@IBOutlet weak var tempLabel: UILabel!
 	@IBOutlet weak var weatherConditionLabel: UILabel!
-	@IBOutlet weak var realFeelingLabel: UILabel!
+	@IBOutlet weak var pressureLabel: UILabel!
 	@IBOutlet weak var humidityLabel: UILabel!
-	@IBOutlet weak var windDirectionLabel: UILabel!
 	@IBOutlet weak var visibilityLabel: UILabel!
 	@IBOutlet weak var sunriseLabel: UILabel!
 	@IBOutlet weak var sunsetLabel: UILabel!
 	@IBOutlet weak var conditionIcon: UIImageView!
 	
-	@IBOutlet weak var alterTempLabel: UILabel!
-	@IBOutlet weak var alterHumidLabel: UILabel!
-	@IBOutlet weak var alterPressureLabel: UILabel!
+	@IBOutlet weak var windsTempLabel: UILabel!
+	@IBOutlet weak var windsDirectionLabel: UILabel!
+	@IBOutlet weak var windsSpeedLabel: UILabel!
 	
 	var currentWeather: Weather! {
 		didSet {
@@ -136,17 +135,16 @@ class ViewController: UIViewController {
 		cityButton.setTitle(weather.city, forState: .Normal)
 		tempLabel.text = weather.temprature + "°C"
 		weatherConditionLabel.text = weather.condition.rawValue
-		realFeelingLabel.text = weather.windTemperatue  + "°C"
+		pressureLabel.text = weather.pressure + "IN"
 		humidityLabel.text = weather.humidity + "%"
-		windDirectionLabel.text = weather.windsDirection
 		visibilityLabel.text = weather.visibility + "M"
 		sunriseLabel.text = String(format: "%02d:%02d", weather.sunriseTime.hour, weather.sunriseTime.minute)
 		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour, weather.sunsetTime.minute)
 		conditionIcon.image = weather.condition.icon
 		
-		alterTempLabel.text = "Temprature: " + weather.temprature + "°C"
-		alterHumidLabel.text = "Humidity: " + weather.humidity + "%"
-		alterPressureLabel.text = "Pressure: " + weather.pressure + "IN"
+		windsTempLabel.text = "Winds Temperature: " + weather.windTemperatue + "°C"
+		windsDirectionLabel.text = "Winds Direction: " + weather.windsDirection
+		windsSpeedLabel.text = "Winds Speed: " + weather.windsSpeed + "m/h"
 	}
 	
 	// MARK: - Weather and location
@@ -217,15 +215,15 @@ class ViewController: UIViewController {
 			opacityAnimation.toValue = 1
 			
 			infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
-			alterPressureLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			alterHumidLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			alterTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			windsSpeedLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			windsDirectionLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			windsTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 			
 			Delay(moveAnimation.duration - 0.05) { [weak self] in
 				self?.infoPanel.hidden = true
-				self?.alterTempLabel.layer.opacity = 1
-				self?.alterHumidLabel.layer.opacity = 1
-				self?.alterPressureLabel.layer.opacity = 1
+				self?.windsTempLabel.layer.opacity = 1
+				self?.windsDirectionLabel.layer.opacity = 1
+				self?.windsSpeedLabel.layer.opacity = 1
 				self?.animating = false
 			}
 		} else {
@@ -236,15 +234,15 @@ class ViewController: UIViewController {
 			moveAnimation.fromValue = view.bounds.height + 100
 			moveAnimation.toValue = infoPanel.center.y
 			
-			alterTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			alterHumidLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			alterPressureLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			windsTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			windsDirectionLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+			windsSpeedLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 			
 			infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
 			Delay(moveAnimation.duration - 0.05) { [weak self] in
-				self?.alterTempLabel.layer.opacity = 0
-				self?.alterHumidLabel.layer.opacity = 0
-				self?.alterPressureLabel.layer.opacity = 0
+				self?.windsTempLabel.layer.opacity = 0
+				self?.windsDirectionLabel.layer.opacity = 0
+				self?.windsSpeedLabel.layer.opacity = 0
 				self?.animating = false
 			}
 			
