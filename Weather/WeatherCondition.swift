@@ -46,7 +46,7 @@ struct WeatherCondition {
 			return dayTime ? "weather_partly_cloud_day" : "weather_partly_cloud_night"
 		case "snow", "mixed rain and snow", "mixed snow and sleet", "snow flurries", "light snow showers", "blowing snow", "hail", "cold", "heavy snow":
 			return dayTime ? "weather_snow_day" : "weather_snow_night"
-		case "thunderstorms", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
+		case "thunderstorms", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms", "isolated thundershowers":
 			return dayTime ? "weather_thunderstorm_day" : "weather_thunderstorm_night"
 		case "windy", "blustery":
 			return dayTime ? "weather_windy_day" : "weather_windy_night"
@@ -75,7 +75,7 @@ struct WeatherCondition {
 			return dayTime ? "weather_l_partly_cloud_day" : "weather_l_partly_cloud_night"
 		case "snow", "mixed rain and snow", "mixed snow and sleet", "snow flurries", "light snow showers", "blowing snow", "hail", "cold", "heavy snow":
 			return dayTime ? "weather_l_snow_day" : "weather_l_snow_night"
-		case "thunderstorms", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
+		case "thunderstorms", "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms", "isolated thundershowers":
 			return dayTime ? "weather_l_thunderstorm_day" : "weather_l_thunderstorm_night"
 		case "windy", "blustery":
 			return dayTime ? "weather_l_windy_day" : "weather_l_windy_night"
@@ -106,6 +106,8 @@ struct WeatherCondition {
 		case "heavy snow", "light snow showers", "mostly cloudy", "partly cloudy", "showers":
 			let suffix = dayTime ? "day" : "night"
 			return UIImage(named: rawValue.lowercaseString + " " + suffix)!
+		case "isolated thundershowers":
+			return UIImage(named: "thundershowers")!
 		default:
 			return UIImage(named: rawValue.lowercaseString) ?? UIImage(named: "not available")!
 		}
