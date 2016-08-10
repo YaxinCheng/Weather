@@ -210,42 +210,28 @@ class ViewController: UIViewController {
 		if infoPanel.hidden == false {
 			moveAnimation.fromValue = infoPanel.center.y
 			moveAnimation.toValue = view.bounds.height + 100
-			
 			opacityAnimation.fromValue = 0
 			opacityAnimation.toValue = 1
-			
-			infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
-			windsSpeedLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			windsDirectionLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			windsTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			
 			Delay(moveAnimation.duration - 0.05) { [weak self] in
 				self?.infoPanel.hidden = true
-				self?.windsTempLabel.layer.opacity = 1
-				self?.windsDirectionLabel.layer.opacity = 1
-				self?.windsSpeedLabel.layer.opacity = 1
-				self?.animating = false
 			}
 		} else {
 			infoPanel.hidden = false
-			
 			opacityAnimation.fromValue = 1
 			opacityAnimation.toValue = 0
 			moveAnimation.fromValue = view.bounds.height + 100
 			moveAnimation.toValue = infoPanel.center.y
-			
-			windsTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			windsDirectionLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			windsSpeedLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-			
-			infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
-			Delay(moveAnimation.duration - 0.05) { [weak self] in
-				self?.windsTempLabel.layer.opacity = 0
-				self?.windsDirectionLabel.layer.opacity = 0
-				self?.windsSpeedLabel.layer.opacity = 0
-				self?.animating = false
-			}
-			
+		}
+		
+		infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
+		windsSpeedLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+		windsDirectionLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+		windsTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+		Delay(moveAnimation.duration - 0.05) { [weak self] in
+			self?.windsTempLabel.layer.opacity = 1 - (self?.windsTempLabel.layer.opacity ?? 0)
+			self?.windsDirectionLabel.layer.opacity = 1 - (self?.windsDirectionLabel.layer.opacity ?? 0)
+			self?.windsSpeedLabel.layer.opacity = 1 - (self?.windsSpeedLabel.layer.opacity ?? 0)
+			self?.animating = false
 		}
 	}
 	

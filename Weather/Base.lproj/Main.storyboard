@@ -207,10 +207,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3NY-kM-6vJ">
-                                <rect key="frame" x="0.0" y="341" width="600" height="210"/>
+                                <rect key="frame" x="0.0" y="376" width="600" height="175"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="qwA-PG-ILe">
-                                        <rect key="frame" x="200" y="0.0" width="400" height="210"/>
+                                        <rect key="frame" x="200" y="0.0" width="400" height="175"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Condition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OJ6-7V-2jO">
                                                 <rect key="frame" x="8" y="8" width="384" height="29"/>
@@ -330,11 +330,11 @@
                                                 <exclude reference="ucE-Zd-BFW"/>
                                                 <exclude reference="gCO-g0-wED"/>
                                                 <exclude reference="wj8-wy-gHr"/>
-                                                <exclude reference="3UZ-vr-PY4"/>
-                                                <exclude reference="wel-d6-bhO"/>
                                                 <exclude reference="5Se-TZ-4FH"/>
                                                 <exclude reference="Vcy-31-MFi"/>
                                                 <exclude reference="XRu-Kf-QkJ"/>
+                                                <exclude reference="3UZ-vr-PY4"/>
+                                                <exclude reference="wel-d6-bhO"/>
                                                 <exclude reference="3T3-4H-COe"/>
                                                 <exclude reference="aKr-Wc-SbR"/>
                                                 <exclude reference="U1V-Yp-PWh"/>
@@ -346,14 +346,14 @@
                                             <mask key="constraints">
                                                 <exclude reference="J0d-cH-cg4"/>
                                                 <include reference="ucE-Zd-BFW"/>
-                                                <exclude reference="YRK-RX-2pq"/>
-                                                <exclude reference="a0T-Ik-2H1"/>
-                                                <include reference="wel-d6-bhO"/>
                                                 <include reference="5Se-TZ-4FH"/>
                                                 <exclude reference="Ml8-Jx-Cwy"/>
                                                 <include reference="Vcy-31-MFi"/>
                                                 <exclude reference="XRu-Kf-QkJ"/>
                                                 <exclude reference="hzI-pF-AuS"/>
+                                                <exclude reference="YRK-RX-2pq"/>
+                                                <exclude reference="a0T-Ik-2H1"/>
+                                                <include reference="wel-d6-bhO"/>
                                                 <include reference="3T3-4H-COe"/>
                                                 <exclude reference="cof-Gh-jLC"/>
                                                 <include reference="ljk-uh-vju"/>
@@ -371,16 +371,16 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7w3-aK-F3R">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="210"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="175"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waL-nU-euv">
-                                                <rect key="frame" x="35" y="146" width="130" height="28"/>
+                                                <rect key="frame" x="35" y="129" width="130" height="28"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bkM-H7-ofx">
-                                                <rect key="frame" x="67" y="72" width="66" height="66"/>
+                                                <rect key="frame" x="67" y="55" width="66" height="66"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="66" id="LKL-Y3-PuO"/>
                                                     <constraint firstAttribute="width" constant="66" id="MSa-hu-eX7"/>
@@ -418,7 +418,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="qwA-PG-ILe" secondAttribute="trailing" id="1kT-Iu-mfH"/>
                                     <constraint firstItem="qwA-PG-ILe" firstAttribute="leading" secondItem="7w3-aK-F3R" secondAttribute="trailing" id="3ni-IJ-BKL"/>
-                                    <constraint firstAttribute="height" constant="210" id="Fk9-fM-0uq"/>
+                                    <constraint firstAttribute="height" constant="175" id="Fk9-fM-0uq"/>
                                     <constraint firstAttribute="height" constant="120" id="Fmp-iY-Kki"/>
                                     <constraint firstItem="7w3-aK-F3R" firstAttribute="width" secondItem="3NY-kM-6vJ" secondAttribute="height" multiplier="219:230" id="K62-Qr-LoG"/>
                                     <constraint firstItem="qwA-PG-ILe" firstAttribute="width" secondItem="3NY-kM-6vJ" secondAttribute="height" multiplier="3:2" id="NzT-cG-1gw"/>

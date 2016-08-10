@@ -50,6 +50,7 @@ class CityListViewController: UITableViewController {
 		
 		if indexPath.section == 0 {
 			cell.cityLabel.text = "Local"
+			cell.imageView?.image = UIImage(named: "local")
 		} else {
 			let city = cityList[indexPath.row]
 			cell.cityLabel.text = city.name
