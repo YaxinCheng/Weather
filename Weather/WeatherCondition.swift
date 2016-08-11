@@ -111,6 +111,31 @@ struct WeatherCondition {
 		default:
 			return UIImage(named: rawValue.lowercaseString) ?? UIImage(named: "not available")!
 		}
-		
+	}
+	
+	var iconName: String {
+		switch rawValue.lowercaseString {
+		case "foggy":
+			return dayTime ? "foggy day" : "haze"
+		case "fair":
+			return dayTime ? "sunny" : "clear"
+		case "mixed rain and sleet", "freezing rain":
+			return "mixed snow and sleet"
+		case "rain":
+			return "showers day"
+		case "sleet":
+			return dayTime ? "light snow shower day" : "light snow shower night"
+		case "tornado", "tropical storm", "hurricane", "severe thunderstorms", "scattered thunderstorms":
+			return "thunderstorms"
+		case "blustery":
+			return "windy"
+		case "heavy snow", "light snow showers", "mostly cloudy", "partly cloudy", "showers":
+			let suffix = dayTime ? "day" : "night"
+			return rawValue.lowercaseString + " " + suffix
+		case "isolated thundershowers":
+			return "thundershowers"
+		default:
+			return rawValue.lowercaseString
+		}
 	}
 }

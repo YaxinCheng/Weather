@@ -43,6 +43,7 @@ struct WeatherStation {
 			guard let weather = Weather(with: JSON) else {
 				return
 			}
+			WeatherStation.sharedStation.saveForWidget(weather)
 			let result = Result<Weather>.Success(weather)
 			completion(result)
 			}) { (_, error) in
@@ -103,5 +104,12 @@ struct WeatherStation {
 	
 	func clearCache() {
 		weatherManager.clearCache()
+	}
+	
+	private func saveForWidget(weather: Weather) {
+		let userDefault = NSUserDefaults(suiteName: "group.NCGroup")
+		userDefault?.setObject(weather.city, forKey: "City")
+		userDefault?.setObject(weather.temprature, forKey: "Temperature")
+		userDefault?.setObject(weather.condition.iconName, forKey: "Icon")
 	}
 }
