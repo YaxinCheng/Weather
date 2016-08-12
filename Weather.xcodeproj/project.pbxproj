@@ -72,6 +72,11 @@
 		E3E42A601D5CBAEB0039BF2B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E42A5E1D5CBAEB0039BF2B /* MainInterface.storyboard */; };
 		E3E42A641D5CBAEB0039BF2B /* Weather Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E3E42A581D5CBAEB0039BF2B /* Weather Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E3E42A6C1D5CBE3D0039BF2B /* weatherIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3E42A6B1D5CBE3D0039BF2B /* weatherIcons.xcassets */; };
+		E3E42A721D5E23CC0039BF2B /* WeatherSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A711D5E23CC0039BF2B /* WeatherSourceProtocol.swift */; };
+		E3E42A741D5E247D0039BF2B /* WeatherSourceSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A731D5E247D0039BF2B /* WeatherSourceSQL.swift */; };
+		E3E42A761D5E2B100039BF2B /* WeatherSourceSQLPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A751D5E2B100039BF2B /* WeatherSourceSQLPatterns.swift */; };
+		E3E42A781D5E35380039BF2B /* YahooWeatherSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A771D5E35380039BF2B /* YahooWeatherSource.swift */; };
+		E3E42A7A1D5E4A310039BF2B /* WeatherUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A791D5E4A310039BF2B /* WeatherUnit.swift */; };
 		E3F0FBCA1D538D6E002DB74E /* Cities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F0FBC91D538D6E002DB74E /* Cities.storyboard */; };
 		E3F0FBCC1D538DD3002DB74E /* CityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FBCB1D538DD3002DB74E /* CityViewController.swift */; };
 		E3F0FBCE1D539237002DB74E /* PlaceLoadProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FBCD1D539237002DB74E /* PlaceLoadProtocol.swift */; };
@@ -199,6 +204,11 @@
 		E3E42A6B1D5CBE3D0039BF2B /* weatherIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = weatherIcons.xcassets; sourceTree = "<group>"; };
 		E3E42A6D1D5CC2EE0039BF2B /* Weather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Weather.entitlements; sourceTree = "<group>"; };
 		E3E42A6E1D5CC3320039BF2B /* Weather Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Weather Widget.entitlements"; sourceTree = "<group>"; };
+		E3E42A711D5E23CC0039BF2B /* WeatherSourceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherSourceProtocol.swift; sourceTree = "<group>"; };
+		E3E42A731D5E247D0039BF2B /* WeatherSourceSQL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherSourceSQL.swift; sourceTree = "<group>"; };
+		E3E42A751D5E2B100039BF2B /* WeatherSourceSQLPatterns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherSourceSQLPatterns.swift; sourceTree = "<group>"; };
+		E3E42A771D5E35380039BF2B /* YahooWeatherSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YahooWeatherSource.swift; sourceTree = "<group>"; };
+		E3E42A791D5E4A310039BF2B /* WeatherUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherUnit.swift; sourceTree = "<group>"; };
 		E3F0FBC91D538D6E002DB74E /* Cities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cities.storyboard; sourceTree = "<group>"; };
 		E3F0FBCB1D538DD3002DB74E /* CityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityViewController.swift; sourceTree = "<group>"; };
 		E3F0FBCD1D539237002DB74E /* PlaceLoadProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceLoadProtocol.swift; sourceTree = "<group>"; };
@@ -308,6 +318,11 @@
 				E3F0FBDA1D53C654002DB74E /* PropertySerializable.swift */,
 				E347AC741D4BEF810012C9E2 /* LocationStorage.swift */,
 				E34C665B1D55119F00DE277C /* Delay.swift */,
+				E3E42A711D5E23CC0039BF2B /* WeatherSourceProtocol.swift */,
+				E3E42A771D5E35380039BF2B /* YahooWeatherSource.swift */,
+				E3E42A791D5E4A310039BF2B /* WeatherUnit.swift */,
+				E3E42A731D5E247D0039BF2B /* WeatherSourceSQL.swift */,
+				E3E42A751D5E2B100039BF2B /* WeatherSourceSQLPatterns.swift */,
 				E3F0FBDD1D53C662002DB74E /* Extension */,
 				E332912C1D5957C000C5AED3 /* Forecasts */,
 				E3F0FBDE1D53C66E002DB74E /* Weather */,
@@ -705,7 +720,9 @@
 				E3C739661D4A910500F51623 /* ViewController.swift in Sources */,
 				E347AC771D4BF0900012C9E2 /* Common.swift in Sources */,
 				E3C739F21D4BD72F00F51623 /* Weather.swift in Sources */,
+				E3E42A721D5E23CC0039BF2B /* WeatherSourceProtocol.swift in Sources */,
 				E347AC751D4BEF820012C9E2 /* LocationStorage.swift in Sources */,
+				E3E42A741D5E247D0039BF2B /* WeatherSourceSQL.swift in Sources */,
 				E3C739641D4A910500F51623 /* AppDelegate.swift in Sources */,
 				E3F0FBDB1D53C654002DB74E /* Persistable.swift in Sources */,
 				E3F0FBCE1D539237002DB74E /* PlaceLoadProtocol.swift in Sources */,
@@ -714,6 +731,7 @@
 				E33291141D58A1D400C5AED3 /* CityManager.swift in Sources */,
 				E33291121D589EB100C5AED3 /* ForecastController.swift in Sources */,
 				E3F0FBD41D53C1C2002DB74E /* CityCell.swift in Sources */,
+				E3E42A7A1D5E4A310039BF2B /* WeatherUnit.swift in Sources */,
 				E3F0FBDC1D53C654002DB74E /* PropertySerializable.swift in Sources */,
 				E3C739EC1D4BCE9F00F51623 /* WeatherError.swift in Sources */,
 				E3F0FBD01D53956C002DB74E /* CityLoader.swift in Sources */,
@@ -721,8 +739,10 @@
 				E3C739EE1D4BD02400F51623 /* NSDate+Localization.swift in Sources */,
 				E3F0FBD21D5398E4002DB74E /* City.swift in Sources */,
 				E3C739F01D4BD65C00F51623 /* UIAlertAction+Cancel.swift in Sources */,
+				E3E42A781D5E35380039BF2B /* YahooWeatherSource.swift in Sources */,
 				E332910E1D589E2100C5AED3 /* ForecastCell.swift in Sources */,
 				E3F0FBD81D53C262002DB74E /* CityListViewController.swift in Sources */,
+				E3E42A761D5E2B100039BF2B /* WeatherSourceSQLPatterns.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,6 +1063,7 @@
 				E3E42A661D5CBAEB0039BF2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

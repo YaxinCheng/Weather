@@ -14,7 +14,7 @@ import CoreData.NSManagedObject
 struct Weather {
 	let condition: WeatherCondition
 	let temprature: String
-	let pressure: String
+	var pressure: String
 	let windTemperatue: String
 	let sunriseTime: NSDateComponents
 	let sunsetTime: NSDateComponents
@@ -25,25 +25,22 @@ struct Weather {
 	let region: String
 	let city: String
 	let windsSpeed: String
-	private let location: (Double, Double)
 	
 	init?(with JSON: NSDictionary) {
 		guard
-			let temprature = (JSON["temperatureInC"] as? NSString)?.doubleValue,
-			let pressure = JSON["pressureInIN"] as? String,
-			let windTemperatue = (JSON["windChillInC"] as? NSString)?.doubleValue,
-			let windsSpeed = JSON["windSpeedInMPH"] as? String,
-			let sunsetTime = JSON["sunsetInLocalTime"] as? NSDateComponents,
-			let sunriseTime = JSON["sunriseInLocalTime"] as? NSDateComponents,
-			let visibility = JSON["visibilityInMI"] as? String,
-			let windsDirection = JSON["windDirectionInCompassPoints"] as? String,
+			let temprature = JSON["temperature"] as? Double,
+			let pressure = JSON["pressure"] as? String,
+			let windTemperatue = (JSON["windChill"] as? NSString)?.doubleValue,
+			let windsSpeed = JSON["windSpeed"] as? String,
+			let sunsetTime = JSON["sunset"] as? NSDateComponents,
+			let sunriseTime = JSON["sunrise"] as? NSDateComponents,
+			let visibility = JSON["visibility"] as? String,
+			let windsDirection = JSON["windDirection"] as? String,
 			let humidity = JSON["humidity"] as? String,
 			let condition = JSON["condition"] as? String,
 			let country = JSON["country"] as? String,
 			let region = JSON["region"] as? String,
-			let city = JSON["city"] as? String,
-			let latitude = (JSON["latitude"] as? NSString)?.doubleValue,
-			let longitude = (JSON["longitude"] as? NSString)?.doubleValue
+			let city = JSON["city"] as? String
 		else { return nil }
 		self.temprature = "\(Int(round(temprature)))"
 		self.pressure = pressure
@@ -57,73 +54,6 @@ struct Weather {
 		self.region = region
 		self.city = city
 		self.windsSpeed = windsSpeed
-		self.location = (latitude, longitude)
-		let location = CLLocation(latitude: latitude, longitude: longitude)
-		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
-		CityManager.sharedManager.dayNight(sunriseTime, sunset: sunsetTime, timeZone: timeZone)
 		self.condition = WeatherCondition(rawValue: condition, day: CityManager.sharedManager.day!)
-	}
-}
-
-extension Weather: PropertySerializable {
-	var properties: [String : AnyObject] {
-		var properties = Dictionary<String, AnyObject>()
-		properties["temperature"] = temprature
-		properties["pressure"] = pressure
-		properties["windTemperature"] = windTemperatue
-		properties["sunriseHour"] = sunriseTime.hour
-		properties["sunriseMinute"] = sunriseTime.minute
-		properties["sunsetHour"] = sunsetTime.hour
-		properties["sunsetMinute"] = sunsetTime.minute
-		properties["visibility"] = visibility
-		properties["windsDirection"] = windsDirection
-		properties["humidity"] = humidity
-		properties["country"] = country
-		properties["region"] = region
-		properties["city"] = city
-		properties["condition"] = condition.rawValue
-		properties["windsSpeed"] = windsSpeed
-		properties["latitude"] = location.0
-		properties["longitude"] = location.1
-		properties["fullLocation"] = country + "," + region + "," + city
-		return properties
-	}
-	
-	init(with managedObject: NSManagedObject) {
-		temprature = managedObject.valueForKey("temperature") as! String
-		pressure = managedObject.valueForKey("pressure") as! String
-		windTemperatue = managedObject.valueForKey("windTemperature") as! String
-		let sunrise = (managedObject.valueForKey("sunriseHour") as! Int, managedObject.valueForKey("sunriseMinute") as! Int)
-		sunriseTime = NSDateComponents()
-		(sunriseTime.hour, sunriseTime.minute) = sunrise
-		let sunset = (managedObject.valueForKey("sunsetHour") as! Int, managedObject.valueForKey("sunsetMinute") as! Int)
-		sunsetTime = NSDateComponents()
-		(sunsetTime.hour, sunsetTime.minute) = sunset
-		visibility = managedObject.valueForKey("visibility") as! String
-		windsDirection = managedObject.valueForKey("windsDirection") as! String
-		humidity = managedObject.valueForKey("humidity") as! String
-		country = managedObject.valueForKey("country") as! String
-		region = managedObject.valueForKey("region") as! String
-		city = managedObject.valueForKey("city") as! String
-		windsSpeed = managedObject.valueForKey("windsSpeed") as! String
-		location = (managedObject.valueForKey("latitude") as! Double, managedObject.valueForKey("longitude") as! Double)
-		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(CLLocation(latitude: location.0, longitude: location.1))
-		let time = NSDate().time(timeZone: timeZone)
-		let currentTime = Double(time.hour) + Double(time.minute) / 60
-		let sunsetT = Double(sunsetTime.hour) + Double(sunsetTime.minute) / 60
-		let sunriseT = Double(sunriseTime.hour) + Double(sunriseTime.minute) / 60
-		
-		let conditionRaw = managedObject.valueForKey("condition") as! String
-		condition = WeatherCondition(rawValue: conditionRaw, day: currentTime >= sunriseT && currentTime < sunsetT)
-	}
-}
-
-extension Weather: Persistable {
-	var primaryKeyAttribute: String {
-		return "fullLocation"
-	}
-	
-	var primaryKeyValue: AnyObject {
-		return country + "," + region + "," + city
 	}
 }

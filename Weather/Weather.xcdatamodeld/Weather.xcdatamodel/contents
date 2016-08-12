@@ -6,28 +6,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Weather" syncable="YES">
-        <attribute name="city" attributeType="String" syncable="YES"/>
-        <attribute name="condition" attributeType="String" syncable="YES"/>
-        <attribute name="country" attributeType="String" syncable="YES"/>
-        <attribute name="fullLocation" attributeType="String" syncable="YES"/>
-        <attribute name="humidity" attributeType="String" syncable="YES"/>
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="pressure" attributeType="String" syncable="YES"/>
-        <attribute name="region" attributeType="String" syncable="YES"/>
-        <attribute name="sunriseHour" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="sunriseMinute" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="sunsetHour" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="sunsetMinute" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="temperature" attributeType="String" syncable="YES"/>
-        <attribute name="visibility" attributeType="String" syncable="YES"/>
-        <attribute name="windsDirection" attributeType="String" syncable="YES"/>
-        <attribute name="windsSpeed" attributeType="String" syncable="YES"/>
-        <attribute name="windTemperature" attributeType="String" syncable="YES"/>
-    </entity>
     <elements>
         <element name="City" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Weather" positionX="-63" positionY="9" width="128" height="315"/>
     </elements>
 </model>

@@ -63,6 +63,16 @@ class ViewController: UIViewController {
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: CityNotification.CityDidChange.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
+		
+		let source = YahooWeatherSource()
+		do {
+			let cities = try City.restoreFromCache()
+			source.currentWeather(at: cities[0]) { weather in
+			
+			}
+		} catch {
+			
+		}
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -266,24 +276,11 @@ class ViewController: UIViewController {
 	
 	// MARK: - App out and in
 	func enterForeground() {
-		do {
-			if let weather = try Weather.restoreFromCache().first {
-				self.currentWeather = weather
-			}
-		} catch {
-			print(error)
-		}
 		player?.play()
 		syncButtonPressedUp(syncButton)
 	}
 	
 	func enterBackground() {
-		do {
-			try Weather.deleteAllFromCache()
-			try currentWeather?.saveToCache()
-		} catch {
-			print("\(error)")
-		}
 	}
 }
 
