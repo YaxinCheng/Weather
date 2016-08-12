@@ -11,21 +11,95 @@ import CoreLocation.CLLocation
 import APTimeZones
 
 struct YahooWeatherSource: WeatherSourceProtocol {
-	func currentWeather(at city: City, complete: (Weather) -> Void) {
-		let baseSQL = WeatherSourceSQLPatterns.weather
+	func currentWeather(at city: City, complete: (Result<Weather>) -> Void) {
 		let cityDescription = city.description
-		let completeSQL = baseSQL.generateSQL(with: cityDescription)
-		sendRequst(completeSQL) {
-			guard let weatherJSON = $0 as? NSDictionary,
-				let unwrapped = (weatherJSON["query"] as? NSDictionary)?["results"]?["channel"] as? Dictionary<String, AnyObject>
-			else { return }
-			let formattedJSON = self.formatJSON(unwrapped)
-			guard let weather = Weather(with: formattedJSON) else { return }
-			complete(weather)
+		loadWeatherData(at: cityDescription, complete: complete)
+	}
+	
+	func currentWeather(at location: CLLocation, complete: (Result<Weather>) -> Void) {
+		let geoCoder = CLGeocoder()
+		geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
+			if error != nil {
+				let errorResult = Result<Weather>.Failure(error!)
+				complete(errorResult)
+			} else {
+				guard
+					let mark = placeMarks?.first,
+					let state = mark.addressDictionary?["State"] as? String,
+					let country = mark.addressDictionary?["Country"] as? String,
+					let city = mark.addressDictionary?["City"] as? String
+				else {
+					let error = Result<Weather>.Failure(YahooWeatherError.FailedFindingCity)
+					complete(error)
+					return
+				}
+				self.loadWeatherData(at: "\(city), \(state), \(country)", complete: complete)
+			}
 		}
 	}
 	
-	private func formatJSON(json: Dictionary<String, AnyObject>) -> Dictionary<String, AnyObject> {
+	func fivedaysForecast(at city: City, complete: (Result<[Forecast]> -> Void)) {
+		loadForecasts(at: city.description, complete: complete)
+	}
+	
+	func fivedaysForecast(at location: CLLocation, complete: (Result<[Forecast]> -> Void)) {
+		let geoCoder = CLGeocoder()
+		geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
+			if error != nil {
+				let errorResult = Result<[Forecast]>.Failure(error!)
+				complete(errorResult)
+			} else {
+				guard
+					let mark = placeMarks?.first,
+					let state = mark.addressDictionary?["State"] as? String,
+					let country = mark.addressDictionary?["Country"] as? String,
+					let city = mark.addressDictionary?["City"] as? String
+					else {
+						let error = Result<[Forecast]>.Failure(YahooWeatherError.FailedFindingCity)
+						complete(error)
+						return
+				}
+				self.loadForecasts(at: "\(city), \(state), \(country)", complete: complete)
+			}
+		}
+	}
+	
+	private func loadWeatherData(at locationString: String, complete: (Result<Weather>) -> Void) {
+		let baseSQL:WeatherSourceSQLPatterns = .weather
+		let completeSQL = baseSQL.generateSQL(with: locationString)
+		sendRequst(completeSQL) {
+			guard let weatherJSON = $0 as? NSDictionary,
+				let unwrapped = (weatherJSON["query"] as? NSDictionary)?["results"]?["channel"] as? Dictionary<String, AnyObject>
+				else {
+					let error = Result<Weather>.Failure(YahooWeatherError.LoadFailed)
+					complete(error)
+					return
+			}
+			let formattedJSON = self.formatWeatherJSON(unwrapped)
+			guard let weather = Weather(with: formattedJSON) else { return }
+			let result = Result<Weather>.Success(weather)
+			complete(result)
+		}
+	}
+	
+	private func loadForecasts(at locationString: String, complete: (Result<[Forecast]>) -> Void) {
+		let baseSQL:WeatherSourceSQLPatterns = .forecast
+		let completeSQL = baseSQL.generateSQL(with: locationString)
+		sendRequst(completeSQL) {
+			guard let weatherJSON = $0 as? NSDictionary,
+				let unwrapped = (((weatherJSON["query"] as? NSDictionary)?["results"] as? NSDictionary)?["channel"] as? NSDictionary)?["forecast"]?["item"] as? [Dictionary<String, AnyObject>]
+				else {
+					let error = Result<[Forecast]>.Failure(YahooWeatherError.LoadFailed)
+					complete(error)
+					return
+			}
+			let forecasts = unwrapped.flatMap { Forecast(with: $0) }
+			let result = Result<[Forecast]>.Success(forecasts)
+			complete(result)
+		}
+	}
+	
+	private func formatWeatherJSON(json: Dictionary<String, AnyObject>) -> Dictionary<String, AnyObject> {
 		var newJSON = Dictionary<String, AnyObject>()
 		newJSON["temperature"] = ((json["item"]?["condition"] as? NSDictionary)?["temp"] as? NSString)?.doubleValue
 		newJSON["condition"] = (json["item"]?["condition"] as? NSDictionary)?["text"]
@@ -67,7 +141,7 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 		return CityManager.sharedManager.day
 	}
 	
-	func conver(value: Double, from funit: WeatherUnit, to tunit: WeatherUnit) -> Double? {
+	private func conver(value: Double, from funit: WeatherUnit, to tunit: WeatherUnit) -> Double? {
 		switch (funit, tunit) {
 		case (.Fahrenheit, .Celsius):
 			return (value - 32) / 1.8
@@ -77,4 +151,9 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 			return nil
 		}
 	}
+}
+
+enum YahooWeatherError: ErrorType {
+	case LoadFailed
+	case FailedFindingCity
 }

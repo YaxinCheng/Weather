@@ -17,14 +17,13 @@ struct Forecast {
 	
 	init?(with JSON: NSDictionary) {
 		guard
-			let timeComponents = JSON["kYWADateComponents"] as? NSDateComponents,
-			let high = (JSON["highTemperatureForDay"] as? NSString)?.doubleValue,
-			let low = (JSON["lowTemperatureForDay"] as? NSString)?.doubleValue,
-			let conditionString = JSON["shortDescription"] as? String
+			let time = JSON["date"] as? String,
+			let date = NSDate.date(string: time, format: "dd MMM yyyy"),
+			let high = (JSON["high"] as? NSString)?.doubleValue,
+			let low = (JSON["low"] as? NSString)?.doubleValue,
+			let conditionString = JSON["low"] as? String
 		else { return nil }
-		let time = "\(timeComponents.year)-\(timeComponents.month)-\(timeComponents.day)"
-		let date = NSDate.date(string: time, format: "yyyy-MM-dd")
-		self.date = date?.formatDate() ?? time
+		self.date = date.formatDate()
 		conditionDescription = conditionString
 		highTemp = String(Int(round(high)))
 		lowTemp = String(Int(round(low)))
