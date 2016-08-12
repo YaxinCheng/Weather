@@ -266,24 +266,11 @@ class ViewController: UIViewController {
 	
 	// MARK: - App out and in
 	func enterForeground() {
-		do {
-			if let weather = try Weather.restoreFromCache().first {
-				self.currentWeather = weather
-			}
-		} catch {
-			print(error)
-		}
 		player?.play()
 		syncButtonPressedUp(syncButton)
 	}
 	
 	func enterBackground() {
-		do {
-			try Weather.deleteAllFromCache()
-			try currentWeather?.saveToCache()
-		} catch {
-			print("\(error)")
-		}
 	}
 }
 
