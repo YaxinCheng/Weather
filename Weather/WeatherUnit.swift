@@ -23,6 +23,17 @@ enum WeatherUnit {
 		return converted
 	}
 	
+	static func convert(forecast: Forecast, from funit: WeatherUnit, to tunit: WeatherUnit) -> Forecast {
+		var converted = forecast
+		guard
+			let highTemp = convert(forecast.highTemp, from: funit, to: tunit),
+			let lowTemp = convert(forecast.lowTemp, from: funit, to: tunit)
+		else { return converted }
+		converted.highTemp = highTemp
+		converted.lowTemp = lowTemp
+		return converted
+	}
+	
 	private static func convert(value: Double, from funit: WeatherUnit, to tunit: WeatherUnit) -> Double? {
 		switch (funit, tunit) {
 		case (.Fahrenheit, .Celsius):

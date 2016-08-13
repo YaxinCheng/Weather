@@ -12,8 +12,8 @@ import APTimeZones
 
 struct YahooWeatherSource: WeatherSourceProtocol {
 	func currentWeather(at city: City, complete: (Result<Weather>) -> Void) {
-		let cityDescription = city.description
-		loadWeatherData(at: cityDescription, complete: complete)
+		let woeid = city.woeid
+		loadWeatherData(at: woeid, complete: complete)
 	}
 	
 	func currentWeather(at location: CLLocation, complete: (Result<Weather>) -> Void) {
@@ -33,13 +33,17 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 					complete(error)
 					return
 				}
-				self.loadWeatherData(at: "\(city), \(state), \(country)", complete: complete)
+				let loader = CityLoader(input: "\(city), \(state), \(country)")
+				loader.loads {
+					guard let matchedCity = $0.first else { return }
+					self.loadWeatherData(at: matchedCity.woeid, complete: complete)
+				}
 			}
 		}
 	}
 	
 	func fivedaysForecast(at city: City, complete: (Result<[Forecast]> -> Void)) {
-		loadForecasts(at: city.description, complete: complete)
+		loadForecasts(at: city.woeid, complete: complete)
 	}
 	
 	func fivedaysForecast(at location: CLLocation, complete: (Result<[Forecast]> -> Void)) {
@@ -59,7 +63,11 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 						complete(error)
 						return
 				}
-				self.loadForecasts(at: "\(city), \(state), \(country)", complete: complete)
+				let loader = CityLoader(input: "\(city), \(state), \(country)")
+				loader.loads {
+					guard let matchedCity = $0.first else { return }
+					self.loadForecasts(at: matchedCity.woeid, complete: complete)
+				}
 			}
 		}
 	}
@@ -87,13 +95,13 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 		let completeSQL = baseSQL.generateSQL(with: locationString)
 		sendRequst(completeSQL) {
 			guard let weatherJSON = $0 as? NSDictionary,
-				let unwrapped = (((weatherJSON["query"] as? NSDictionary)?["results"] as? NSDictionary)?["channel"] as? NSDictionary)?["forecast"]?["item"] as? [Dictionary<String, AnyObject>]
+				let unwrapped = (((weatherJSON["query"] as? NSDictionary)?["results"] as? NSDictionary)?["channel"]) as? [Dictionary<String, AnyObject>]
 				else {
 					let error = Result<[Forecast]>.Failure(YahooWeatherError.LoadFailed)
 					complete(error)
 					return
 			}
-			let forecasts = unwrapped.flatMap { Forecast(with: $0) }
+			let forecasts = unwrapped.flatMap { $0["item"]?["forecast"] as? NSDictionary }.flatMap { Forecast(with: $0) }
 			let result = Result<[Forecast]>.Success(forecasts)
 			complete(result)
 		}

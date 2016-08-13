@@ -32,7 +32,7 @@ class ForecastController: UIViewController {
 		let completion: (Result<[Forecast]> -> Void) = { [weak self] in
 			switch $0 {
 			case .Success(let forecasts):
-				self?.dataSource = forecasts
+				self?.dataSource = forecasts.map { WeatherUnit.convert($0, from: .Fahrenheit, to: .Celsius) }
 			case .Failure(let error):
 				let alert = UIAlertController(title: "Error!", message: "\(error)", preferredStyle: .Alert)
 				alert.addAction(.Cancel)
@@ -75,8 +75,8 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 			cell.weatherImageView.image = forecast.condition.icon
 			cell.forecastLabel.text = forecast.conditionDescription
 			cell.weekdayLabel.text = forecast.date
-			cell.highTempLabel.text = forecast.highTemp + "°C"
-			cell.lowTempLabel.text = forecast.lowTemp + "°C"
+			cell.highTempLabel.text = String(format: "%.0f°C", round(forecast.highTemp))
+			cell.lowTempLabel.text = String(format: "%.0f°C", round(forecast.lowTemp))
 			return cell
 		}
 	}
