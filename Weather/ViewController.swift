@@ -58,7 +58,6 @@ class ViewController: UIViewController {
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterBackground), name: UIApplicationWillResignActiveNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: CityNotification.CityDidChange.rawValue, object: nil)
@@ -268,9 +267,6 @@ class ViewController: UIViewController {
 	func enterForeground() {
 		player?.play()
 		syncButtonPressedUp(syncButton)
-	}
-	
-	func enterBackground() {
 	}
 }
 

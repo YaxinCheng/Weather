@@ -50,10 +50,10 @@ class CityViewController: UITableViewController {
 		let city = cityList[indexPath.row]
 		do {
 			try city.saveToCache()
+			performSegueWithIdentifier(Common.unwindFromCityView, sender: nil)
 		} catch {
 			print(error)
 		}
-		performSegueWithIdentifier(Common.unwindFromCityView, sender: nil)
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	

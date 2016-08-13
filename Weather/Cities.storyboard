@@ -49,7 +49,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="LhE-qj-1Ua">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="nZV-H8-w4f">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="nZV-H8-w4f">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="YgV-EM-pex" id="Fxn-UP-LaN"/>
                             </connections>
