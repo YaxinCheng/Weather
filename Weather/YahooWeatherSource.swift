@@ -77,7 +77,7 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 			}
 			let formattedJSON = self.formatWeatherJSON(unwrapped)
 			guard let weather = Weather(with: formattedJSON) else { return }
-			let result = Result<Weather>.Success(weather)
+			let result = Result<Weather>.Success(WeatherUnit.convert(weather, from: .Fahrenheit, to: .Celsius))
 			complete(result)
 		}
 	}
@@ -141,16 +141,7 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 		return CityManager.sharedManager.day
 	}
 	
-	private func conver(value: Double, from funit: WeatherUnit, to tunit: WeatherUnit) -> Double? {
-		switch (funit, tunit) {
-		case (.Fahrenheit, .Celsius):
-			return (value - 32) / 1.8
-		case (.Celsius, .Fahrenheit):
-			return value * 1.8 + 32
-		default:
-			return nil
-		}
-	}
+
 }
 
 enum YahooWeatherError: ErrorType {

@@ -8,20 +8,11 @@
 
 import Foundation
 
-struct CityLoader: PlaceLoadProtocol {
-	var responseType: String = "json"
-	var input: String
+struct CityLoader: WeatherSourceProtocol {
+	let sql: WeatherSourceSQL
 	
 	init(input: String) {
-		self.input = input
-	}
-	
-	func process(json: NSDictionary?, callback: ((Any?) -> Void)?) {
-		guard let JSON = json, let cityList = JSON["predictions"] as? [NSDictionary] else {
-			callback?(nil)
-			return
-		}
-		let cities = cityList.flatMap { City(from: $0) }
-		callback?(cities)
+		let baseSQL: WeatherSourceSQLPatterns = .city
+		sql = baseSQL.generateSQL(with: input)
 	}
 }

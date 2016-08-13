@@ -13,9 +13,9 @@ import CoreData.NSManagedObject
 
 struct Weather {
 	let condition: WeatherCondition
-	let temprature: String
-	var pressure: String
-	let windTemperatue: String
+	var temprature: Int
+	let pressure: String
+	var windTemperatue: Int
 	let sunriseTime: NSDateComponents
 	let sunsetTime: NSDateComponents
 	let visibility: String
@@ -42,9 +42,9 @@ struct Weather {
 			let region = JSON["region"] as? String,
 			let city = JSON["city"] as? String
 		else { return nil }
-		self.temprature = "\(Int(round(temprature)))"
+		self.temprature = Int(round(temprature))
 		self.pressure = pressure
-		self.windTemperatue = String(Int(round(windTemperatue)))
+		self.windTemperatue = Int(round(windTemperatue))
 		self.sunriseTime = sunriseTime
 		self.sunsetTime = sunsetTime
 		self.visibility = visibility
