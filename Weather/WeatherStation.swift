@@ -7,19 +7,16 @@
 //
 
 import Foundation
-import CoreLocation
-import YWeatherAPI
+import CoreLocation.CLLocation
 
 struct WeatherStation {
-	static var sharedStation = WeatherStation()
-	private let weatherManager: YWeatherAPI
 	let locationStorage: LocationStorage
+	private let weatherSource: YahooWeatherSource
+	
+	static var sharedStation = WeatherStation()
 	
 	private init() {
-		weatherManager = YWeatherAPI.sharedManager()
-		weatherManager.cacheEnabled = true
-		weatherManager.cacheExpiryInMinutes = 2
-		weatherManager.defaultTemperatureUnit = C
+		weatherSource = YahooWeatherSource()
 		locationStorage = LocationStorage()
 	}
 	
@@ -39,28 +36,11 @@ struct WeatherStation {
 			completion(result)
 			return
 		}
-		weatherManager.allCurrentConditionsForCoordinate(currentLocation, success: { (JSON) in
-			guard let weather = Weather(with: JSON) else {
-				return
-			}
-			WeatherStation.sharedStation.saveForWidget(weather)
-			let result = Result<Weather>.Success(weather)
-			completion(result)
-			}) { (_, error) in
-			let result = Result<Weather>.Failure(error)
-			completion(result)
-		}
+		weatherSource.currentWeather(at: currentLocation, complete: completion)
 	}
 	
 	func all(for city: City, completion: (Result<Weather>) -> Void) {
-		weatherManager.allCurrentConditionsForLocation(city.description, success: { (JSON) in
-			guard let weather = Weather(with: JSON) else { return }
-			let result = Result<Weather>.Success(weather)
-			completion(result)
-			}) { (_,  error) in
-			let result = Result<Weather>.Failure(error)
-			completion(result)
-		}
+		weatherSource.currentWeather(at: city, complete: completion)
 	}
 	
 	func forecast(completion: (Result<[Forecast]>) -> Void) {
@@ -79,31 +59,11 @@ struct WeatherStation {
 			completion(result)
 			return
 		}
-		weatherManager.fiveDayForecastForCoordinate(currentLocation, success: { (JSON) in
-			guard let forecastJSON = JSON["fiveDayForecasts"] as? [NSDictionary] else { return }
-			let forecasts = forecastJSON.flatMap { Forecast(with: $0) }
-			let result = Result<[Forecast]>.Success(forecasts)
-			completion(result)
-			}) { (_, error) in
-			let result = Result<[Forecast]>.Failure(error)
-			completion(result)
-		}
+		weatherSource.fivedaysForecast(at: currentLocation, complete: completion)
 	}
 	
 	func forecast(for city: City, completion: (Result<[Forecast]>) -> Void) {
-		weatherManager.fiveDayForecastForLocation(city.description, success: { (JSON) in
-			guard let forecastJSON = JSON["fiveDayForecasts"] as? [NSDictionary] else { return }
-			let forecasts = forecastJSON.flatMap { Forecast(with: $0) }
-			let result = Result<[Forecast]>.Success(forecasts)
-			completion(result)
-			}) { (_, error) in
-			let result = Result<[Forecast]>.Failure(error)
-			completion(result)
-		}
-	}
-	
-	func clearCache() {
-		weatherManager.clearCache()
+		weatherSource.fivedaysForecast(at: city, complete: completion)
 	}
 	
 	private func saveForWidget(weather: Weather) {

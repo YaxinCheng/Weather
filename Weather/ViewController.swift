@@ -132,7 +132,7 @@ class ViewController: UIViewController {
 		view.insertSubview(backgroundView, atIndex: 0)
 		
 		cityButton.setTitle(weather.city, forState: .Normal)
-		tempLabel.text = weather.temprature + "°C"
+		tempLabel.text = "\(weather.temprature)°C"
 		weatherConditionLabel.text = weather.condition.rawValue
 		pressureLabel.text = weather.pressure + "IN"
 		humidityLabel.text = weather.humidity + "%"
@@ -141,7 +141,7 @@ class ViewController: UIViewController {
 		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour, weather.sunsetTime.minute)
 		conditionIcon.image = weather.condition.icon
 		
-		windsTempLabel.text = "Winds Temperature: " + weather.windTemperatue + "°C"
+		windsTempLabel.text = "Winds Temperature: \(weather.windTemperatue)°C"
 		windsDirectionLabel.text = "Winds Direction: " + weather.windsDirection
 		windsSpeedLabel.text = "Winds Speed: " + weather.windsSpeed + "m/h"
 	}
@@ -180,7 +180,6 @@ class ViewController: UIViewController {
 		animation.fromValue = 2 * M_PI
 		animation.toValue = 0
 		sender.layer.addAnimation(animation, forKey: "rotation")
-		WeatherStation.sharedStation.clearCache()
 		let city = CityManager.sharedManager.currentCity
 		if city == nil {
 			refreshLocation()

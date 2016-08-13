@@ -13,9 +13,9 @@ import CoreData.NSManagedObject
 
 struct Weather {
 	let condition: WeatherCondition
-	let temprature: String
+	var temprature: Int
 	let pressure: String
-	let windTemperatue: String
+	var windTemperatue: Int
 	let sunriseTime: NSDateComponents
 	let sunsetTime: NSDateComponents
 	let visibility: String
@@ -25,29 +25,26 @@ struct Weather {
 	let region: String
 	let city: String
 	let windsSpeed: String
-	private let location: (Double, Double)
 	
 	init?(with JSON: NSDictionary) {
 		guard
-			let temprature = (JSON["temperatureInC"] as? NSString)?.doubleValue,
-			let pressure = JSON["pressureInIN"] as? String,
-			let windTemperatue = (JSON["windChillInC"] as? NSString)?.doubleValue,
-			let windsSpeed = JSON["windSpeedInMPH"] as? String,
-			let sunsetTime = JSON["sunsetInLocalTime"] as? NSDateComponents,
-			let sunriseTime = JSON["sunriseInLocalTime"] as? NSDateComponents,
-			let visibility = JSON["visibilityInMI"] as? String,
-			let windsDirection = JSON["windDirectionInCompassPoints"] as? String,
+			let temprature = JSON["temperature"] as? Double,
+			let pressure = JSON["pressure"] as? String,
+			let windTemperatue = (JSON["windChill"] as? NSString)?.doubleValue,
+			let windsSpeed = JSON["windSpeed"] as? String,
+			let sunsetTime = JSON["sunset"] as? NSDateComponents,
+			let sunriseTime = JSON["sunrise"] as? NSDateComponents,
+			let visibility = JSON["visibility"] as? String,
+			let windsDirection = JSON["windDirection"] as? String,
 			let humidity = JSON["humidity"] as? String,
 			let condition = JSON["condition"] as? String,
 			let country = JSON["country"] as? String,
 			let region = JSON["region"] as? String,
-			let city = JSON["city"] as? String,
-			let latitude = (JSON["latitude"] as? NSString)?.doubleValue,
-			let longitude = (JSON["longitude"] as? NSString)?.doubleValue
+			let city = JSON["city"] as? String
 		else { return nil }
-		self.temprature = "\(Int(round(temprature)))"
+		self.temprature = Int(round(temprature))
 		self.pressure = pressure
-		self.windTemperatue = String(Int(round(windTemperatue)))
+		self.windTemperatue = Int(round(windTemperatue))
 		self.sunriseTime = sunriseTime
 		self.sunsetTime = sunsetTime
 		self.visibility = visibility
@@ -57,10 +54,6 @@ struct Weather {
 		self.region = region
 		self.city = city
 		self.windsSpeed = windsSpeed
-		self.location = (latitude, longitude)
-		let location = CLLocation(latitude: latitude, longitude: longitude)
-		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
-		CityManager.sharedManager.dayNight(sunriseTime, sunset: sunsetTime, timeZone: timeZone)
 		self.condition = WeatherCondition(rawValue: condition, day: CityManager.sharedManager.day!)
 	}
 }

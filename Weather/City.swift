@@ -8,65 +8,74 @@
 
 import Foundation
 import CoreData.NSManagedObject
+import APTimeZones
+import CoreLocation.CLLocation
 
 struct City: CustomStringConvertible {
 	let name: String
 	let province: String
 	let country: String
-	let id: String
+	let woeid: String
+	let latitude: Double
+	let longitude: Double
 	var region: String {
 		return province.isEmpty ? country : province + ", " + country
+	}
+	var timeZone: NSTimeZone {
+		let location = CLLocation(latitude: latitude, longitude: longitude)
+		return APTimeZones.sharedInstance().timeZoneWithLocation(location)
 	}
 	
 	init?(from JSON: NSDictionary) {
 		guard
-			let terms = JSON["terms"] as? [NSDictionary] where terms.count > 0,
-			let id = JSON["id"] as? String,
-			let name = terms[0]["value"] as? String
+			let name = JSON["name"] as? String,
+			let country = JSON["country"] as? String,
+			let woeid = JSON["woeid"] as? String,
+			let province = JSON["admin1"] as? String,
+			let latitude = (JSON["centroid"]?["latitude"] as? NSString)?.doubleValue,
+			let longitude = (JSON["centroid"]?["latitude"] as? NSString)?.doubleValue
 		else { return nil }
-		
-		let province = terms[1]["value"] as? String ?? ""
-		let country: String
-		if terms.count > 2 {
-			country = terms[2]["value"] as? String ?? ""
-		} else {
-			country = ""
-		}
-	
 		self.name = name
-		self.province = country.isEmpty ? "" : province
-		self.country = country.isEmpty ? province : country
-		self.id = id
+		self.woeid = woeid
+		self.country = country
+		self.province = province
+		self.latitude = latitude
+		self.longitude = longitude
 	}
 	
 	var description: String {
 		return name + ", " + region
 	}
-	
-	var fullLocation: String {
-		return country + "," + region + "," + name
-	}
 }
 
 extension City: PropertySerializable {
+	var properties: [String : AnyObject] {
+		var newDict = [String: AnyObject]()
+		newDict["name"] = name
+		newDict["province"] = province
+		newDict["country"] = country
+		newDict["woeid"] = woeid
+		newDict["latitude"] = latitude
+		newDict["longitude"] = longitude
+		return newDict
+	}
+	
 	init(with managedObject: NSManagedObject) {
 		name = managedObject.valueForKey("name") as! String
 		province = managedObject.valueForKey("province") as! String
 		country = managedObject.valueForKey("country") as! String
-		id = managedObject.valueForKey("id") as! String
-	}
-	
-	var properties: [String : AnyObject] {
-		return Dictionary<String, AnyObject>(dictionaryLiteral: ("name", name), ("province", province), ("country", country), ("id", id))
+		woeid = managedObject.valueForKey("woeid") as! String
+		latitude = managedObject.valueForKey("latitude") as! Double
+		longitude = managedObject.valueForKey("longitude") as! Double
 	}
 }
 
 extension City: Persistable {
 	var primaryKeyAttribute: String {
-		return "id"
+		return "woeid"
 	}
 	
 	var primaryKeyValue: AnyObject {
-		return id
+		return woeid
 	}
 }
