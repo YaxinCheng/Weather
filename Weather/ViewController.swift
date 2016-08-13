@@ -66,7 +66,6 @@ class ViewController: UIViewController {
 		
 		let source = YahooWeatherSource()
 		do {
-			let cities = try City.restoreFromCache()
 			source.currentWeather(at: LocationStorage().location!, complete: { (result) in
 				
 			})

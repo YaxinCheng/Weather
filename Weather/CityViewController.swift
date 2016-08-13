@@ -84,12 +84,8 @@ extension CityViewController: UISearchBarDelegate {
 				let _ = NSURL(string: name)
 				else { return true }
 			let loader = CityLoader(input: name)
-			loader.sendRequest { [weak self] in
-				guard let cities = $0 as? [City] else {
-					self?.cityList = []
-					return
-				}
-				self?.cityList = cities
+			loader.loads { [weak self] in
+				self?.cityList = $0
 			}
 		}
 		return true
