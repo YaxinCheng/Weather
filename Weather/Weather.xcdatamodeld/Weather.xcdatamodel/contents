@@ -6,9 +6,10 @@
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="province" attributeType="String" syncable="YES"/>
+        <attribute name="timezone" attributeType="String" syncable="YES"/>
         <attribute name="woeid" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="City" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="City" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

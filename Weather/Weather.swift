@@ -21,9 +21,6 @@ struct Weather {
 	let visibility: String
 	let windsDirection: String
 	let humidity: String
-	let country: String
-	let region: String
-	let city: String
 	let windsSpeed: String
 	
 	init?(with JSON: NSDictionary) {
@@ -37,10 +34,7 @@ struct Weather {
 			let visibility = JSON["visibility"] as? String,
 			let windsDirection = JSON["windDirection"] as? String,
 			let humidity = JSON["humidity"] as? String,
-			let condition = JSON["condition"] as? String,
-			let country = JSON["country"] as? String,
-			let region = JSON["region"] as? String,
-			let city = JSON["city"] as? String
+			let condition = JSON["condition"] as? String
 		else { return nil }
 		self.temprature = Int(round(temprature))
 		self.pressure = pressure
@@ -50,9 +44,6 @@ struct Weather {
 		self.visibility = visibility
 		self.windsDirection = windsDirection
 		self.humidity = humidity
-		self.country = country
-		self.region = region
-		self.city = city
 		self.windsSpeed = windsSpeed
 		self.condition = WeatherCondition(rawValue: condition, day: CityManager.sharedManager.day!)
 	}

@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import CoreLocation.CLLocation
 import APTimeZones
 
 struct YahooWeatherSource: WeatherSourceProtocol {
 	func currentWeather(at city: City, complete: (Result<Weather>) -> Void) {
 		let woeid = city.woeid
+		CityManager.sharedManager.local = false
 		loadWeatherData(at: woeid, complete: complete)
 	}
 	
@@ -36,6 +36,8 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 				let loader = CityLoader(input: "\(city), \(state), \(country)")
 				loader.loads {
 					guard let matchedCity = $0.first else { return }
+					CityManager.sharedManager.currentCity = matchedCity
+					CityManager.sharedManager.local = true
 					self.loadWeatherData(at: matchedCity.woeid, complete: complete)
 				}
 			}
@@ -117,14 +119,9 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 		newJSON["humidity"] = json["atmosphere"]?["humidity"]
 		newJSON["visibility"] = json["atmosphere"]?["visibility"]
 		newJSON["pressure"] = json["atmosphere"]?["pressure"]
-		newJSON["country"] = json["location"]?["country"]
-		newJSON["region"] = json["location"]?["region"]
-		newJSON["city"] = json["location"]?["city"]
 		let sunrise = processTime(json["astronomy"]?["sunrise"] as? String)
 		let sunset = processTime(json["astronomy"]?["sunset"] as? String)
-		let latitude = (json["item"]?["lat"] as? NSString)?.doubleValue
-		let longitude = (json["item"]?["long"] as? NSString)?.doubleValue
-		guard let _ = dayNight(sunrise, sunset: sunset, latitude: latitude, longitude: longitude) else { return Dictionary() }
+		guard let _ = dayNight(sunrise, sunset: sunset) else { return Dictionary() }
 		newJSON["sunrise"] = sunrise
 		newJSON["sunset"] = sunset
 		
@@ -141,11 +138,9 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 		return component
 	}
 	
-	private func dayNight(sunrise: NSDateComponents?, sunset: NSDateComponents?, latitude: Double?, longitude: Double?) -> Bool? {
-		guard sunrise != nil && sunset != nil && latitude != nil && longitude != nil else { return nil }
-		let location = CLLocation(latitude: latitude!, longitude: longitude!)
-		let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
-		CityManager.sharedManager.dayNight(sunrise!, sunset: sunset!, timeZone: timeZone)
+	private func dayNight(sunrise: NSDateComponents?, sunset: NSDateComponents?) -> Bool? {
+		guard sunrise != nil && sunset != nil else { return nil }
+		CityManager.sharedManager.dayNight(sunrise!, sunset: sunset!)
 		return CityManager.sharedManager.day
 	}
 	

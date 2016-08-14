@@ -131,7 +131,9 @@ class ViewController: UIViewController {
 		backgroundView.contentMode = .ScaleToFill
 		view.insertSubview(backgroundView, atIndex: 0)
 		
-		cityButton.setTitle(weather.city, forState: .Normal)
+		if let city = CityManager.sharedManager.currentCity {
+			cityButton.setTitle(city.name, forState: .Normal)
+		}
 		tempLabel.text = "\(weather.temprature)°C"
 		weatherConditionLabel.text = weather.condition.rawValue
 		pressureLabel.text = weather.pressure + "IN"
@@ -158,7 +160,7 @@ class ViewController: UIViewController {
 				self?.syncButton.setImage(UIImage(named: "errorsync")!, forState: .Normal)
 			}
 		}
-		if city != nil {
+		if CityManager.sharedManager.local == false {
 			WeatherStation.sharedStation.all(for: city!, completion: weatherDidRefresh)
 		} else {
 			WeatherStation.sharedStation.all(weatherDidRefresh)

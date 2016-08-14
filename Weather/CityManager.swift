@@ -16,6 +16,7 @@ struct CityManager {
 			NSNotificationCenter.defaultCenter().postNotification(notification)
 		}
 	}
+	var local: Bool = false
 	
 	private init() {
 		currentCity = nil
@@ -23,16 +24,14 @@ struct CityManager {
 	
 	private(set) var sunrise: NSDateComponents?
 	private(set) var sunset: NSDateComponents?
-	private(set) var timeZone: NSTimeZone?
 	
-	mutating func dayNight(sunrise: NSDateComponents, sunset: NSDateComponents, timeZone: NSTimeZone) {
+	mutating func dayNight(sunrise: NSDateComponents, sunset: NSDateComponents) {
 		self.sunrise = sunrise
 		self.sunset = sunset
-		self.timeZone = timeZone
 	}
 	
 	var day: Bool? {
-		guard let zone = timeZone, let sunriseTime = sunrise, let sunsetTime = sunset else { return nil }
+		guard let zone = currentCity?.timeZone, let sunriseTime = sunrise, let sunsetTime = sunset else { return nil }
 		let date = NSDate().time(timeZone: zone)
 		return date > sunriseTime && date < sunsetTime
 	}
