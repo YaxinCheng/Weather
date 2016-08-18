@@ -66,7 +66,10 @@ class CityViewController: UITableViewController {
 		}
 		if identifier == Common.unwindFromCityView {
 			let city = cityList[indexPath.row]
+			CityManager.sharedManager.local = false
 			CityManager.sharedManager.currentCity = city
+			let destinationVC = segue.destinationViewController as! ViewController
+			destinationVC.refreshWeather()
 		}
 	}
 	
@@ -80,7 +83,7 @@ extension CityViewController: UISearchBarDelegate {
 		if text == "\n" {
 			searchBar.resignFirstResponder()
 			guard
-				let name = searchBar.text?.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet()).stringByFoldingWithOptions(.DiacriticInsensitiveSearch, locale: NSLocale(localeIdentifier: "en_CA")).stringByReplacingOccurrencesOfString(" ", withString: "") where !name.isEmpty,
+				let name = searchBar.text?.formatted where !name.isEmpty,
 				let _ = NSURL(string: name)
 				else { return true }
 			let loader = CityLoader(input: name)

@@ -21,12 +21,9 @@ class ForecastController: UIViewController {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		forcastWeather()
-		let centre = NSNotificationCenter.defaultCenter()
-		centre.addObserver(self, selector: #selector(forcastWeather), name: CityNotification.CityDidChange.rawValue, object: nil)
 	}
 	
-	func forcastWeather() {
+	func forecastWeather() {
 		let weatherStation = WeatherStation.sharedStation
 		let city = CityManager.sharedManager.currentCity
 		let completion: (Result<[Forecast]> -> Void) = { [weak self] in
@@ -50,6 +47,7 @@ class ForecastController: UIViewController {
 		super.viewWillAppear(animated)
 		
 		UIApplication.sharedApplication().statusBarStyle = .Default
+		forecastWeather()
 	}
 }
 

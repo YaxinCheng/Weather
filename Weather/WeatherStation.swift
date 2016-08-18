@@ -68,7 +68,7 @@ struct WeatherStation {
 	
 	private func saveForWidget(weather: Weather) {
 		let userDefault = NSUserDefaults(suiteName: "group.NCGroup")
-		userDefault?.setObject(weather.city, forKey: "City")
+		userDefault?.setObject(CityManager.sharedManager.currentCity!.name, forKey: "City")
 		userDefault?.setObject(weather.temprature, forKey: "Temperature")
 		userDefault?.setObject(weather.condition.iconName, forKey: "Icon")
 	}

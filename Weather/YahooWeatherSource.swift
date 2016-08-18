@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import APTimeZones
+import CoreLocation.CLLocation
 
 struct YahooWeatherSource: WeatherSourceProtocol {
 	func currentWeather(at city: City, complete: (Result<Weather>) -> Void) {
@@ -25,9 +25,9 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 			} else {
 				guard
 					let mark = placeMarks?.first,
-					let state = mark.addressDictionary?["State"] as? String,
-					let country = mark.addressDictionary?["Country"] as? String,
-					let city = mark.addressDictionary?["City"] as? String
+					let state = (mark.addressDictionary?["State"] as? String)?.formatted,
+					let country = (mark.addressDictionary?["Country"] as? String)?.formatted,
+					let city = (mark.addressDictionary?["City"] as? String)?.formatted
 				else {
 					let error = Result<Weather>.Failure(YahooWeatherError.FailedFindingCity)
 					complete(error)
@@ -57,9 +57,9 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 			} else {
 				guard
 					let mark = placeMarks?.first,
-					let state = mark.addressDictionary?["State"] as? String,
-					let country = mark.addressDictionary?["Country"] as? String,
-					let city = mark.addressDictionary?["City"] as? String
+					let state = (mark.addressDictionary?["State"] as? String)?.formatted,
+					let country = (mark.addressDictionary?["Country"] as? String)?.formatted,
+					let city = (mark.addressDictionary?["City"] as? String)?.formatted
 					else {
 						let error = Result<[Forecast]>.Failure(YahooWeatherError.FailedFindingCity)
 						complete(error)
@@ -144,7 +144,6 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 		return CityManager.sharedManager.day
 	}
 	
-
 }
 
 enum YahooWeatherError: ErrorType {

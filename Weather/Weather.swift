@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import CoreLocation.CLLocation
-import APTimeZones
-import CoreData.NSManagedObject
 
 struct Weather {
 	let condition: WeatherCondition

@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData.NSManagedObject
-import APTimeZones
 import CoreLocation.CLLocation
 
 struct City: CustomStringConvertible {
