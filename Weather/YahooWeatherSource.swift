@@ -10,65 +10,91 @@ import Foundation
 import CoreLocation.CLLocation
 
 struct YahooWeatherSource: WeatherSourceProtocol {
+	private let queue: dispatch_queue_t
+	
+	init() {
+		queue = dispatch_queue_create("WeatherSourceQueue", nil)
+	}
+	
 	func currentWeather(at city: City, complete: (Result<Weather>) -> Void) {
 		let woeid = city.woeid
 		CityManager.sharedManager.local = false
-		loadWeatherData(at: woeid, complete: complete)
+		dispatch_async(queue) {
+			self.loadWeatherData(at: woeid, complete: complete)
+		}
 	}
 	
 	func currentWeather(at location: CLLocation, complete: (Result<Weather>) -> Void) {
 		let geoCoder = CLGeocoder()
-		geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
-			if error != nil {
-				let errorResult = Result<Weather>.Failure(error!)
-				complete(errorResult)
-			} else {
-				guard
-					let mark = placeMarks?.first,
-					let state = (mark.addressDictionary?["State"] as? String)?.formatted,
-					let country = (mark.addressDictionary?["Country"] as? String)?.formatted,
-					let city = (mark.addressDictionary?["City"] as? String)?.formatted
-				else {
-					let error = Result<Weather>.Failure(YahooWeatherError.FailedFindingCity)
-					complete(error)
-					return
-				}
-				let loader = CityLoader(input: "\(city), \(state), \(country)")
-				loader.loads {
-					guard let matchedCity = $0.first else { return }
-					CityManager.sharedManager.currentCity = matchedCity
-					CityManager.sharedManager.local = true
-					self.loadWeatherData(at: matchedCity.woeid, complete: complete)
+		dispatch_async(queue) {
+			geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
+				if error != nil {
+					let errorResult = Result<Weather>.Failure(error!)
+					dispatch_async(dispatch_get_main_queue()) {
+						complete(errorResult)
+					}
+				} else {
+					guard
+						let mark = placeMarks?.first,
+						let state = (mark.addressDictionary?["State"] as? String)?.formatted,
+						let country = (mark.addressDictionary?["Country"] as? String)?.formatted,
+						let city = (mark.addressDictionary?["City"] as? String)?.formatted
+						else {
+							let error = Result<Weather>.Failure(YahooWeatherError.FailedFindingCity)
+							dispatch_async(dispatch_get_main_queue()) {
+								complete(error)
+							}
+							return
+					}
+					dispatch_sync(self.queue) {
+						let loader = CityLoader(input: "\(city), \(state), \(country)")
+						loader.loads {
+							guard let matchedCity = $0.first else { return }
+							CityManager.sharedManager.currentCity = matchedCity
+							CityManager.sharedManager.local = true
+							self.loadWeatherData(at: matchedCity.woeid, complete: complete)
+						}
+					}
 				}
 			}
 		}
 	}
 	
 	func fivedaysForecast(at city: City, complete: (Result<[Forecast]> -> Void)) {
-		loadForecasts(at: city.woeid, complete: complete)
+		dispatch_async(queue) {
+			self.loadForecasts(at: city.woeid, complete: complete)
+		}
 	}
 	
 	func fivedaysForecast(at location: CLLocation, complete: (Result<[Forecast]> -> Void)) {
 		let geoCoder = CLGeocoder()
-		geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
-			if error != nil {
-				let errorResult = Result<[Forecast]>.Failure(error!)
-				complete(errorResult)
-			} else {
-				guard
-					let mark = placeMarks?.first,
-					let state = (mark.addressDictionary?["State"] as? String)?.formatted,
-					let country = (mark.addressDictionary?["Country"] as? String)?.formatted,
-					let city = (mark.addressDictionary?["City"] as? String)?.formatted
-					else {
-						let error = Result<[Forecast]>.Failure(YahooWeatherError.FailedFindingCity)
-						complete(error)
-						return
-				}
-				let loader = CityLoader(input: "\(city), \(state), \(country)")
-				loader.loads {
-					guard let matchedCity = $0.first else { return }
-					self.loadForecasts(at: matchedCity.woeid, complete: complete)
+		dispatch_async(queue) {
+			geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
+				if error != nil {
+					let errorResult = Result<[Forecast]>.Failure(error!)
+					dispatch_async(dispatch_get_main_queue()) {
+						complete(errorResult)
+					}
+				} else {
+					guard
+						let mark = placeMarks?.first,
+						let state = (mark.addressDictionary?["State"] as? String)?.formatted,
+						let country = (mark.addressDictionary?["Country"] as? String)?.formatted,
+						let city = (mark.addressDictionary?["City"] as? String)?.formatted
+						else {
+							let error = Result<[Forecast]>.Failure(YahooWeatherError.FailedFindingCity)
+							dispatch_async(dispatch_get_main_queue()) {
+								complete(error)
+							}
+							return
+					}
+					dispatch_sync(self.queue) {
+						let loader = CityLoader(input: "\(city), \(state), \(country)")
+						loader.loads {
+							guard let matchedCity = $0.first else { return }
+							self.loadForecasts(at: matchedCity.woeid, complete: complete)
+						}
+					}
 				}
 			}
 		}
@@ -77,35 +103,48 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 	private func loadWeatherData(at locationString: String, complete: (Result<Weather>) -> Void) {
 		let baseSQL:WeatherSourceSQLPatterns = .weather
 		let completeSQL = baseSQL.generateSQL(with: locationString)
-		sendRequst(completeSQL) {
-			guard let weatherJSON = $0 as? NSDictionary,
-				let unwrapped = (weatherJSON["query"] as? NSDictionary)?["results"]?["channel"] as? Dictionary<String, AnyObject>
-				else {
-					let error = Result<Weather>.Failure(YahooWeatherError.LoadFailed)
-					complete(error)
-					return
+		
+		dispatch_async(queue) {
+			self.sendRequst(completeSQL) {
+				guard let weatherJSON = $0 as? NSDictionary,
+					let unwrapped = (weatherJSON["query"] as? NSDictionary)?["results"]?["channel"] as? Dictionary<String, AnyObject>
+					else {
+						let error = Result<Weather>.Failure(YahooWeatherError.LoadFailed)
+						dispatch_async(dispatch_get_main_queue()) {
+							complete(error)
+						}
+						return
+				}
+				let formattedJSON = self.formatWeatherJSON(unwrapped)
+				guard let weather = Weather(with: formattedJSON) else { return }
+				let result = Result<Weather>.Success(WeatherUnit.convert(weather, from: .Fahrenheit, to: .Celsius))
+				dispatch_async(dispatch_get_main_queue()) {
+					complete(result)
+				}
 			}
-			let formattedJSON = self.formatWeatherJSON(unwrapped)
-			guard let weather = Weather(with: formattedJSON) else { return }
-			let result = Result<Weather>.Success(WeatherUnit.convert(weather, from: .Fahrenheit, to: .Celsius))
-			complete(result)
 		}
 	}
 	
 	private func loadForecasts(at locationString: String, complete: (Result<[Forecast]>) -> Void) {
 		let baseSQL:WeatherSourceSQLPatterns = .forecast
 		let completeSQL = baseSQL.generateSQL(with: locationString)
-		sendRequst(completeSQL) {
-			guard let weatherJSON = $0 as? NSDictionary,
-				let unwrapped = (((weatherJSON["query"] as? NSDictionary)?["results"] as? NSDictionary)?["channel"]) as? [Dictionary<String, AnyObject>]
-				else {
-					let error = Result<[Forecast]>.Failure(YahooWeatherError.LoadFailed)
-					complete(error)
-					return
+		dispatch_async(queue) {
+			self.sendRequst(completeSQL) {
+				guard let weatherJSON = $0 as? NSDictionary,
+					let unwrapped = (((weatherJSON["query"] as? NSDictionary)?["results"] as? NSDictionary)?["channel"]) as? [Dictionary<String, AnyObject>]
+					else {
+						let error = Result<[Forecast]>.Failure(YahooWeatherError.LoadFailed)
+						dispatch_async(dispatch_get_main_queue()) {
+							complete(error)
+						}
+						return
+				}
+				let forecasts = unwrapped.flatMap { $0["item"]?["forecast"] as? NSDictionary }.flatMap { Forecast(with: $0) }
+				let result = Result<[Forecast]>.Success(forecasts)
+				dispatch_async(dispatch_get_main_queue()) {
+					complete(result)
+				}
 			}
-			let forecasts = unwrapped.flatMap { $0["item"]?["forecast"] as? NSDictionary }.flatMap { Forecast(with: $0) }
-			let result = Result<[Forecast]>.Success(forecasts)
-			complete(result)
 		}
 	}
 	
