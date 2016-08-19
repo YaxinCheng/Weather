@@ -93,10 +93,9 @@ class CityListViewController: UITableViewController {
 		if identifier == Common.unwindBackMain {
 			if indexPath.section != 0 {
 				let city = cityList[indexPath.row]
-				CityManager.sharedManager.local = false
 				CityManager.sharedManager.currentCity = city
 			} else {
-				CityManager.sharedManager.local = true
+				CityManager.sharedManager.currentCity	= nil
 			}
 			let destinationVC = segue.destinationViewController as! ViewController
 			destinationVC.refreshWeather()

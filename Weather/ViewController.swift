@@ -58,6 +58,7 @@ class ViewController: UIViewController {
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: CityManagerNotification.currentCityDidChange.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -159,7 +160,7 @@ class ViewController: UIViewController {
 				self?.syncButton.setImage(UIImage(named: "errorsync")!, forState: .Normal)
 			}
 		}
-		if CityManager.sharedManager.local == false {
+		if CityManager.sharedManager.currentCity != nil {
 			WeatherStation.sharedStation.all(for: city!, completion: weatherDidRefresh)
 		} else {
 			WeatherStation.sharedStation.all(weatherDidRefresh)

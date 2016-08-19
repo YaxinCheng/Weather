@@ -18,20 +18,31 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 	
 	func currentWeather(at city: City, complete: (Result<Weather>) -> Void) {
 		let woeid = city.woeid
-		CityManager.sharedManager.local = false
 		dispatch_async(queue) {
 			self.loadWeatherData(at: woeid, complete: complete)
 		}
 	}
 	
 	func currentWeather(at location: CLLocation, complete: (Result<Weather>) -> Void) {
+		locationParse(at: location) {
+			guard let city = $0 else {
+				let errorResult = Result<Weather>.Failure(YahooWeatherError.FailedFindingCity)
+				complete(errorResult)
+				return
+			}
+			dispatch_async(self.queue) {
+				self.loadWeatherData(at: city.woeid, complete: complete)
+			}
+		}
+	}
+	
+	func locationParse(at location: CLLocation, complete: (City?) -> Void) {
 		let geoCoder = CLGeocoder()
 		dispatch_async(queue) {
 			geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
 				if error != nil {
-					let errorResult = Result<Weather>.Failure(error!)
 					dispatch_async(dispatch_get_main_queue()) {
-						complete(errorResult)
+						complete(nil)
 					}
 				} else {
 					guard
@@ -39,10 +50,9 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 						let state = (mark.addressDictionary?["State"] as? String)?.formatted,
 						let country = (mark.addressDictionary?["Country"] as? String)?.formatted,
 						let city = (mark.addressDictionary?["City"] as? String)?.formatted
-						else {
-							let error = Result<Weather>.Failure(YahooWeatherError.FailedFindingCity)
+					else {
 							dispatch_async(dispatch_get_main_queue()) {
-								complete(error)
+								complete(nil)
 							}
 							return
 					}
@@ -50,9 +60,7 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 						let loader = CityLoader(input: "\(city), \(state), \(country)")
 						loader.loads {
 							guard let matchedCity = $0.first else { return }
-							CityManager.sharedManager.currentCity = matchedCity
-							CityManager.sharedManager.local = true
-							self.loadWeatherData(at: matchedCity.woeid, complete: complete)
+							complete(matchedCity)
 						}
 					}
 				}
@@ -67,35 +75,14 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 	}
 	
 	func fivedaysForecast(at location: CLLocation, complete: (Result<[Forecast]> -> Void)) {
-		let geoCoder = CLGeocoder()
-		dispatch_async(queue) {
-			geoCoder.reverseGeocodeLocation(location) { (placeMarks, error) in
-				if error != nil {
-					let errorResult = Result<[Forecast]>.Failure(error!)
-					dispatch_async(dispatch_get_main_queue()) {
-						complete(errorResult)
-					}
-				} else {
-					guard
-						let mark = placeMarks?.first,
-						let state = (mark.addressDictionary?["State"] as? String)?.formatted,
-						let country = (mark.addressDictionary?["Country"] as? String)?.formatted,
-						let city = (mark.addressDictionary?["City"] as? String)?.formatted
-						else {
-							let error = Result<[Forecast]>.Failure(YahooWeatherError.FailedFindingCity)
-							dispatch_async(dispatch_get_main_queue()) {
-								complete(error)
-							}
-							return
-					}
-					dispatch_sync(self.queue) {
-						let loader = CityLoader(input: "\(city), \(state), \(country)")
-						loader.loads {
-							guard let matchedCity = $0.first else { return }
-							self.loadForecasts(at: matchedCity.woeid, complete: complete)
-						}
-					}
-				}
+		locationParse(at: location) {
+			guard let city = $0 else {
+				let errorResult = Result<[Forecast]>.Failure(YahooWeatherError.FailedFindingCity)
+				complete(errorResult)
+				return
+			}
+			dispatch_async(self.queue) {
+				self.loadForecasts(at: city.woeid, complete: complete)
 			}
 		}
 	}

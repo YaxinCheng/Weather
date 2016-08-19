@@ -10,8 +10,12 @@ import Foundation
 
 struct CityManager {
 	static var sharedManager = CityManager()
-	var currentCity: City? = nil
-	var local: Bool = true
+	var currentCity: City? = nil {
+		didSet {
+			let notification = NSNotification(name: CityManagerNotification.currentCityDidChange.rawValue, object: nil)
+			NSNotificationCenter.defaultCenter().postNotification(notification)
+		}
+	}
 	
 	private init() {
 	}
@@ -29,6 +33,10 @@ struct CityManager {
 		let date = NSDate().time(timeZone: zone)
 		return date > sunriseTime && date < sunsetTime
 	}
+}
+
+enum CityManagerNotification: String {
+	case currentCityDidChange
 }
 
 private func > (lhs: NSDateComponents, rhs: NSDateComponents) -> Bool {

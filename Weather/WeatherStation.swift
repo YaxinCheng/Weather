@@ -36,7 +36,10 @@ struct WeatherStation {
 			completion(result)
 			return
 		}
-		weatherSource.currentWeather(at: currentLocation, complete: completion)
+		weatherSource.locationParse(at: currentLocation) {
+			guard let city = $0 else { return }
+			CityManager.sharedManager.currentCity = city
+		}
 	}
 	
 	func all(for city: City, completion: (Result<Weather>) -> Void) {
