@@ -133,6 +133,8 @@ class ViewController: UIViewController {
 		
 		if let city = CityManager.sharedManager.currentCity {
 			cityButton.setTitle(city.name, forState: .Normal)
+		} else {
+			cityButton.setTitle("Local", forState: .Normal)
 		}
 		tempLabel.text = "\(weather.temprature)°C"
 		weatherConditionLabel.text = weather.condition.rawValue

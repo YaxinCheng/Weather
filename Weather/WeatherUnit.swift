@@ -11,6 +11,8 @@ import Foundation
 enum WeatherUnit {
 	case Fahrenheit
 	case Celsius
+	case Mi
+	case Km
 	
 	static func convert(weather: Weather, from funit: WeatherUnit, to tunit: WeatherUnit) -> Weather {
 		var converted = weather
@@ -40,6 +42,10 @@ enum WeatherUnit {
 			return (value - 32) / 1.8
 		case (.Celsius, .Fahrenheit):
 			return value * 1.8 + 32
+		case (.Mi, .Km):
+			return value / 1000
+		case (.Km, .Mi):
+			return value * 1000
 		default:
 			return nil
 		}
