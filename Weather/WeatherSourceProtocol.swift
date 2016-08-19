@@ -24,7 +24,8 @@ extension WeatherSourceProtocol {
 	}
 	
 	func sendRequst(sql: WeatherSourceSQL, with completion: (Any?)->()) {
-		let urlRequest = NSURLRequest(URL: NSURL(string: api + sql.rawValue + format)!, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 10 * 60)
+		guard let url = NSURL(string: api + sql.rawValue + format) else { return }
+		let urlRequest = NSURLRequest(URL: url, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 10 * 60)
 		Alamofire.request(.GET, urlRequest).responseJSON { (response) in
 			switch response.result {
 			case .Success(let json):
