@@ -51,11 +51,17 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tka-Iv-i0a">
+                                                    <rect key="frame" x="555" y="18" width="37" height="37"/>
+                                                    <color key="color" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="tka-Iv-i0a" firstAttribute="centerY" secondItem="mcY-Pw-HmR" secondAttribute="centerY" id="6fg-Eu-6HA"/>
                                                 <constraint firstItem="cCw-oe-hxW" firstAttribute="top" secondItem="mcY-Pw-HmR" secondAttribute="bottom" constant="8" id="7wh-vH-osq"/>
                                                 <constraint firstItem="mcY-Pw-HmR" firstAttribute="top" secondItem="Ywi-cS-XwC" secondAttribute="topMargin" constant="3" id="8mT-pI-AWo"/>
                                                 <constraint firstItem="cCw-oe-hxW" firstAttribute="trailing" secondItem="mcY-Pw-HmR" secondAttribute="trailing" id="KaR-4T-IJN"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="tka-Iv-i0a" secondAttribute="trailing" id="RoP-e5-GVC"/>
                                                 <constraint firstItem="mcY-Pw-HmR" firstAttribute="leading" secondItem="Ywi-cS-XwC" secondAttribute="leadingMargin" constant="12" id="VqE-D8-ut4"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="cCw-oe-hxW" secondAttribute="bottom" constant="8" id="ZGI-nv-4NR"/>
                                                 <constraint firstItem="cCw-oe-hxW" firstAttribute="leading" secondItem="mcY-Pw-HmR" secondAttribute="leading" id="h3X-EV-43F"/>
@@ -63,6 +69,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="indicator" destination="tka-Iv-i0a" id="MPv-H5-fyF"/>
                                             <outlet property="subtitleLabel" destination="cCw-oe-hxW" id="ubn-HG-U2M"/>
                                             <outlet property="titleLabel" destination="mcY-Pw-HmR" id="6Iy-ru-vFG"/>
                                         </connections>

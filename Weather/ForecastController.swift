@@ -11,8 +11,11 @@ import UIKit
 class ForecastController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
+	weak var headerCell: HeaderCell?
+	
 	var dataSource: [Forecast] = [] {
 		didSet {
+			headerCell?.indicator.stopAnimating()
 			tableView.reloadData()
 		}
 	}
@@ -66,6 +69,7 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 			let currentCity = CityManager.sharedManager.currentCity
 			cell.titleLabel.text = currentCity?.name ?? "Forecast"
 			cell.subtitleLabel.text = NSDate().formatDate()
+			headerCell = cell
 			return cell
 		} else {
 			let cell = tableView.dequeueReusableCellWithIdentifier(Common.forcastCellidentifier, forIndexPath: indexPath) as! ForecastCell

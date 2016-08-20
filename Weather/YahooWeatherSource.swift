@@ -19,6 +19,10 @@ struct YahooWeatherSource: WeatherSourceProtocol {
 		NSURLCache.setSharedURLCache(cache)
 	}
 	
+	func clearCache() {
+		cache.removeAllCachedResponses()
+	}
+	
 	func currentWeather(at city: City, complete: (Result<Weather>) -> Void) {
 		let woeid = city.woeid
 		dispatch_async(queue) {
