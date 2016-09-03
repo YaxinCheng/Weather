@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 import CoreLocation
+import YahooWeatherSource
 
 class ViewController: UIViewController {
 
@@ -147,7 +148,7 @@ class ViewController: UIViewController {
 		
 		windsTempLabel.text = "Winds Temperature: \(weather.windTemperatue)°C"
 		windsDirectionLabel.text = "Winds Direction: " + weather.windsDirection
-		windsSpeedLabel.text = "Winds Speed: " + weather.windsSpeed + "m/h"
+		windsSpeedLabel.text = "Winds Speed: \(weather.windsSpeed)m/h"
 	}
 	
 	// MARK: - Weather and location

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YahooWeatherSource
 
 class CityViewController: UITableViewController {
 	
@@ -82,12 +83,11 @@ extension CityViewController: UISearchBarDelegate {
 		if text == "\n" {
 			searchBar.resignFirstResponder()
 			guard
-				let name = searchBar.text?.formatted where !name.isEmpty,
-				let _ = NSURL(string: name)
-				else { return true }
-			let loader = CityLoader(input: name)
-			loader.loads { [weak self] in
-				self?.cityList = $0
+				let name = searchBar.text where !name.isEmpty
+			else { return true }
+			let loader = CityLoader()
+			loader.loadCity(city: name) { [weak self] (listOfJSON) in
+				self?.cityList = listOfJSON.flatMap { City(from: $0) }
 			}
 		}
 		return true

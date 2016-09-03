@@ -18,14 +18,14 @@ struct Weather {
 	let visibility: String
 	let windsDirection: String
 	let humidity: String
-	let windsSpeed: String
+	let windsSpeed: Double
 	
 	init?(with JSON: NSDictionary) {
 		guard
 			let temprature = JSON["temperature"] as? Double,
 			let pressure = JSON["pressure"] as? String,
-			let windTemperatue = (JSON["windChill"] as? NSString)?.doubleValue,
-			let windsSpeed = JSON["windSpeed"] as? String,
+			let windTemperatue = JSON["windChill"] as? Double,
+			let windsSpeed = JSON["windSpeed"] as? Double,
 			let sunsetTime = JSON["sunset"] as? NSDateComponents,
 			let sunriseTime = JSON["sunrise"] as? NSDateComponents,
 			let visibility = JSON["visibility"] as? String,
@@ -42,6 +42,6 @@ struct Weather {
 		self.windsDirection = windsDirection
 		self.humidity = humidity
 		self.windsSpeed = windsSpeed
-		self.condition = WeatherCondition(rawValue: condition, day: CityManager.sharedManager.day!)
+		self.condition = WeatherCondition(rawValue: condition, day: true)
 	}
 }

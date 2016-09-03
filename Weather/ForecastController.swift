@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YahooWeatherSource
 
 class ForecastController: UIViewController {
 	
@@ -32,7 +33,7 @@ class ForecastController: UIViewController {
 		let completion: (Result<[Forecast]> -> Void) = { [weak self] in
 			switch $0 {
 			case .Success(let forecasts):
-				self?.dataSource = forecasts.map { WeatherUnit.convert($0, from: .Fahrenheit, to: .Celsius) }
+				self?.dataSource = forecasts
 			case .Failure(let error):
 				let alert = UIAlertController(title: "Error!", message: "\(error)", preferredStyle: .Alert)
 				alert.addAction(.Cancel)

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation.CLLocation
+import YahooWeatherSource
 
 struct WeatherStation {
 	let locationStorage: LocationStorage
@@ -37,13 +38,28 @@ struct WeatherStation {
 			return
 		}
 		weatherSource.locationParse(at: currentLocation) {
-			guard let city = $0 else { return }
+			guard let JSON = $0, let city = City(from: JSON) else { return }
 			CityManager.sharedManager.currentCity = city
 		}
 	}
 	
 	func all(for city: City, completion: (Result<Weather>) -> Void) {
-		weatherSource.currentWeather(at: city, complete: completion)
+		weatherSource.currentWeather(city: city.name, province: city.province, country: city.country) {
+			switch $0 {
+			case .Success(let JSON):
+				guard let weather = Weather(with: JSON) else {
+					let error = WeatherStationError.WeatherLoadError
+					let errorResult = Result<Weather>.Failure(error)
+					completion(errorResult)
+					return
+				}
+				let result = Result<Weather>.Success(weather)
+				completion(result)
+			case .Failure(let error):
+				let errorResult = Result<Weather>.Failure(error)
+				completion(errorResult)
+			}
+		}
 	}
 	
 	func forecast(completion: (Result<[Forecast]>) -> Void) {
@@ -62,11 +78,31 @@ struct WeatherStation {
 			completion(result)
 			return
 		}
-		weatherSource.fivedaysForecast(at: currentLocation, complete: completion)
+		weatherSource.fivedaysForecast(at: currentLocation) {
+			switch $0 {
+			case .Success(let JSONs):
+				let forecasts = JSONs.flatMap { Forecast(with: $0) }
+				let result = Result<[Forecast]>.Success(forecasts)
+				completion(result)
+			case .Failure(let error):
+				let result = Result<[Forecast]>.Failure(error)
+				completion(result)
+			}
+		}
 	}
 	
 	func forecast(for city: City, completion: (Result<[Forecast]>) -> Void) {
-		weatherSource.fivedaysForecast(at: city, complete: completion)
+		weatherSource.fivedaysForecast(city: city.name, province: city.province, country: city.country) {
+			switch $0 {
+			case .Success(let JSONs):
+				let forecasts = JSONs.flatMap { Forecast(with: $0) }
+				let result = Result<[Forecast]>.Success(forecasts)
+				completion(result)
+			case .Failure(let error):
+				let result = Result<[Forecast]>.Failure(error)
+				completion(result)
+			}
+		}
 	}
 	
 	private func saveForWidget(weather: Weather) {
@@ -75,4 +111,8 @@ struct WeatherStation {
 		userDefault?.setObject(weather.temprature, forKey: "Temperature")
 		userDefault?.setObject(weather.condition.iconName, forKey: "Icon")
 	}
+}
+
+enum WeatherStationError: ErrorType {
+	case WeatherLoadError
 }
