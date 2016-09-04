@@ -43,7 +43,7 @@ struct WeatherStation {
 		}
 	}
 	
-	mutating func all(for city: City, completion: (Weather?, ErrorType?) -> Void) {
+	func all(for city: City, completion: (Weather?, ErrorType?) -> Void) {
 		weatherSource.currentWeather(city: city.name, province: city.province, country: city.country) {
 			switch $0 {
 			case .Success(let JSON):
@@ -51,7 +51,7 @@ struct WeatherStation {
 					completion(nil, WeatherStationError.WeatherLoadError)
 					return
 				}
-				self.cachedWeather[city] = weather
+				WeatherStation.sharedStation.cachedWeather[city] = weather
 				completion(weather, nil)
 			case .Failure(let error):
 				completion(nil, error)

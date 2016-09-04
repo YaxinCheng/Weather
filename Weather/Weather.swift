@@ -19,6 +19,7 @@ struct Weather {
 	let windsDirection: String
 	let humidity: String
 	let windsSpeed: Double
+	let pressureTrend: String
 	
 	init?(with JSON: NSDictionary) {
 		guard
@@ -31,7 +32,8 @@ struct Weather {
 			let visibility = JSON["visibility"] as? String,
 			let windsDirection = JSON["windDirection"] as? String,
 			let humidity = JSON["humidity"] as? String,
-			let condition = JSON["condition"] as? String
+			let condition = JSON["condition"] as? String,
+			let pressureTrend = JSON["trend"] as? String
 		else { return nil }
 		self.temprature = Int(round(temprature))
 		self.pressure = pressure
@@ -42,16 +44,9 @@ struct Weather {
 		self.windsDirection = windsDirection
 		self.humidity = humidity
 		self.windsSpeed = windsSpeed
+		self.pressureTrend = pressureTrend
 		let timeZone = CityManager.sharedManager.currentCity?.timeZone ?? NSTimeZone.localTimeZone()
 		let day = sunriseTime < NSDate().time(timeZone: timeZone) && sunsetTime > NSDate().time(timeZone: timeZone)
 		self.condition = WeatherCondition(rawValue: condition, day: day)
 	}
-}
-
-func > (lhs: NSDateComponents, rhs: NSDateComponents) -> Bool {
-	return (lhs.hour * 60 + lhs.minute) > (rhs.hour * 60 + rhs.minute)
-}
-
-func < (lhs: NSDateComponents, rhs: NSDateComponents) -> Bool {
-	return (lhs.hour * 60 + lhs.minute) < (rhs.hour * 60 + rhs.minute)
 }

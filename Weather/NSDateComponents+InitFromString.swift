@@ -28,3 +28,11 @@ extension NSDateComponents {
 		self.minute = elements[1]
 	}
 }
+
+func > (lhs: NSDateComponents, rhs: NSDateComponents) -> Bool {
+	return (lhs.hour * 60 + lhs.minute) > (rhs.hour * 60 + rhs.minute)
+}
+
+func < (lhs: NSDateComponents, rhs: NSDateComponents) -> Bool {
+	return (lhs.hour * 60 + lhs.minute) < (rhs.hour * 60 + rhs.minute)
+}

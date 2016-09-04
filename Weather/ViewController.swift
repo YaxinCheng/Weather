@@ -250,7 +250,11 @@ class ViewController: UIViewController {
 	
 	// MARK: - Navigation
 	@IBAction func prepareForUnwindSegue(segue: UIStoryboardSegue) {
-		refreshWeather()
+		guard let identifier = segue.identifier, let city = CityManager.sharedManager.currentCity else { return }
+		if identifier == Common.unwindBackMain {
+			let weather = WeatherStation.sharedStation.cachedWeather[city]
+			currentWeather = weather
+		}
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
