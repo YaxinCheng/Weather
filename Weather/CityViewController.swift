@@ -24,7 +24,6 @@ class CityViewController: UITableViewController {
 		searchBar.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50)
 		searchBar.placeholder = "Search your city"
 		searchBar.backgroundImage = UIImage()
-		searchBar.keyboardType = .ASCIICapable
 		searchBar.delegate = self
 		navigationItem.titleView = searchBar
 	}

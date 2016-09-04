@@ -10,7 +10,6 @@ import UIKit
 import AVKit
 import AVFoundation
 import CoreLocation
-import YahooWeatherSource
 
 class ViewController: UIViewController {
 
@@ -155,12 +154,11 @@ class ViewController: UIViewController {
 	
 	func refreshWeather() {
 		let city = CityManager.sharedManager.currentCity
-		let weatherDidRefresh: (Result<Weather>) -> Void = { [weak self] result in
-			switch result {
-			case .Success(let weather):
-				self?.currentWeather = weather
-			case .Failure(_):
+		let weatherDidRefresh: (Weather?, ErrorType?) -> Void = { [weak self] in
+			if $1 != nil || $0 == nil {
 				self?.syncButton.setImage(UIImage(named: "errorsync")!, forState: .Normal)
+			} else {
+				self?.currentWeather = $0!
 			}
 		}
 		if CityManager.sharedManager.currentCity != nil {

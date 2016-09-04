@@ -12,7 +12,6 @@
 		E332910E1D589E2100C5AED3 /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332910D1D589E2100C5AED3 /* ForecastCell.swift */; };
 		E33291101D589E2C00C5AED3 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332910F1D589E2C00C5AED3 /* HeaderCell.swift */; };
 		E33291121D589EB100C5AED3 /* ForecastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33291111D589EB100C5AED3 /* ForecastController.swift */; };
-		E33291161D58E33000C5AED3 /* timezonesDB.json in Resources */ = {isa = PBXBuildFile; fileRef = E33291151D58E33000C5AED3 /* timezonesDB.json */; };
 		E347AC751D4BEF820012C9E2 /* LocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E347AC741D4BEF810012C9E2 /* LocationStorage.swift */; };
 		E347AC771D4BF0900012C9E2 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E347AC761D4BF0900012C9E2 /* Common.swift */; };
 		E34C665C1D55119F00DE277C /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34C665B1D55119F00DE277C /* Delay.swift */; };
@@ -66,7 +65,7 @@
 		E3C739EE1D4BD02400F51623 /* NSDate+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739ED1D4BD02400F51623 /* NSDate+Localization.swift */; };
 		E3C739F01D4BD65C00F51623 /* UIAlertAction+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */; };
 		E3C739F21D4BD72F00F51623 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739F11D4BD72F00F51623 /* Weather.swift */; };
-		E3CB86DA1D65EE9F00ABC10D /* String+formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB86D91D65EE9F00ABC10D /* String+formatted.swift */; };
+		E3D6B6E71D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6B6E61D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift */; };
 		E3E42A5A1D5CBAEB0039BF2B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E42A591D5CBAEB0039BF2B /* NotificationCenter.framework */; };
 		E3E42A5D1D5CBAEB0039BF2B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A5C1D5CBAEB0039BF2B /* TodayViewController.swift */; };
 		E3E42A601D5CBAEB0039BF2B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E42A5E1D5CBAEB0039BF2B /* MainInterface.storyboard */; };
@@ -128,7 +127,6 @@
 		E332910D1D589E2100C5AED3 /* ForecastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		E332910F1D589E2C00C5AED3 /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		E33291111D589EB100C5AED3 /* ForecastController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastController.swift; sourceTree = "<group>"; };
-		E33291151D58E33000C5AED3 /* timezonesDB.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timezonesDB.json; sourceTree = "<group>"; };
 		E347AC741D4BEF810012C9E2 /* LocationStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStorage.swift; sourceTree = "<group>"; };
 		E347AC761D4BF0900012C9E2 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		E34C665B1D55119F00DE277C /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
@@ -188,7 +186,7 @@
 		E3C739ED1D4BD02400F51623 /* NSDate+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Localization.swift"; sourceTree = "<group>"; };
 		E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Cancel.swift"; sourceTree = "<group>"; };
 		E3C739F11D4BD72F00F51623 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		E3CB86D91D65EE9F00ABC10D /* String+formatted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+formatted.swift"; sourceTree = "<group>"; };
+		E3D6B6E61D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateComponents+InitFromString.swift"; sourceTree = "<group>"; };
 		E3E42A581D5CBAEB0039BF2B /* Weather Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Weather Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E42A591D5CBAEB0039BF2B /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		E3E42A5C1D5CBAEB0039BF2B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -314,7 +312,6 @@
 				E3C7396F1D4A910500F51623 /* LaunchScreen.storyboard */,
 				E3C739721D4A910500F51623 /* Info.plist */,
 				E3C7396A1D4A910500F51623 /* Weather.xcdatamodeld */,
-				E33291151D58E33000C5AED3 /* timezonesDB.json */,
 				E3C739951D4A913700F51623 /* Videos */,
 			);
 			path = Weather;
@@ -396,7 +393,7 @@
 		E3F0FBDD1D53C662002DB74E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E3CB86D91D65EE9F00ABC10D /* String+formatted.swift */,
+				E3D6B6E61D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift */,
 				E3C739ED1D4BD02400F51623 /* NSDate+Localization.swift */,
 				E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */,
 			);
@@ -569,7 +566,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E33291161D58E33000C5AED3 /* timezonesDB.json in Resources */,
 				E3C739BF1D4A93BA00F51623 /* weather_hot.mp4 in Resources */,
 				E3C739C81D4A93BA00F51623 /* weather_l_partly_sunny.mp4 in Resources */,
 				E3C739CD1D4A93BA00F51623 /* weather_l_sunny.mp4 in Resources */,
@@ -697,7 +693,6 @@
 				E33291101D589E2C00C5AED3 /* HeaderCell.swift in Sources */,
 				E3C739661D4A910500F51623 /* ViewController.swift in Sources */,
 				E347AC771D4BF0900012C9E2 /* Common.swift in Sources */,
-				E3CB86DA1D65EE9F00ABC10D /* String+formatted.swift in Sources */,
 				E3C739F21D4BD72F00F51623 /* Weather.swift in Sources */,
 				E347AC751D4BEF820012C9E2 /* LocationStorage.swift in Sources */,
 				E3C739641D4A910500F51623 /* AppDelegate.swift in Sources */,
@@ -707,6 +702,7 @@
 				E33291121D589EB100C5AED3 /* ForecastController.swift in Sources */,
 				E3F0FBD41D53C1C2002DB74E /* CityCell.swift in Sources */,
 				E3F0FBDC1D53C654002DB74E /* PropertySerializable.swift in Sources */,
+				E3D6B6E71D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift in Sources */,
 				E3C739EC1D4BCE9F00F51623 /* WeatherError.swift in Sources */,
 				E3F0FBE11D54E123002DB74E /* Forecast.swift in Sources */,
 				E3C739EE1D4BD02400F51623 /* NSDate+Localization.swift in Sources */,

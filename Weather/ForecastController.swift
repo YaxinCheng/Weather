@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import YahooWeatherSource
 
 class ForecastController: UIViewController {
 	
@@ -30,14 +29,13 @@ class ForecastController: UIViewController {
 	func forecastWeather() {
 		let weatherStation = WeatherStation.sharedStation
 		let city = CityManager.sharedManager.currentCity
-		let completion: (Result<[Forecast]> -> Void) = { [weak self] in
-			switch $0 {
-			case .Success(let forecasts):
-				self?.dataSource = forecasts
-			case .Failure(let error):
-				let alert = UIAlertController(title: "Error!", message: "\(error)", preferredStyle: .Alert)
+		let completion: (([Forecast], ErrorType?) -> Void) = { [weak self] in
+			if $1 != nil || $0.isEmpty {
+				let alert = UIAlertController(title: "Error!", message: "\($1!)", preferredStyle: .Alert)
 				alert.addAction(.Cancel)
 				self?.presentViewController(alert, animated: true, completion: nil)
+			} else {
+				self?.dataSource = $0
 			}
 		}
 		if city != nil {

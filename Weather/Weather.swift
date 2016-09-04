@@ -42,6 +42,16 @@ struct Weather {
 		self.windsDirection = windsDirection
 		self.humidity = humidity
 		self.windsSpeed = windsSpeed
-		self.condition = WeatherCondition(rawValue: condition, day: true)
+		let timeZone = CityManager.sharedManager.currentCity?.timeZone ?? NSTimeZone.localTimeZone()
+		let day = sunriseTime < NSDate().time(timeZone: timeZone) && sunsetTime > NSDate().time(timeZone: timeZone)
+		self.condition = WeatherCondition(rawValue: condition, day: day)
 	}
+}
+
+func > (lhs: NSDateComponents, rhs: NSDateComponents) -> Bool {
+	return (lhs.hour * 60 + lhs.minute) > (rhs.hour * 60 + rhs.minute)
+}
+
+func < (lhs: NSDateComponents, rhs: NSDateComponents) -> Bool {
+	return (lhs.hour * 60 + lhs.minute) < (rhs.hour * 60 + rhs.minute)
 }

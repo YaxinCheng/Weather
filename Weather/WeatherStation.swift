@@ -16,25 +16,25 @@ struct WeatherStation {
 	
 	static var sharedStation = WeatherStation()
 	
+	var cachedWeather = [City: Weather]()
+	
 	private init() {
 		weatherSource = YahooWeatherSource()
 		locationStorage = LocationStorage()
 	}
 	
-	func all(completion: (Result<Weather>) -> Void) {
+	func all(completion: (Weather?, ErrorType?) -> Void) {
 		let location: CLLocation?
 		if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == .AuthorizedAlways {
 			location = locationStorage.location
 		} else {
 			let error = WeatherError.NotAuthorized("Location service of the weather app is blocked, please turn it on in the setting app")
-			let result = Result<Weather>.Failure(error)
-			completion(result)
+			completion(nil, error)
 			return
 		}
 		guard let currentLocation = location else {
 			let error = WeatherError.NoAvailableLocation("Location is not available")
-			let result = Result<Weather>.Failure(error)
-			completion(result)
+			completion(nil, error)
 			return
 		}
 		weatherSource.locationParse(at: currentLocation) {
@@ -43,64 +43,55 @@ struct WeatherStation {
 		}
 	}
 	
-	func all(for city: City, completion: (Result<Weather>) -> Void) {
+	mutating func all(for city: City, completion: (Weather?, ErrorType?) -> Void) {
 		weatherSource.currentWeather(city: city.name, province: city.province, country: city.country) {
 			switch $0 {
 			case .Success(let JSON):
 				guard let weather = Weather(with: JSON) else {
-					let error = WeatherStationError.WeatherLoadError
-					let errorResult = Result<Weather>.Failure(error)
-					completion(errorResult)
+					completion(nil, WeatherStationError.WeatherLoadError)
 					return
 				}
-				let result = Result<Weather>.Success(weather)
-				completion(result)
+				self.cachedWeather[city] = weather
+				completion(weather, nil)
 			case .Failure(let error):
-				let errorResult = Result<Weather>.Failure(error)
-				completion(errorResult)
+				completion(nil, error)
 			}
 		}
 	}
 	
-	func forecast(completion: (Result<[Forecast]>) -> Void) {
+	func forecast(completion: ([Forecast], ErrorType?) -> Void) {
 		let location: CLLocation?
 		if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == .AuthorizedAlways {
 			location = locationStorage.location
 		} else {
 			let error = WeatherError.NotAuthorized("Location service of the weather app is blocked, please turn it on in the setting app")
-			let result = Result<[Forecast]>.Failure(error)
-			completion(result)
+			completion([], error)
 			return
 		}
 		guard let currentLocation = location else {
 			let error = WeatherError.NoAvailableLocation("Location is not available")
-			let result = Result<[Forecast]>.Failure(error)
-			completion(result)
+			completion([], error)
 			return
 		}
 		weatherSource.fivedaysForecast(at: currentLocation) {
 			switch $0 {
 			case .Success(let JSONs):
 				let forecasts = JSONs.flatMap { Forecast(with: $0) }
-				let result = Result<[Forecast]>.Success(forecasts)
-				completion(result)
+				completion(forecasts, nil)
 			case .Failure(let error):
-				let result = Result<[Forecast]>.Failure(error)
-				completion(result)
+				completion([], error)
 			}
 		}
 	}
 	
-	func forecast(for city: City, completion: (Result<[Forecast]>) -> Void) {
+	func forecast(for city: City, completion: ([Forecast], ErrorType?) -> Void) {
 		weatherSource.fivedaysForecast(city: city.name, province: city.province, country: city.country) {
 			switch $0 {
 			case .Success(let JSONs):
 				let forecasts = JSONs.flatMap { Forecast(with: $0) }
-				let result = Result<[Forecast]>.Success(forecasts)
-				completion(result)
+				completion(forecasts, nil)
 			case .Failure(let error):
-				let result = Result<[Forecast]>.Failure(error)
-				completion(result)
+				completion([], error)
 			}
 		}
 	}

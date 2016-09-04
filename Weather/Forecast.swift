@@ -19,14 +19,16 @@ struct Forecast {
 		guard
 			let time = JSON["date"] as? String,
 			let date = NSDate.date(string: time, format: "dd MMM yyyy"),
-			let high = (JSON["high"] as? NSString)?.doubleValue,
-			let low = (JSON["low"] as? NSString)?.doubleValue,
+			let high = JSON["high"] as? Double,
+			let low = JSON["low"] as? Double,
 			let conditionString = JSON["text"] as? String
 		else { return nil }
 		self.date = date.formatDate()
 		conditionDescription = conditionString
 		highTemp = high
 		lowTemp = low
-		condition = WeatherCondition(rawValue: conditionString, day: true)
+		let timeZone = CityManager.sharedManager.currentCity?.timeZone ?? NSTimeZone.localTimeZone()
+		let day = NSDateComponents(from: "6:00 am")! < NSDate().time(timeZone: timeZone) && NSDateComponents(from: "8:00 pm")! > NSDate().time(timeZone: timeZone)
+		condition = WeatherCondition(rawValue: conditionString, day: day)
 	}
 }
