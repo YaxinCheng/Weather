@@ -9,7 +9,7 @@
 import UIKit
 import YahooWeatherSource
 
-class CityViewController: UITableViewController {
+class CitySearchViewController: UITableViewController {
 	
 	var cityList: Array<City>! = [] {
 		didSet {
@@ -77,7 +77,7 @@ class CityViewController: UITableViewController {
 	}
 }
 
-extension CityViewController: UISearchBarDelegate {
+extension CitySearchViewController: UISearchBarDelegate {
 	func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
 		if text == "\n" {
 			searchBar.resignFirstResponder()

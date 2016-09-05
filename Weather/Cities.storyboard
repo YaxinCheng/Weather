@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--City View Controller-->
+        <!--City Search View Controller-->
         <scene sceneID="emp-JH-qPf">
             <objects>
-                <tableViewController id="YgV-EM-pex" customClass="CityViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="YgV-EM-pex" customClass="CitySearchViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="int-v5-lQ3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,36 +69,52 @@
             <objects>
                 <tableViewController storyboardIdentifier="cityList" id="y5D-q9-5R2" customClass="CityListViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="41c-Pf-LWE">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="basicTextCell" id="uNJ-0h-1oH" customClass="CityCell" customModule="Weather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="200" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="300" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uNJ-0h-1oH" id="xsY-mq-5zD">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7R-WV-ToS">
-                                            <rect key="frame" x="8" y="11" width="184" height="21"/>
+                                            <rect key="frame" x="8" y="11" width="266" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="270" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nw-vG-B3S">
+                                            <rect key="frame" x="274" y="11" width="18" height="22"/>
+                                            <state key="normal" image="delete"/>
+                                            <connections>
+                                                <action selector="deleteButtonPressed:" destination="uNJ-0h-1oH" eventType="touchUpInside" id="N7K-aw-ast"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Q7R-WV-ToS" secondAttribute="trailing" id="8A8-17-mgA"/>
+                                        <constraint firstItem="8nw-vG-B3S" firstAttribute="centerY" secondItem="xsY-mq-5zD" secondAttribute="centerY" id="0Kp-Hh-qnx"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Q7R-WV-ToS" secondAttribute="trailing" constant="32" id="8A8-17-mgA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8nw-vG-B3S" secondAttribute="trailing" id="EM8-u3-DcR"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Q7R-WV-ToS" secondAttribute="bottom" constant="3" id="PRX-w2-8GF"/>
+                                        <constraint firstItem="8nw-vG-B3S" firstAttribute="leading" secondItem="Q7R-WV-ToS" secondAttribute="trailing" id="Rgg-Bu-MPQ"/>
                                         <constraint firstItem="Q7R-WV-ToS" firstAttribute="top" secondItem="xsY-mq-5zD" secondAttribute="topMargin" constant="3" id="Wev-Wa-S4I"/>
                                         <constraint firstItem="Q7R-WV-ToS" firstAttribute="leading" secondItem="xsY-mq-5zD" secondAttribute="leadingMargin" id="m8z-9v-HpN"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="8A8-17-mgA"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="cityLabel" destination="Q7R-WV-ToS" id="Ur3-35-o0k"/>
+                                    <outlet property="deleteButton" destination="8nw-vG-B3S" id="yEf-uH-8MM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -109,7 +125,7 @@
                     </tableView>
                     <value key="contentSizeForViewInPopover" type="size" width="150" height="300"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="200" height="400"/>
+                    <size key="freeformSize" width="300" height="400"/>
                     <connections>
                         <segue destination="v5P-Lz-3nd" kind="unwind" identifier="citySelected" unwindAction="prepareForUnwindSegue:" id="3nK-0h-Zh8"/>
                     </connections>
@@ -139,4 +155,7 @@
             <point key="canvasLocation" x="329" y="373"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="delete" width="18" height="18"/>
+    </resources>
 </document>

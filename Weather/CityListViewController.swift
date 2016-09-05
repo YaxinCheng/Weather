@@ -47,13 +47,14 @@ class CityListViewController: UITableViewController {
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier(Common.cityListCellIdentifier, forIndexPath: indexPath) as! CityCell
-		
+		cell.delegate = self
 		if indexPath.section == 0 {
 			cell.cityLabel.text = WeatherStation.sharedStation.cachedCity?.name ?? "Local"
 			cell.imageView?.image = UIImage(named: "local")
 		} else {
 			let city = cityList[indexPath.row]
 			cell.cityLabel.text = city.name
+			cell.deleteButton.hidden = false
 		}
 		return cell
 	}
@@ -63,28 +64,6 @@ class CityListViewController: UITableViewController {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	
-	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-		return indexPath.section != 0
-	}
-	
-	override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-		return false
-	}
-	
-	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-		if editingStyle == .Delete {
-			let city = cityList[indexPath.row]
-			do {
-				try city.deleteFromCache()
-				cityList.removeAtIndex(indexPath.row)
-				tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-			} catch {
-				let alert = UIAlertController(title: "City Delete Failed", message: nil, preferredStyle: .Alert)
-				alert.addAction(.Cancel)
-				presentViewController(alert, animated: true, completion: nil)
-			}
-		}
-	}
 	// MARK: - Navigation
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -97,9 +76,27 @@ class CityListViewController: UITableViewController {
 			} else {
 				CityManager.sharedManager.currentCity	= nil
 			}
-			let destinationVC = segue.destinationViewController as! ViewController
-			destinationVC.refreshWeather()
 		}
 	}
-	
+}
+
+extension CityListViewController: CityListViewDelegate {
+	func deleteCity(of cell: CityCell) {
+		let alertFunction: ()->() = { [unowned self] in
+			let alert = UIAlertController(title: "City Delete Failed", message: nil, preferredStyle: .Alert)
+			alert.addAction(.Cancel)
+			self.presentViewController(alert, animated: true, completion: nil)
+		}
+		guard let indexPath = tableView.indexPathForCell(cell) where indexPath.section != 0 else {
+			alertFunction()
+			return
+		}
+		do {
+			let city = cityList.removeAtIndex(indexPath.row)
+			try city.deleteFromCache()
+			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+		} catch {
+			alertFunction()
+		}
+	}
 }

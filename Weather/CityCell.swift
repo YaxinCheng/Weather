@@ -11,5 +11,10 @@ import UIKit
 class CityCell: UITableViewCell {
 	
 	@IBOutlet weak var cityLabel: UILabel!
+	@IBOutlet weak var deleteButton: UIButton!
+	weak var delegate: CityListViewDelegate?
 	
+	@IBAction func deleteButtonPressed(sender: AnyObject) {
+		delegate?.deleteCity(of: self)
+	}
 }

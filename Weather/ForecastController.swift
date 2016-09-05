@@ -75,7 +75,7 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 			let forecast = dataSource[indexPath.row]
 			cell.weatherImageView.image = forecast.condition.icon
 			cell.forecastLabel.text = forecast.conditionDescription
-			cell.weekdayLabel.text = forecast.date
+			cell.weekdayLabel.text = indexPath.row == 0 ? "Today" : forecast.date
 			cell.highTempLabel.text = String(format: "%.0f°C", round(forecast.highTemp))
 			cell.lowTempLabel.text = String(format: "%.0f°C", round(forecast.lowTemp))
 			return cell

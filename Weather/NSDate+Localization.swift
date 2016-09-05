@@ -11,7 +11,7 @@ import Foundation
 extension NSDate {
 	func formatDate() -> String {
 		let dateFmt = NSDateFormatter()
-		dateFmt.dateFormat = "EEEE, MMMM dd"
+		dateFmt.dateFormat = "EEEE, MMM dd"
 		dateFmt.timeZone = NSTimeZone.localTimeZone()
 		return dateFmt.stringFromDate(self)
 	}

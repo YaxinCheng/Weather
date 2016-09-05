@@ -141,7 +141,7 @@ class ViewController: UIViewController {
 			let name = WeatherStation.sharedStation.cachedCity?.name ?? "Local"
 			cityButton.setTitle(name, forState: .Normal)
 		}
-		tempLabel.text = "\(weather.temprature)°C"
+		tempLabel.text = "\(weather.temprature)"
 		weatherConditionLabel.text = weather.condition.rawValue
 		pressureLabel.text = weather.pressure + "IN"
 		humidityLabel.text = weather.humidity + "%"
