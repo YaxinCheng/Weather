@@ -26,6 +26,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var sunriseLabel: UILabel!
 	@IBOutlet weak var sunsetLabel: UILabel!
 	@IBOutlet weak var conditionIcon: UIImageView!
+	@IBOutlet weak var pressureTrendLabel: UILabel!
 	
 	@IBOutlet weak var windsTempLabel: UILabel!
 	@IBOutlet weak var windsDirectionLabel: UILabel!
@@ -144,6 +145,7 @@ class ViewController: UIViewController {
 		sunriseLabel.text = String(format: "%02d:%02d", weather.sunriseTime.hour, weather.sunriseTime.minute)
 		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour, weather.sunsetTime.minute)
 		conditionIcon.image = weather.condition.icon
+		pressureTrendLabel.text = weather.pressureTrend
 		
 		windsTempLabel.text = "Winds Temperature: \(weather.windTemperatue)°C"
 		windsDirectionLabel.text = "Winds Direction: " + weather.windsDirection
