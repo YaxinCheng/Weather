@@ -49,7 +49,7 @@ class CityListViewController: UITableViewController {
 		let cell = tableView.dequeueReusableCellWithIdentifier(Common.cityListCellIdentifier, forIndexPath: indexPath) as! CityCell
 		
 		if indexPath.section == 0 {
-			cell.cityLabel.text = "Local"
+			cell.cityLabel.text = WeatherStation.sharedStation.cachedCity?.name ?? "Local"
 			cell.imageView?.image = UIImage(named: "local")
 		} else {
 			let city = cityList[indexPath.row]

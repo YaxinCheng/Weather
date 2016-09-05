@@ -138,7 +138,8 @@ class ViewController: UIViewController {
 		if let city = CityManager.sharedManager.currentCity {
 			cityButton.setTitle(city.name, forState: .Normal)
 		} else {
-			cityButton.setTitle("Local", forState: .Normal)
+			let name = WeatherStation.sharedStation.cachedCity?.name ?? "Local"
+			cityButton.setTitle(name, forState: .Normal)
 		}
 		tempLabel.text = "\(weather.temprature)°C"
 		weatherConditionLabel.text = weather.condition.rawValue
@@ -160,6 +161,7 @@ class ViewController: UIViewController {
 	func refreshWeather() {
 		let city = CityManager.sharedManager.currentCity
 		let weatherDidRefresh: (Weather?, ErrorType?) -> Void = { [weak self] in
+			self?.syncButton.layer.removeAllAnimations()
 			if $1 != nil || $0 == nil {
 				self?.syncButton.setImage(UIImage(named: "errorsync")!, forState: .Normal)
 			} else {
@@ -187,6 +189,7 @@ class ViewController: UIViewController {
 		animation.fillMode = kCAFillModeForwards
 		animation.fromValue = 2 * M_PI
 		animation.toValue = 0
+		animation.repeatCount = 5
 		sender.layer.addAnimation(animation, forKey: "rotation")
 		let city = CityManager.sharedManager.currentCity
 		if city == nil {
@@ -207,27 +210,22 @@ class ViewController: UIViewController {
 		let moveAnimation = generator.moveAnimation(axis: .y, duration: 0.3, fillMode: kCAFillModeForwards)
 		let opacityAnimation = generator.opacityAnimation(duration: moveAnimation.duration)
 		let tabAnimation = generator.moveAnimation(axis: .y, duration: moveAnimation.duration, fillMode: kCAFillModeForwards)
+		let hideClosure: () -> ()
 		
 		if infoPanel.hidden == false {
-			moveAnimation.fromValue = infoPanel.center.y
-			moveAnimation.toValue = view.bounds.height + 150
-			tabAnimation.fromValue = tabBarController?.tabBar.center.y
-			tabAnimation.toValue = moveAnimation.toValue
-			opacityAnimation.fromValue = 0
-			opacityAnimation.toValue = 1
-			Delay(moveAnimation.duration - 0.05) { [weak self] in
+			(moveAnimation.fromValue, moveAnimation.toValue) = (infoPanel.center.y, view.bounds.height + 150)
+			(tabAnimation.fromValue, tabAnimation.toValue) = (tabBarController?.tabBar.center.y, moveAnimation.toValue)
+			(opacityAnimation.fromValue, opacityAnimation.toValue) = (0, 1)
+			hideClosure = { [weak self] in
 				self?.infoPanel.hidden = true
 				self?.tabBarController?.tabBar.alpha = 0
 			}
 		} else {
 			infoPanel.hidden = false
-			opacityAnimation.fromValue = 1
-			opacityAnimation.toValue = 0
-			moveAnimation.fromValue = view.bounds.height + 150
-			moveAnimation.toValue = infoPanel.center.y
-			opacityAnimation.fromValue = moveAnimation.fromValue
-			opacityAnimation.toValue = tabBarController?.tabBar.center.y
-			Delay(moveAnimation.duration - 0.05) { [weak self] in
+			(opacityAnimation.fromValue, opacityAnimation.toValue) = (1, 0)
+			(moveAnimation.fromValue, moveAnimation.toValue) = (view.bounds.height + 150, infoPanel.center.y)
+			(opacityAnimation.fromValue, opacityAnimation.toValue) = (moveAnimation.fromValue, tabBarController?.tabBar.center.y)
+			hideClosure = { [weak self] in
 				self?.tabBarController?.tabBar.alpha = 1
 			}
 		}
@@ -238,6 +236,7 @@ class ViewController: UIViewController {
 		windsDirectionLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 		windsTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 		Delay(moveAnimation.duration - 0.05) { [weak self] in
+			hideClosure()
 			self?.windsTempLabel.layer.opacity = 1 - (self?.windsTempLabel.layer.opacity ?? 0)
 			self?.windsDirectionLabel.layer.opacity = 1 - (self?.windsDirectionLabel.layer.opacity ?? 0)
 			self?.windsSpeedLabel.layer.opacity = 1 - (self?.windsSpeedLabel.layer.opacity ?? 0)
@@ -259,9 +258,10 @@ class ViewController: UIViewController {
 	
 	// MARK: - Navigation
 	@IBAction func prepareForUnwindSegue(segue: UIStoryboardSegue) {
-		guard let identifier = segue.identifier, let city = CityManager.sharedManager.currentCity else { return }
-		if identifier == Common.unwindBackMain {
-			let weather = WeatherStation.sharedStation.cachedWeather[city]
+		guard let identifier = segue.identifier else { return }
+		let city = CityManager.sharedManager.currentCity ?? WeatherStation.sharedStation.cachedCity
+		if identifier == Common.unwindBackMain && city != nil {
+			let weather = WeatherStation.sharedStation.cachedWeather[city!]
 			currentWeather = weather
 		}
 	}

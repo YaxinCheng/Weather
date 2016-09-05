@@ -4,5 +4,5 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'Weather' do
-	pod 'YahooWeatherSource', '~> 0.0.8'
+	pod 'YahooWeatherSource', '~> 0.0.9'
 end
