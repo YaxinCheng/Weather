@@ -66,6 +66,7 @@
 		E3C739F01D4BD65C00F51623 /* UIAlertAction+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */; };
 		E3C739F21D4BD72F00F51623 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739F11D4BD72F00F51623 /* Weather.swift */; };
 		E3D6B6E71D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6B6E61D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift */; };
+		E3D6B6EB1D7D2500004B6ADC /* AnimationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6B6EA1D7D2500004B6ADC /* AnimationGenerator.swift */; };
 		E3E42A5A1D5CBAEB0039BF2B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E42A591D5CBAEB0039BF2B /* NotificationCenter.framework */; };
 		E3E42A5D1D5CBAEB0039BF2B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A5C1D5CBAEB0039BF2B /* TodayViewController.swift */; };
 		E3E42A601D5CBAEB0039BF2B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E42A5E1D5CBAEB0039BF2B /* MainInterface.storyboard */; };
@@ -187,6 +188,7 @@
 		E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Cancel.swift"; sourceTree = "<group>"; };
 		E3C739F11D4BD72F00F51623 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		E3D6B6E61D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateComponents+InitFromString.swift"; sourceTree = "<group>"; };
+		E3D6B6EA1D7D2500004B6ADC /* AnimationGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationGenerator.swift; sourceTree = "<group>"; };
 		E3E42A581D5CBAEB0039BF2B /* Weather Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Weather Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E42A591D5CBAEB0039BF2B /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		E3E42A5C1D5CBAEB0039BF2B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 		E3F0FBDE1D53C66E002DB74E /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				E3D6B6EA1D7D2500004B6ADC /* AnimationGenerator.swift */,
 				E3C739651D4A910500F51623 /* ViewController.swift */,
 				E3C739E31D4AC7C900F51623 /* WeatherStation.swift */,
 				E3C739EB1D4BCE9F00F51623 /* WeatherError.swift */,
@@ -711,6 +714,7 @@
 				E30A85661D7A65DD0073EC44 /* CityManager.swift in Sources */,
 				E332910E1D589E2100C5AED3 /* ForecastCell.swift in Sources */,
 				E3F0FBD81D53C262002DB74E /* CityListViewController.swift in Sources */,
+				E3D6B6EB1D7D2500004B6ADC /* AnimationGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

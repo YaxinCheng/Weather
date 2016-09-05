@@ -16,6 +16,7 @@ class ViewController: UIViewController {
 	var player: AVPlayer?
 	weak var playerLayer: AVPlayerLayer?
 	@IBOutlet weak var infoPanel: UIView!
+	
 	@IBOutlet weak var syncButton: UIButton!
 	@IBOutlet weak var cityButton: UIButton!
 	@IBOutlet weak var tempLabel: UILabel!
@@ -118,6 +119,7 @@ class ViewController: UIViewController {
 		if backgroundView != nil {
 			backgroundView.removeFromSuperview()
 		}
+		
 		let name = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? weather.condition.videoName : weather.condition.landscapeVideoName
 		backgroundView = UIImageView(image: UIImage(named: name)!)
 		if UI_USER_INTERFACE_IDIOM() == .Phone {
@@ -129,6 +131,7 @@ class ViewController: UIViewController {
 			let frame = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? CGRect(x: 0, y: 0, width: height, height: width) : CGRect(x: 0, y: 0, width: width, height: height)
 			backgroundView.frame = frame
 		}
+		
 		backgroundView.contentMode = .ScaleToFill
 		view.insertSubview(backgroundView, atIndex: 0)
 		
@@ -200,33 +203,37 @@ class ViewController: UIViewController {
 	@IBAction func touchToFullScreen() {
 		guard animating == false else { return }
 		animating = true
-		let moveAnimation = CABasicAnimation(keyPath: "position.y")
-		moveAnimation.duration = 0.3
-		moveAnimation.removedOnCompletion = true
-		moveAnimation.fillMode = kCAFillModeForwards
-		
-		let opacityAnimation = CABasicAnimation(keyPath: "opacity")
-		opacityAnimation.duration = moveAnimation.duration
-		opacityAnimation.removedOnCompletion = moveAnimation.removedOnCompletion
-		opacityAnimation.fillMode = kCAFillModeBoth
+		let generator = AnimationGenerator()
+		let moveAnimation = generator.moveAnimation(axis: .y, duration: 0.3, fillMode: kCAFillModeForwards)
+		let opacityAnimation = generator.opacityAnimation(duration: moveAnimation.duration)
+		let tabAnimation = generator.moveAnimation(axis: .y, duration: moveAnimation.duration, fillMode: kCAFillModeForwards)
 		
 		if infoPanel.hidden == false {
 			moveAnimation.fromValue = infoPanel.center.y
-			moveAnimation.toValue = view.bounds.height + 100
+			moveAnimation.toValue = view.bounds.height + 150
+			tabAnimation.fromValue = tabBarController?.tabBar.center.y
+			tabAnimation.toValue = moveAnimation.toValue
 			opacityAnimation.fromValue = 0
 			opacityAnimation.toValue = 1
 			Delay(moveAnimation.duration - 0.05) { [weak self] in
 				self?.infoPanel.hidden = true
+				self?.tabBarController?.tabBar.alpha = 0
 			}
 		} else {
 			infoPanel.hidden = false
 			opacityAnimation.fromValue = 1
 			opacityAnimation.toValue = 0
-			moveAnimation.fromValue = view.bounds.height + 100
+			moveAnimation.fromValue = view.bounds.height + 150
 			moveAnimation.toValue = infoPanel.center.y
+			opacityAnimation.fromValue = moveAnimation.fromValue
+			opacityAnimation.toValue = tabBarController?.tabBar.center.y
+			Delay(moveAnimation.duration - 0.05) { [weak self] in
+				self?.tabBarController?.tabBar.alpha = 1
+			}
 		}
 		
 		infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
+		tabBarController?.tabBar.layer.addAnimation(tabAnimation, forKey: nil)
 		windsSpeedLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 		windsDirectionLabel.layer.addAnimation(opacityAnimation, forKey: nil)
 		windsTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)

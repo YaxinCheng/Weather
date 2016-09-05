@@ -36,7 +36,7 @@ struct WeatherCondition {
 			return "weather_clear"
 		case "cloudy", "mostly cloudy":
 			return dayTime ? "weather_cloudy_day" : "weather_cloudy_night"
-		case "mixed rain and sleet", "drizzle", "freezing rain", "showers", "sleet":
+		case "mixed rain and sleet", "drizzle", "freezing rain", "showers", "sleet", "rain":
 			return dayTime ? "weather_rain_day" : "weather_rain_night"
 		case "foggy", "dust", "haze", "smoky":
 			return dayTime ? "weather_fog_day" : "weather_fog_night"
@@ -65,7 +65,7 @@ struct WeatherCondition {
 			return "weather_l_clear"
 		case "cloudy", "mostly cloudy":
 			return dayTime ? "weather_l_cloudy_day" : "weather_l_cloudy_night"
-		case "mixed rain and sleet", "drizzle", "freezing rain", "showers", "sleet":
+		case "mixed rain and sleet", "drizzle", "freezing rain", "showers", "sleet", "rain":
 			return dayTime ? "weather_l_rain_day" : "weather_l_rain_night"
 		case "foggy", "dust", "haze", "smoky":
 			return dayTime ? "weather_l_fog_day" : "weather_l_fog_night"
