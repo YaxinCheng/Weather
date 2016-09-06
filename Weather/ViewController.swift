@@ -151,9 +151,9 @@ class ViewController: UIViewController {
 		conditionIcon.image = weather.condition.icon
 		pressureTrendLabel.text = weather.pressureTrend
 		
-		windsTempLabel.text = "Winds Temperature: \(weather.windTemperatue)°C"
-		windsDirectionLabel.text = "Winds Direction: " + weather.windsDirection
-		windsSpeedLabel.text = "Winds Speed: \(weather.windsSpeed)m/h"
+		windsTempLabel.text = "WINDS TEMPERATURE: \(weather.windTemperatue)°C"
+		windsDirectionLabel.text = "WINDS DIRECTION: " + weather.windsDirection
+		windsSpeedLabel.text = "WINDS SPEED: \(weather.windsSpeed)MH"
 	}
 	
 	// MARK: - Weather and location
