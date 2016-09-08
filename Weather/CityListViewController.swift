@@ -46,17 +46,18 @@ class CityListViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier(Common.cityListCellIdentifier, forIndexPath: indexPath) as! CityCell
-		cell.delegate = self
 		if indexPath.section == 0 {
-			cell.cityLabel.text = "Local"
+			let cell = tableView.dequeueReusableCellWithIdentifier(Common.cityLocalCellIdentifier) as! CityLocalCell
+			cell.nameLabel.text = "Local"
 			cell.imageView?.image = UIImage(named: "local")
+			return cell
 		} else {
+			let cell = tableView.dequeueReusableCellWithIdentifier(Common.cityListCellIdentifier) as! CityListCell
+			cell.delegate = self
 			let city = cityList[indexPath.row]
 			cell.cityLabel.text = city.name
-			cell.deleteButton.hidden = false
+			return cell
 		}
-		return cell
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -83,7 +84,7 @@ class CityListViewController: UITableViewController {
 }
 
 extension CityListViewController: CityListViewDelegate {
-	func deleteCity(of cell: CityCell) {
+	func deleteCity(of cell: CityListCell) {
 		let alertFunction: ()->() = { [unowned self] in
 			let alert = UIAlertController(title: "City Delete Failed", message: nil, preferredStyle: .Alert)
 			alert.addAction(.Cancel)

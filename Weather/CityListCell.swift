@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CityCell: UITableViewCell {
+class CityListCell: UITableViewCell {
 	
 	@IBOutlet weak var cityLabel: UILabel!
 	@IBOutlet weak var deleteButton: UIButton!

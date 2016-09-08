@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CityListViewDelegate: class {
-	func deleteCity(of cell: CityCell)
+	func deleteCity(of cell: CityListCell)
 }

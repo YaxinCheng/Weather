@@ -12,7 +12,8 @@ struct Common {
 	static let locationIdentifier = "LocationIdentifier"
 	
 	static let cityCellIdentifier = "plainTextCell"
-	static let cityListCellIdentifier = "basicTextCell"
+	static let cityListCellIdentifier = "cityListCell"
+	static let cityLocalCellIdentifier = "localCityCell"
 	static let forcastCellidentifier = "ForecastCell"
 	static let headerCellIdentifier = "HeaderCell"
 	
