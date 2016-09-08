@@ -18,6 +18,8 @@ struct CityManager {
 			NSNotificationCenter.defaultCenter().postNotification(notification)
 		}
 	}
+	
+	var isLocal: Bool = true
 }
 
 enum CityManagerNotification: String {

@@ -16,9 +16,6 @@ struct WeatherStation {
 	
 	static var sharedStation = WeatherStation()
 	
-	var cachedWeather = [City: Weather]()
-	var cachedCity: City? = nil
-	
 	private init() {
 		weatherSource = YahooWeatherSource()
 		locationStorage = LocationStorage()
@@ -40,7 +37,6 @@ struct WeatherStation {
 		}
 		weatherSource.locationParse(at: currentLocation) {
 			guard let JSON = $0, let city = City(from: JSON) else { return }
-			WeatherStation.sharedStation.cachedCity = city
 			CityManager.sharedManager.currentCity = city
 		}
 	}
@@ -53,7 +49,6 @@ struct WeatherStation {
 					completion(nil, WeatherStationError.WeatherLoadError)
 					return
 				}
-				WeatherStation.sharedStation.cachedWeather[city] = weather
 				completion(weather, nil)
 			case .Failure(let error):
 				completion(nil, error)

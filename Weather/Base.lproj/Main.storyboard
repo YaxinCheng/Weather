@@ -422,8 +422,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="243"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="TP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waL-nU-euv">
-                                                <rect key="frame" x="66" y="135" width="49" height="48"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <rect key="frame" x="68" y="135" width="45" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -435,7 +435,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="℃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wz-mg-Bv0">
-                                                <rect key="frame" x="115" y="135" width="20" height="21"/>
+                                                <rect key="frame" x="113" y="135" width="20" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -532,28 +532,35 @@
                                     <outletCollection property="gestureRecognizers" destination="3bI-ah-JDs" appends="YES" id="uds-jX-Jlj"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9E-EU-m2O">
-                                <rect key="frame" x="20" y="20" width="81" height="63"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-xJ-Kag">
+                                <rect key="frame" x="557" y="39" width="23" height="23"/>
+                                <state key="normal" image="sync"/>
+                                <connections>
+                                    <action selector="syncButtonPressedUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BkJ-Ej-cKF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgM-8F-Ko2" userLabel="Add button">
+                                <rect key="frame" x="526" y="39" width="23" height="23"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="add"/>
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Kd-2c-nee"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="q9E-EU-m2O">
+                                <rect key="frame" x="20" y="20" width="77" height="60"/>
                                 <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="42"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <state key="normal" title="City">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="cityButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U1o-QK-Zhe"/>
                                     <outletCollection property="gestureRecognizers" destination="mlZ-eC-82E" appends="YES" id="fG2-EU-nLN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-xJ-Kag">
-                                <rect key="frame" x="557" y="40" width="23" height="23"/>
-                                <state key="normal" image="sync"/>
-                                <connections>
-                                    <action selector="syncButtonPressedUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BkJ-Ej-cKF"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temprature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gue-Qb-OOh">
-                                <rect key="frame" x="20" y="91" width="80" height="18"/>
+                                <rect key="frame" x="20" y="88" width="80" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -564,7 +571,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anJ-6Q-gCm">
-                                <rect key="frame" x="20" y="117" width="62" height="18"/>
+                                <rect key="frame" x="20" y="114" width="62" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -575,7 +582,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRv-qd-BXw">
-                                <rect key="frame" x="20" y="143" width="44" height="18"/>
+                                <rect key="frame" x="20" y="140" width="44" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -585,13 +592,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgM-8F-Ko2">
-                                <rect key="frame" x="526" y="40" width="23" height="23"/>
-                                <state key="normal" image="add"/>
-                                <connections>
-                                    <action selector="addButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Kd-2c-nee"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -616,15 +616,16 @@
                             <constraint firstItem="VRv-qd-BXw" firstAttribute="top" secondItem="anJ-6Q-gCm" secondAttribute="bottom" constant="8" id="dfP-qR-z5b"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3hS-xJ-Kag" secondAttribute="trailing" id="gOj-IX-UER"/>
                             <constraint firstItem="3hS-xJ-Kag" firstAttribute="centerY" secondItem="q9E-EU-m2O" secondAttribute="centerY" id="kDN-hz-dES"/>
+                            <constraint firstItem="hgM-8F-Ko2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="q9E-EU-m2O" secondAttribute="trailing" constant="8" id="tz6-bp-YX1"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3NY-kM-6vJ" secondAttribute="bottom" constant="-48" id="vt4-eX-MSW"/>
                             <constraint firstItem="3hS-xJ-Kag" firstAttribute="leading" secondItem="hgM-8F-Ko2" secondAttribute="trailing" constant="8" id="xLU-kz-CI8"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="LlX-Is-KK1"/>
+                                <exclude reference="vt4-eX-MSW"/>
                                 <exclude reference="B5k-ca-82r"/>
                                 <exclude reference="dVW-rm-300"/>
-                                <exclude reference="vt4-eX-MSW"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">

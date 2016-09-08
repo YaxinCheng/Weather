@@ -64,6 +64,8 @@ class ViewController: UIViewController {
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
+		cityButton.titleLabel?.numberOfLines = 1
+		cityButton.titleLabel?.adjustsFontSizeToFitWidth = true
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -138,7 +140,7 @@ class ViewController: UIViewController {
 		if let city = CityManager.sharedManager.currentCity {
 			cityButton.setTitle(city.name, forState: .Normal)
 		} else {
-			let name = WeatherStation.sharedStation.cachedCity?.name ?? "Local"
+			let name = "Local"
 			cityButton.setTitle(name, forState: .Normal)
 		}
 		tempLabel.text = "\(weather.temprature)"
@@ -153,7 +155,7 @@ class ViewController: UIViewController {
 		
 		windsTempLabel.text = "WINDS TEMPERATURE: \(weather.windTemperatue)°C"
 		windsDirectionLabel.text = "WINDS DIRECTION: " + weather.windsDirection
-		windsSpeedLabel.text = "WINDS SPEED: \(weather.windsSpeed)MH"
+		windsSpeedLabel.text = "WINDS SPEED: \(weather.windsSpeed)MPH"
 	}
 	
 	// MARK: - Weather and location
@@ -191,9 +193,10 @@ class ViewController: UIViewController {
 		animation.toValue = 0
 		animation.repeatCount = 5
 		sender.layer.addAnimation(animation, forKey: "rotation")
-		let city = CityManager.sharedManager.currentCity
-		if city == nil {
+		let local = CityManager.sharedManager.isLocal
+		if local {
 			refreshLocation()
+			CityManager.sharedManager.currentCity = nil
 		} else {
 			refreshWeather()
 		}
@@ -258,12 +261,6 @@ class ViewController: UIViewController {
 	
 	// MARK: - Navigation
 	@IBAction func prepareForUnwindSegue(segue: UIStoryboardSegue) {
-		guard let identifier = segue.identifier else { return }
-		let city = CityManager.sharedManager.currentCity ?? WeatherStation.sharedStation.cachedCity
-		if identifier == Common.unwindBackMain && city != nil {
-			let weather = WeatherStation.sharedStation.cachedWeather[city!]
-			currentWeather = weather
-		}
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
