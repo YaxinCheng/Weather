@@ -76,6 +76,7 @@ extension Persistable {
 		for model in try context.executeFetchRequest(fetch) {
 			context.deleteObject(model as! NSManagedObject)
 		}
+		appDelegate.saveContext()
 	}
 	
 	static func searchFromCache(predicate: NSPredicate) throws -> [Self] {
