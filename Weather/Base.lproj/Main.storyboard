@@ -16,7 +16,7 @@
             </objects>
             <point key="canvasLocation" x="1011.5" y="604"/>
         </scene>
-        <!--forecasts-->
+        <!--Forecasts-->
         <scene sceneID="rW3-yR-UXr">
             <objects>
                 <viewController id="zZQ-fD-jQm" customClass="ForecastController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -190,7 +190,7 @@
                             <constraint firstItem="DCE-DI-gts" firstAttribute="leading" secondItem="Rf8-7p-UdK" secondAttribute="leading" id="hPb-EO-OEX"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="forecasts" image="forecast" id="BjP-oQ-9vh"/>
+                    <tabBarItem key="tabBarItem" title="Forecasts" image="forecast" id="BjP-oQ-9vh"/>
                     <connections>
                         <outlet property="tableView" destination="DCE-DI-gts" id="k7p-ni-I8X"/>
                     </connections>

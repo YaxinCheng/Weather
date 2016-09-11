@@ -1,18 +1,31 @@
-# Weather
-Weather is not an commercial app or app to show my programming skills<br>
-**I made this app with resources from HTC weather app, if this breaks any law or copyright, please email me, and I will delete related resources at once**<br>
+![Weather: Old bottle with new wine](https://cloud.githubusercontent.com/assets/13768613/18416937/508c493a-77f9-11e6-9c4f-53faf0828d45.png)
+![Swift2.x](https://img.shields.io/badge/Swift2.x-support-green.svg)
+![Swift3.x](https://img.shields.io/badge/Swift3.x-ongoing-red.svg)
+<br>
+Weather is a weather app built based on [WeatherKit](https://github.com/YaxinCheng/WeatherKit)<br>
+## Disclaimers:
+- This is not an commercial app or app to show my interests in programming<br>
+- The app used resources from Internet, please contact me if any copyright is violated
 
-##Feature
-Gorgeous weather animations from HTC<br>
-Yahoo weather API for accurate weather information<br>
-Swift 3.0 working on now<br>
+## Feature:
+Gorgeous weather animations from [XDA Developers](http://forum.xda-developers.com/nexus-6/themes-apps/mod-htc-weather-animated-rom-t3120774)<br>
+WeatherKit with Yahoo weather API for accurate weather information<br>
+Unit conversion setting for weather information<br>
+Concise UI design simplified the app logic<br>
 
-##Condtion:
-On going. Just for the interest of the gorgeous weather animation right now<br>
+## Screenshot:
+### Main View:
+![Weather in Chengdu](https://cloud.githubusercontent.com/assets/13768613/18417052/4d412414-77fc-11e6-9fde-4244a873bb27.png)
+![Weather in Lasa](https://cloud.githubusercontent.com/assets/13768613/18417056/4d42dffc-77fc-11e6-9259-33f77a9e5463.png)
+![Weather fullscreen](https://cloud.githubusercontent.com/assets/13768613/18417055/4d422e4a-77fc-11e6-9dc5-1095984a6d18.png)
+### City list:
+![City List](https://cloud.githubusercontent.com/assets/13768613/18417051/4d31b1f0-77fc-11e6-9b0f-4baf7c53ef82.png)
+![Search a city](https://cloud.githubusercontent.com/assets/13768613/18417054/4d4142be-77fc-11e6-91eb-e037a7e84959.png)
+### Forecasts:
+![Forecast](https://cloud.githubusercontent.com/assets/13768613/18417053/4d411046-77fc-11e6-8937-126c92e554ea.png)
+### Setting:
+![Setting](https://cloud.githubusercontent.com/assets/13768613/18417057/4d43af7c-77fc-11e6-82e0-2025ada0e836.png)
 
-##Screenshot:
- ![screenshot 2016-08-09 20 15 41](https://cloud.githubusercontent.com/assets/13768613/17536807/17526ae0-5e6e-11e6-82e5-f5b43b9cae10.png)
-<!-- ![alt tag](http://web.cs.dal.ca/~ycheng/resume/Github/Weather/main.png)<br> -->
+## License
 
-This app will not be big, and features are limited. More functionalities are coming...<br>
--- Yaxin Cheng
+WeatherKit is released under the Apache license. See LICENSE for details.
