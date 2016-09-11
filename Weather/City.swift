@@ -80,17 +80,3 @@ extension City: Persistable {
 		return woeid
 	}
 }
-
-extension City: Hashable {
-	var hashValue: Int {
-		return woeid.hashValue
-	}
-}
-
-func == (lhs: City, rhs: City) -> Bool {
-	let nameEqual = lhs.name == rhs.name
-	let provinceEqual = lhs.province == rhs.province
-	let countryEqual = lhs.country == rhs.country
-	let woeidEqual = lhs.woeid == rhs.woeid
-	return (nameEqual && provinceEqual && countryEqual) || woeidEqual
-}
