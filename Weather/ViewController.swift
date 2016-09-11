@@ -33,6 +33,8 @@ class ViewController: UIViewController {
 	@IBOutlet weak var windsDirectionLabel: UILabel!
 	@IBOutlet weak var windsSpeedLabel: UILabel!
 	
+	@IBOutlet weak var mainUnitLabel: UILabel!
+
 	var currentWeather: Weather! {
 		didSet {
 			guard let weather = currentWeather else { return }
@@ -143,19 +145,20 @@ class ViewController: UIViewController {
 			let name = "Local"
 			cityButton.setTitle(name, forState: .Normal)
 		}
+		mainUnitLabel.text = "\(WeatherStation.sharedStation.temperatureUnit)"
 		tempLabel.text = "\(weather.temprature)"
 		weatherConditionLabel.text = weather.condition.rawValue
 		pressureLabel.text = weather.pressure + "IN"
 		humidityLabel.text = weather.humidity + "%"
-		visibilityLabel.text = weather.visibility + "M"
+		visibilityLabel.text = "\(weather.visibility)\(WeatherStation.sharedStation.distanceUnit)"
 		sunriseLabel.text = String(format: "%02d:%02d", weather.sunriseTime.hour, weather.sunriseTime.minute)
 		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour, weather.sunsetTime.minute)
 		conditionIcon.image = weather.condition.icon
 		pressureTrendLabel.text = weather.pressureTrend
 		
-		windsTempLabel.text = "WINDS TEMPERATURE: \(weather.windTemperatue)°C"
+		windsTempLabel.text = "WINDS TEMPERATURE: \(weather.windTemperatue)\(WeatherStation.sharedStation.temperatureUnit)"
 		windsDirectionLabel.text = "WINDS DIRECTION: " + weather.windsDirection
-		windsSpeedLabel.text = "WINDS SPEED: \(weather.windsSpeed)MPH"
+		windsSpeedLabel.text = "WINDS SPEED: \(weather.windsSpeed)\(WeatherStation.sharedStation.distanceUnit)"
 	}
 	
 	// MARK: - Weather and location

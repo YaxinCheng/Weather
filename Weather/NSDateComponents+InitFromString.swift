@@ -1,6 +1,6 @@
 //
 //  NSDateComponents+InitFromString.swift
-//  YahooWeatherSource
+//  WeatherKit
 //
 //  Created by Yaxin Cheng on 2016-08-23.
 //  Copyright © 2016 Yaxin Cheng. All rights reserved.

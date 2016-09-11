@@ -21,6 +21,7 @@ struct Forecast {
 			let date = NSDate.date(string: time, format: "dd MMM yyyy"),
 			let high = JSON["high"] as? Double,
 			let low = JSON["low"] as? Double,
+			let code = (JSON["code"] as? NSString)?.integerValue,
 			let conditionString = JSON["text"] as? String
 		else { return nil }
 		self.date = date.formatDate()
@@ -29,6 +30,6 @@ struct Forecast {
 		lowTemp = low
 		let timeZone = CityManager.sharedManager.currentCity?.timeZone ?? NSTimeZone.localTimeZone()
 		let day = NSDateComponents(from: "6:00 am")! < NSDate().time(timeZone: timeZone) && NSDateComponents(from: "8:00 pm")! > NSDate().time(timeZone: timeZone)
-		condition = WeatherCondition(rawValue: conditionString, day: day)
+		condition = WeatherCondition(rawValue: conditionString, code: code, day: day)
 	}
 }

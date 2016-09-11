@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BsN-JN-bRi">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="16A320" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BsN-JN-bRi">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -644,6 +644,7 @@
                         <outlet property="conditionIcon" destination="bkM-H7-ofx" id="VXa-Yi-d2p"/>
                         <outlet property="humidityLabel" destination="sQW-Wn-735" id="bIg-sg-BIb"/>
                         <outlet property="infoPanel" destination="3NY-kM-6vJ" id="fT4-MM-DlB"/>
+                        <outlet property="mainUnitLabel" destination="2wz-mg-Bv0" id="nms-EL-8zv"/>
                         <outlet property="pressureLabel" destination="xoO-Sk-u8D" id="fAL-2s-McL"/>
                         <outlet property="pressureTrendLabel" destination="kQI-sk-Qs7" id="UhV-2N-SyY"/>
                         <outlet property="sunriseLabel" destination="t6C-Yr-Zdt" id="Puw-4T-Xed"/>
@@ -735,7 +736,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2x-uY-c5X">
                                                     <rect key="frame" x="20" y="11" width="79" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eBE-71-qqd">
@@ -745,6 +746,9 @@
                                                         <segment title="Option"/>
                                                     </segments>
                                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="segmentChanged:" destination="sbf-11-OiV" eventType="valueChanged" id="70s-QE-vh7"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import YahooWeatherSource
+import WeatherKit
 
 class CitySearchViewController: UITableViewController {
 	

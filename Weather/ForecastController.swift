@@ -70,8 +70,9 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 			cell.weatherImageView.image = forecast.condition.icon
 			cell.forecastLabel.text = forecast.conditionDescription
 			cell.weekdayLabel.text = indexPath.row == 0 ? "Today" : forecast.date
-			cell.highTempLabel.text = String(format: "%.0f°C", round(forecast.highTemp))
-			cell.lowTempLabel.text = String(format: "%.0f°C", round(forecast.lowTemp))
+			let temperatureUnit = WeatherStation.sharedStation.temperatureUnit
+			cell.highTempLabel.text = String(format: "%.0f", round(forecast.highTemp)) + "\(temperatureUnit)"
+			cell.lowTempLabel.text = String(format: "%.0f", round(forecast.lowTemp)) + "\(temperatureUnit)"
 			return cell
 		}
 	}

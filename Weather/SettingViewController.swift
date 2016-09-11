@@ -41,6 +41,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 			cell.unitNameLabel.text = unit.0
 			cell.unitSegment.setTitle(unit.1, forSegmentAtIndex: _DefaultIndex)
 			cell.unitSegment.setTitle(unit.2, forSegmentAtIndex: _OptionalIndex)
+			let selectedIndex = NSUserDefaults.standardUserDefaults().integerForKey(unit.0)
+			cell.unitSegment.selectedSegmentIndex = selectedIndex
 			return cell
 		}
 	}

@@ -8,17 +8,55 @@
 
 import Foundation
 import CoreLocation.CLLocation
-import YahooWeatherSource
+import WeatherKit
 
 struct WeatherStation {
 	let locationStorage: LocationStorage
-	private let weatherSource: YahooWeatherSource
+	private var weatherSource: WeatherKit.WeatherStation
 	
 	static var sharedStation = WeatherStation()
 	
+	var temperatureUnit: TemperatureUnit {
+		get {
+			return weatherSource.temperatureUnit
+		} set {
+			weatherSource.temperatureUnit = newValue
+		}
+	}
+	
+	var speedUnit: SpeedUnit {
+		get {
+			return weatherSource.speedUnit
+		} set {
+			weatherSource.speedUnit = newValue
+		}
+	}
+	
+	var distanceUnit: DistanceUnit {
+		get {
+			return weatherSource.distanceUnit
+		} set {
+			weatherSource.distanceUnit = newValue
+		}
+	}
+	
+	var directionUnit: DirectionUnit {
+		get {
+			return weatherSource.directionUnit
+		} set {
+			weatherSource.directionUnit = newValue
+		}
+	}
+
+	
 	private init() {
-		weatherSource = YahooWeatherSource()
+		weatherSource = WeatherKit.WeatherStation()
 		locationStorage = LocationStorage()
+		let userDefault = NSUserDefaults.standardUserDefaults()
+		temperatureUnit = userDefault.integerForKey("Temperature") == 1 ? .fahrenheit : .celsius
+		speedUnit = userDefault.integerForKey("Speed") == 1 ? .kmph : .mph
+		distanceUnit = userDefault.integerForKey("Distance") == 1 ? .km : .mi
+		directionUnit = userDefault.integerForKey("Direction") == 1 ? .degree : .direction
 	}
 	
 	func all(completion: (Weather?, ErrorType?) -> Void) {
@@ -35,14 +73,15 @@ struct WeatherStation {
 			completion(nil, error)
 			return
 		}
-		weatherSource.locationParse(at: currentLocation) {
+		let cityLoader = CityLoader()
+		cityLoader.locationParse(location: currentLocation) {
 			guard let JSON = $0, let city = City(from: JSON) else { return }
 			CityManager.sharedManager.currentCity = city
 		}
 	}
 	
 	func all(for city: City, completion: (Weather?, ErrorType?) -> Void) {
-		weatherSource.currentWeather(city: city.name, province: city.province, country: city.country) {
+		weatherSource.weather(city: city.name, province: city.province, country: city.country) {
 			switch $0 {
 			case .Success(let JSON):
 				guard let weather = Weather(with: JSON) else {
@@ -70,7 +109,7 @@ struct WeatherStation {
 			completion([], error)
 			return
 		}
-		weatherSource.fivedaysForecast(at: currentLocation) {
+		weatherSource.forecast(location: currentLocation) {
 			switch $0 {
 			case .Success(let JSONs):
 				let forecasts = JSONs.flatMap { Forecast(with: $0) }
@@ -82,7 +121,7 @@ struct WeatherStation {
 	}
 	
 	func forecast(for city: City, completion: ([Forecast], ErrorType?) -> Void) {
-		weatherSource.fivedaysForecast(city: city.name, province: city.province, country: city.country) {
+		weatherSource.forecast(city: city.name, province: city.province, country: city.country) {
 			switch $0 {
 			case .Success(let JSONs):
 				let forecasts = JSONs.flatMap { Forecast(with: $0) }
