@@ -158,7 +158,7 @@ class ViewController: UIViewController {
 		
 		windsTempLabel.text = "WINDS TEMPERATURE: \(weather.windTemperatue)\(WeatherStation.sharedStation.temperatureUnit)"
 		windsDirectionLabel.text = "WINDS DIRECTION: " + weather.windsDirection
-		windsSpeedLabel.text = "WINDS SPEED: \(weather.windsSpeed)\(WeatherStation.sharedStation.distanceUnit)"
+		windsSpeedLabel.text = "WINDS SPEED: \(weather.windsSpeed)\(WeatherStation.sharedStation.speedUnit)"
 	}
 	
 	// MARK: - Weather and location
