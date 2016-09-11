@@ -88,6 +88,9 @@ struct WeatherStation {
 					completion(nil, WeatherStationError.WeatherLoadError)
 					return
 				}
+				if CityManager.sharedManager.isLocal {
+					self.saveForWidget(weather)
+				}
 				completion(weather, nil)
 			case .Failure(let error):
 				completion(nil, error)

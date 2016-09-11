@@ -45,7 +45,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	
 	@IBAction func viewTouched(sender: AnyObject) {
 		(sender as? UIControl)?.backgroundColor = originalColour
-		extensionContext?.openURL(NSURL(string: "weather://main")!, completionHandler: nil)
+		extensionContext?.openURL(NSURL(string: "weatherX://main")!, completionHandler: nil)
 	}
 	
 	@IBAction func viewTouchedUpOutside(sender: UIControl) {
