@@ -188,13 +188,8 @@ class ViewController: UIViewController {
 	
 	@IBAction func syncButtonPressedUp(sender: UIButton) {
 		syncButton.setImage(UIImage(named: "sync")!, forState: .Normal)
-		let animation = CABasicAnimation(keyPath: "transform.rotation.z")
-		animation.duration = 2
-		animation.removedOnCompletion = false
-		animation.fillMode = kCAFillModeForwards
-		animation.fromValue = 2 * M_PI
-		animation.toValue = 0
-		animation.repeatCount = 5
+		let generator = AnimationGenerator()
+		let animation = generator.rotationAnimation(axis: .z, duration: 2, removeOnCompletion: false, fillMode: kCAFillModeForwards, from: 2 * M_PI, to: 0, repeatCount: 5)
 		sender.layer.addAnimation(animation, forKey: "rotation")
 		let local = CityManager.sharedManager.isLocal
 		if local {

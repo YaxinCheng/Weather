@@ -25,9 +25,30 @@ struct AnimationGenerator {
 		animation.fillMode = fillMode
 		return animation
 	}
+	
+	func rotationAnimation(axis axis: Axis, duration: Double, removeOnCompletion: Bool = true, fillMode: String = kCAFillModeBoth, from fromValue: Double, to toValue: Double, repeatCount: Float = 0) -> CABasicAnimation {
+		let path = axis.rotation
+		let animation = CABasicAnimation(keyPath: path)
+		animation.duration = duration
+		animation.removedOnCompletion = removeOnCompletion
+		animation.fillMode = fillMode
+		animation.fromValue = fromValue
+		animation.toValue = toValue
+		animation.repeatCount = repeatCount
+		return animation
+	}
 }
 
-enum Axis {
+enum Axis: String {
 	case x
 	case y
+	case z
+	
+	var position: String {
+		return "position." + rawValue
+	}
+	
+	var rotation: String {
+		return "transform.rotation." + rawValue
+	}
 }
