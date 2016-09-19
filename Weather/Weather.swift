@@ -13,22 +13,22 @@ struct Weather {
 	var temprature: Int
 	let pressure: String
 	var windTemperatue: Int
-	let sunriseTime: NSDateComponents
-	let sunsetTime: NSDateComponents
+	let sunriseTime: DateComponents
+	let sunsetTime: DateComponents
 	let visibility: Double
 	let windsDirection: String
 	let humidity: String
 	let windsSpeed: Double
 	let pressureTrend: String
 	
-	init?(with JSON: NSDictionary) {
+	init?(with JSON: Dictionary<String, AnyObject>) {
 		guard
 			let temprature = JSON["temperature"] as? Double,
 			let pressure = JSON["pressure"] as? String,
 			let windTemperatue = JSON["windChill"] as? Double,
 			let windsSpeed = JSON["windSpeed"] as? Double,
-			let sunsetTime = JSON["sunset"] as? NSDateComponents,
-			let sunriseTime = JSON["sunrise"] as? NSDateComponents,
+			let sunsetTime = JSON["sunset"] as? DateComponents,
+			let sunriseTime = JSON["sunrise"] as? DateComponents,
 			let visibility = JSON["visibility"] as? Double,
 			let windsDirection = JSON["windDirection"] as? String,
 			let humidity = JSON["humidity"] as? String,
@@ -46,8 +46,8 @@ struct Weather {
 		self.humidity = humidity
 		self.windsSpeed = windsSpeed
 		self.pressureTrend = pressureTrend
-		let timeZone = CityManager.sharedManager.currentCity?.timeZone ?? NSTimeZone.localTimeZone()
-		let day = sunriseTime < NSDate().time(timeZone: timeZone) && sunsetTime > NSDate().time(timeZone: timeZone)
+		let timeZone = CityManager.sharedManager.currentCity?.timeZone ?? TimeZone.autoupdatingCurrent
+		let day = sunriseTime < Date().time(timeZone: timeZone) && sunsetTime > Date().time(timeZone: timeZone)
 		self.condition = WeatherCondition(rawValue: condition, code: code, day: day)
 	}
 }

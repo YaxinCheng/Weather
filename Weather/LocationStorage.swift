@@ -10,13 +10,13 @@ import UIKit
 import CoreLocation
 
 class LocationStorage: NSObject {
-	private let manager: CLLocationManager
+	fileprivate let manager: CLLocationManager
 	override init() {
 		manager = CLLocationManager()
 		manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 		super.init()
 		manager.delegate = self
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
+		if CLLocationManager.authorizationStatus() == .notDetermined {
 			manager.requestWhenInUseAuthorization()
 		}
 	}
@@ -24,16 +24,16 @@ class LocationStorage: NSObject {
 	var location: CLLocation? {
 		set {
 			guard newValue != nil else { return }
-			let locationData = NSKeyedArchiver.archivedDataWithRootObject(newValue!)
-			let userDefault = NSUserDefaults.standardUserDefaults()
-			userDefault.setObject(locationData, forKey: Common.locationIdentifier)
-			let centre = NSNotificationCenter.defaultCenter()
-			let notification = NSNotification(name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
-			centre.postNotification(notification)
+			let locationData = NSKeyedArchiver.archivedData(withRootObject: newValue!)
+			let userDefault = UserDefaults.standard
+			userDefault.set(locationData, forKey: Common.locationIdentifier)
+			let centre = NotificationCenter.default
+			let notification = Notification(name: Notification.Name(rawValue: LocationStorageNotification.locationUpdated.rawValue), object: nil)
+			centre.post(notification)
 		} get {
-			let userDefault = NSUserDefaults.standardUserDefaults()
-			guard let locationData = userDefault.objectForKey(Common.locationIdentifier) as? NSData,
-				let location = NSKeyedUnarchiver.unarchiveObjectWithData(locationData) as? CLLocation
+			let userDefault = UserDefaults.standard
+			guard let locationData = userDefault.object(forKey: Common.locationIdentifier) as? Data,
+				let location = NSKeyedUnarchiver.unarchiveObject(with: locationData) as? CLLocation
 			else { return nil }
 			return location
 		}
@@ -45,11 +45,11 @@ class LocationStorage: NSObject {
 }
 
 extension LocationStorage: CLLocationManagerDelegate {
-	func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		defer { manager.stopUpdatingLocation() }
 		if locations.isEmpty {
-			let notification = NSNotification(name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
-			NSNotificationCenter.defaultCenter().postNotification(notification)
+			let notification = Notification(name: Notification.Name(rawValue: LocationStorageNotification.noNewLocation.rawValue), object: nil)
+			NotificationCenter.default.post(notification)
 			return
 		}
 		let location = locations.last!

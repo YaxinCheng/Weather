@@ -44,7 +44,7 @@ class ViewController: UIViewController {
 	}
 	
 	var backgroundView: UIImageView!
-	private var animating = false
+	fileprivate var animating = false
 	
 	// MARK: - Set up the view
 	
@@ -60,24 +60,24 @@ class ViewController: UIViewController {
 		tabBarController?.tabBar.shadowImage = UIImage()
 		tabBarController?.tabBar.tintColor = view.tintColor
 		
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: CityManagerNotification.currentCityDidChange.rawValue, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.locationUpdated.rawValue, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshWeather), name: LocationStorageNotification.noNewLocation.rawValue, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(orientationDidChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(loopVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: NSNotification.Name(rawValue: CityManagerNotification.currentCityDidChange.rawValue), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: NSNotification.Name(rawValue: LocationStorageNotification.locationUpdated.rawValue), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: NSNotification.Name(rawValue: LocationStorageNotification.noNewLocation.rawValue), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 		cityButton.titleLabel?.numberOfLines = 1
 		cityButton.titleLabel?.adjustsFontSizeToFitWidth = true
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		refreshWeather()
-		UIApplication.sharedApplication().statusBarStyle = .LightContent
+		UIApplication.shared.statusBarStyle = .lightContent
 	}
 	
-	override func viewWillDisappear(animated: Bool) {
+	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
 		for eachLayer in backgroundView?.layer.sublayers ?? [] {
@@ -96,19 +96,19 @@ class ViewController: UIViewController {
 	}
 	
 	func loopVideo() {
-		player?.seekToTime(kCMTimeZero)
+		player?.seek(to: kCMTimeZero)
 		player?.play()
 	}
 	
-	func setupPlayer(weather: WeatherCondition) {
-		let name = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? weather.videoName : weather.landscapeVideoName
-		guard let videoURL = NSBundle.mainBundle().URLForResource(name, withExtension: "mp4") else { return }
+	func setupPlayer(_ weather: WeatherCondition) {
+		let name = UIDeviceOrientationIsPortrait(UIDevice.current.orientation) ? weather.videoName : weather.landscapeVideoName
+		guard let videoURL = Bundle.main.url(forResource: name, withExtension: "mp4") else { return }
 		if player == nil {
-			player = AVPlayer(URL: videoURL)
-			player?.actionAtItemEnd = .None
-			player?.muted = true
+			player = AVPlayer(url: videoURL)
+			player?.actionAtItemEnd = .none
+			player?.isMuted = true
 		} else {
-			player?.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: videoURL))
+			player?.replaceCurrentItem(with: AVPlayerItem(url: videoURL))
 		}
 		let playerLayer = AVPlayerLayer(player: player)
 		self.playerLayer = playerLayer
@@ -119,31 +119,31 @@ class ViewController: UIViewController {
 		player?.play()
 	}
 	
-	func setupLabels(weather: Weather) {
+	func setupLabels(_ weather: Weather) {
 		if backgroundView != nil {
 			backgroundView.removeFromSuperview()
 		}
 		
-		let name = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? weather.condition.videoName : weather.condition.landscapeVideoName
+		let name = UIDeviceOrientationIsPortrait(UIDevice.current.orientation) ? weather.condition.videoName : weather.condition.landscapeVideoName
 		backgroundView = UIImageView(image: UIImage(named: name)!)
-		if UI_USER_INTERFACE_IDIOM() == .Phone {
-			backgroundView.frame = UIScreen.mainScreen().bounds
-		} else if UI_USER_INTERFACE_IDIOM() == .Pad {
-			let screenFrame = (UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height)
+		if UI_USER_INTERFACE_IDIOM() == .phone {
+			backgroundView.frame = UIScreen.main.bounds
+		} else if UI_USER_INTERFACE_IDIOM() == .pad {
+			let screenFrame = (UIScreen.main.bounds.width, UIScreen.main.bounds.height)
 			let width = max(screenFrame.0, screenFrame.1)
 			let height = screenFrame.0 == width ? screenFrame.1 : screenFrame.0
-			let frame = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? CGRect(x: 0, y: 0, width: height, height: width) : CGRect(x: 0, y: 0, width: width, height: height)
+			let frame = UIDeviceOrientationIsPortrait(UIDevice.current.orientation) ? CGRect(x: 0, y: 0, width: height, height: width) : CGRect(x: 0, y: 0, width: width, height: height)
 			backgroundView.frame = frame
 		}
 		
-		backgroundView.contentMode = .ScaleToFill
-		view.insertSubview(backgroundView, atIndex: 0)
+		backgroundView.contentMode = .scaleToFill
+		view.insertSubview(backgroundView, at: 0)
 		
 		if let city = CityManager.sharedManager.currentCity {
-			cityButton.setTitle(city.name, forState: .Normal)
+			cityButton.setTitle(city.name, for: UIControlState())
 		} else {
 			let name = "Local"
-			cityButton.setTitle(name, forState: .Normal)
+			cityButton.setTitle(name, for: UIControlState())
 		}
 		mainUnitLabel.text = "\(WeatherStation.sharedStation.temperatureUnit)"
 		tempLabel.text = "\(weather.temprature)"
@@ -151,8 +151,8 @@ class ViewController: UIViewController {
 		pressureLabel.text = weather.pressure + "IN"
 		humidityLabel.text = weather.humidity + "%"
 		visibilityLabel.text = "\(weather.visibility)\(WeatherStation.sharedStation.distanceUnit)"
-		sunriseLabel.text = String(format: "%02d:%02d", weather.sunriseTime.hour, weather.sunriseTime.minute)
-		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour, weather.sunsetTime.minute)
+		sunriseLabel.text = String(format: "%02d:%02d", weather.sunriseTime.hour!, weather.sunriseTime.minute!)
+		sunsetLabel.text = String(format: "%02d:%02d", weather.sunsetTime.hour!, weather.sunsetTime.minute!)
 		conditionIcon.image = weather.condition.icon
 		pressureTrendLabel.text = weather.pressureTrend
 		
@@ -165,10 +165,10 @@ class ViewController: UIViewController {
 	
 	func refreshWeather() {
 		let city = CityManager.sharedManager.currentCity
-		let weatherDidRefresh: (Weather?, ErrorType?) -> Void = { [weak self] in
+		let weatherDidRefresh: (Weather?, Error?) -> Void = { [weak self] in
 			self?.syncButton.layer.removeAllAnimations()
 			if $1 != nil || $0 == nil {
-				self?.syncButton.setImage(UIImage(named: "errorsync")!, forState: .Normal)
+				self?.syncButton.setImage(UIImage(named: "errorsync")!, for: UIControlState())
 			} else {
 				self?.currentWeather = $0!
 			}
@@ -186,11 +186,11 @@ class ViewController: UIViewController {
 	
 	// MARK: - Outlet actions
 	
-	@IBAction func syncButtonPressedUp(sender: UIButton) {
-		syncButton.setImage(UIImage(named: "sync")!, forState: .Normal)
+	@IBAction func syncButtonPressedUp(_ sender: UIButton) {
+		syncButton.setImage(UIImage(named: "sync")!, for: UIControlState())
 		let generator = AnimationGenerator()
 		let animation = generator.rotationAnimation(axis: .z, duration: 2, removeOnCompletion: false, fillMode: kCAFillModeForwards, from: 2 * M_PI, to: 0, repeatCount: 5)
-		sender.layer.addAnimation(animation, forKey: "rotation")
+		sender.layer.add(animation, forKey: "rotation")
 		let local = CityManager.sharedManager.isLocal
 		if local {
 			refreshLocation()
@@ -200,8 +200,8 @@ class ViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func addButtonPressed(sender: UIButton) {
-		performSegueWithIdentifier(Common.segueCitySearch, sender: nil)
+	@IBAction func addButtonPressed(_ sender: UIButton) {
+		performSegue(withIdentifier: Common.segueCitySearch, sender: nil)
 	}
 	
 	@IBAction func touchToFullScreen() {
@@ -213,16 +213,16 @@ class ViewController: UIViewController {
 		let tabAnimation = generator.moveAnimation(axis: .y, duration: moveAnimation.duration, fillMode: kCAFillModeForwards)
 		let hideClosure: () -> ()
 		
-		if infoPanel.hidden == false {
+		if infoPanel.isHidden == false {
 			(moveAnimation.fromValue, moveAnimation.toValue) = (infoPanel.center.y, view.bounds.height + 150)
 			(tabAnimation.fromValue, tabAnimation.toValue) = (tabBarController?.tabBar.center.y, moveAnimation.toValue)
 			(opacityAnimation.fromValue, opacityAnimation.toValue) = (0, 1)
 			hideClosure = { [weak self] in
-				self?.infoPanel.hidden = true
+				self?.infoPanel.isHidden = true
 				self?.tabBarController?.tabBar.alpha = 0
 			}
 		} else {
-			infoPanel.hidden = false
+			infoPanel.isHidden = false
 			(opacityAnimation.fromValue, opacityAnimation.toValue) = (1, 0)
 			(moveAnimation.fromValue, moveAnimation.toValue) = (view.bounds.height + 150, infoPanel.center.y)
 			(opacityAnimation.fromValue, opacityAnimation.toValue) = (moveAnimation.fromValue, tabBarController?.tabBar.center.y)
@@ -231,11 +231,11 @@ class ViewController: UIViewController {
 			}
 		}
 		
-		infoPanel.layer.addAnimation(moveAnimation, forKey: nil)
-		tabBarController?.tabBar.layer.addAnimation(tabAnimation, forKey: nil)
-		windsSpeedLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-		windsDirectionLabel.layer.addAnimation(opacityAnimation, forKey: nil)
-		windsTempLabel.layer.addAnimation(opacityAnimation, forKey: nil)
+		infoPanel.layer.add(moveAnimation, forKey: nil)
+		tabBarController?.tabBar.layer.add(tabAnimation, forKey: nil)
+		windsSpeedLabel.layer.add(opacityAnimation, forKey: nil)
+		windsDirectionLabel.layer.add(opacityAnimation, forKey: nil)
+		windsTempLabel.layer.add(opacityAnimation, forKey: nil)
 		Delay(moveAnimation.duration - 0.05) { [weak self] in
 			hideClosure()
 			self?.windsTempLabel.layer.opacity = 1 - (self?.windsTempLabel.layer.opacity ?? 0)
@@ -245,27 +245,27 @@ class ViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func cityButtonPressed(sender: UIButton) {
-		performSegueWithIdentifier(Common.segueCityView, sender: nil)
+	@IBAction func cityButtonPressed(_ sender: UIButton) {
+		performSegue(withIdentifier: Common.segueCityView, sender: nil)
 	}
 	
-	@IBAction func cityButtonLongPressed(sender: UILongPressGestureRecognizer) {
-		performSegueWithIdentifier(Common.segueCitySearch, sender: nil)
+	@IBAction func cityButtonLongPressed(_ sender: UILongPressGestureRecognizer) {
+		performSegue(withIdentifier: Common.segueCitySearch, sender: nil)
 	}
 	
-	@IBAction func swipeDownPanel(sender: UISwipeGestureRecognizer) {
+	@IBAction func swipeDownPanel(_ sender: UISwipeGestureRecognizer) {
 		touchToFullScreen()
 	}
 	
 	// MARK: - Navigation
-	@IBAction func prepareForUnwindSegue(segue: UIStoryboardSegue) {
+	@IBAction func prepareForUnwindSegue(_ segue: UIStoryboardSegue) {
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let identifier = segue.identifier else { return }
 		if identifier == Common.segueCityView {
-			let destinationVC = segue.destinationViewController as! CityListViewController
-			destinationVC.modalPresentationStyle = .Popover
+			let destinationVC = segue.destination as! CityListViewController
+			destinationVC.modalPresentationStyle = .popover
 			destinationVC.popoverPresentationController?.sourceView = cityButton
 			destinationVC.popoverPresentationController?.delegate = self
 			guard let popOver = destinationVC.popoverPresentationController else { return }
@@ -281,7 +281,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
-	func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-		return .None
+	func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+		return .none
 	}
 }

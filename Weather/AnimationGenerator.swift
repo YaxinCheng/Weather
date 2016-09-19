@@ -9,28 +9,28 @@
 import UIKit
 
 struct AnimationGenerator {
-	func moveAnimation(axis axis: Axis, duration: Double, removeOnCompletion: Bool = true, fillMode: String = kCAFillModeBoth) -> CABasicAnimation {
+	func moveAnimation(axis: Axis, duration: Double, removeOnCompletion: Bool = true, fillMode: String = kCAFillModeBoth) -> CABasicAnimation {
 		let path = axis == .x ? "position.x" : "position.y"
 		let animation = CABasicAnimation(keyPath: path)
 		animation.duration = duration
-		animation.removedOnCompletion = removeOnCompletion
+		animation.isRemovedOnCompletion = removeOnCompletion
 		animation.fillMode = fillMode
 		return animation
 	}
 	
-	func opacityAnimation(duration duration: Double, removeOnCompletion: Bool = true, fillMode: String = kCAFillModeBoth) -> CABasicAnimation {
+	func opacityAnimation(duration: Double, removeOnCompletion: Bool = true, fillMode: String = kCAFillModeBoth) -> CABasicAnimation {
 		let animation = CABasicAnimation(keyPath: "opacity")
 		animation.duration = duration
-		animation.removedOnCompletion = removeOnCompletion
+		animation.isRemovedOnCompletion = removeOnCompletion
 		animation.fillMode = fillMode
 		return animation
 	}
 	
-	func rotationAnimation(axis axis: Axis, duration: Double, removeOnCompletion: Bool = true, fillMode: String = kCAFillModeBoth, from fromValue: Double, to toValue: Double, repeatCount: Float = 0) -> CABasicAnimation {
+	func rotationAnimation(axis: Axis, duration: Double, removeOnCompletion: Bool = true, fillMode: String = kCAFillModeBoth, from fromValue: Double, to toValue: Double, repeatCount: Float = 0) -> CABasicAnimation {
 		let path = axis.rotation
 		let animation = CABasicAnimation(keyPath: path)
 		animation.duration = duration
-		animation.removedOnCompletion = removeOnCompletion
+		animation.isRemovedOnCompletion = removeOnCompletion
 		animation.fillMode = fillMode
 		animation.fromValue = fromValue
 		animation.toValue = toValue

@@ -8,7 +8,7 @@
 
 import Foundation
 
-func Delay(time: Double, block: dispatch_block_t) {
-	let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC)))
-	dispatch_after(delayTime, dispatch_get_main_queue(), block)
+func Delay(_ time: Double, block: @escaping ()->()) {
+	let delayTime = DispatchTime.now() + Double(Int64(time * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+	DispatchQueue.main.asyncAfter(deadline: delayTime, execute: block)
 }

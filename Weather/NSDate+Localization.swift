@@ -8,39 +8,39 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
 	func formatDate() -> String {
-		let dateFmt = NSDateFormatter()
+		let dateFmt = DateFormatter()
 		dateFmt.dateFormat = "EEEE, MMM dd"
-		dateFmt.timeZone = NSTimeZone.localTimeZone()
-		return dateFmt.stringFromDate(self)
+		dateFmt.timeZone = TimeZone.autoupdatingCurrent
+		return dateFmt.string(from: self)
 	}
 	
 	func localTime() -> String {
-		let dateFmt = NSDateFormatter()
+		let dateFmt = DateFormatter()
 		dateFmt.dateFormat = "yyyy-MM-dd hh:mm:ss"
-		let localTimeZone = NSTimeZone.localTimeZone()
+		let localTimeZone = TimeZone.autoupdatingCurrent
 		dateFmt.timeZone = localTimeZone
-		return dateFmt.stringFromDate(self)
+		return dateFmt.string(from: self)
 	}
 	
-	func time(timeZone zone: NSTimeZone = .localTimeZone()) -> NSDateComponents {
-		let calendar = NSCalendar.autoupdatingCurrentCalendar()
+	func time(timeZone zone: TimeZone = .current) -> DateComponents {
+		var calendar = Calendar.autoupdatingCurrent
 		calendar.timeZone = zone
-		let component = calendar.components([.Hour, .Minute], fromDate: self)
+		let component = (calendar as NSCalendar).components([.hour, .minute], from: self)
 		return component
 	}
 	
-	static func date(string string: String, format: String, timeZone zone: NSTimeZone = .localTimeZone()) -> NSDate? {
-		let dateFmt = NSDateFormatter()
+	static func date(string: String, format: String, timeZone zone: TimeZone = .current) -> Date? {
+		let dateFmt = DateFormatter()
 		dateFmt.dateFormat = format
 		dateFmt.timeZone = zone
-		guard let date = dateFmt.dateFromString(string) else { return nil }
+		guard let date = dateFmt.date(from: string) else { return nil }
 		return date
 	}
 	
-	func localized(timeZone zone: NSTimeZone = .localTimeZone()) -> NSDate {
-		let seconds = Double(zone.secondsFromGMTForDate(self))
-		return NSDate(timeInterval: seconds, sinceDate: self)
+	func localized(timeZone zone: TimeZone = .current) -> Date {
+		let seconds = Double(zone.secondsFromGMT(for: self))
+		return Date(timeInterval: seconds, since: self)
 	}
 }

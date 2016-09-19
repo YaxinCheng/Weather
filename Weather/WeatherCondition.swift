@@ -18,10 +18,10 @@ struct WeatherCondition {
 		self.code = code
 		
 		let initializer: (String) -> (String, Bool) = {
-			if let range = $0.rangeOfString(" (day)") {
-				return ($0.stringByReplacingCharactersInRange(range, withString: ""), true)
-			} else if let range = $0.rangeOfString(" (night)") {
-				return ($0.stringByReplacingCharactersInRange(range, withString: ""), false)
+			if let range = $0.range(of: " (day)") {
+				return ($0.replacingCharacters(in: range, with: ""), true)
+			} else if let range = $0.range(of: " (night)") {
+				return ($0.replacingCharacters(in: range, with: ""), false)
 			} else {
 				return ($0, day)
 			}
@@ -89,7 +89,7 @@ struct WeatherCondition {
 	}
 	
 	var icon: UIImage {
-		switch rawValue.lowercaseString {
+		switch rawValue.lowercased() {
 		case "foggy":
 			let name = dayTime ? "foggy day" : "haze"
 			return UIImage(named: name)!
@@ -107,16 +107,16 @@ struct WeatherCondition {
 			return UIImage(named: "windy")!
 		case "heavy snow", "light snow showers", "mostly cloudy", "partly cloudy", "showers":
 			let suffix = dayTime ? "day" : "night"
-			return UIImage(named: rawValue.lowercaseString + " " + suffix)!
+			return UIImage(named: rawValue.lowercased() + " " + suffix)!
 		case "isolated thundershowers", "scattered thundershowers":
 			return UIImage(named: "thundershowers")!
 		default:
-			return UIImage(named: rawValue.lowercaseString) ?? UIImage(named: "not available")!
+			return UIImage(named: rawValue.lowercased()) ?? UIImage(named: "not available")!
 		}
 	}
 	
 	var iconName: String {
-		switch rawValue.lowercaseString {
+		switch rawValue.lowercased() {
 		case "foggy":
 			return dayTime ? "foggy day" : "haze"
 		case "fair", "mostly clear":
@@ -133,11 +133,11 @@ struct WeatherCondition {
 			return "windy"
 		case "heavy snow", "light snow showers", "mostly cloudy", "partly cloudy", "showers":
 			let suffix = dayTime ? "day" : "night"
-			return rawValue.lowercaseString + " " + suffix
+			return rawValue.lowercased() + " " + suffix
 		case "isolated thundershowers", "scattered thundershowers":
 			return "thundershowers"
 		default:
-			return rawValue.lowercaseString
+			return rawValue.lowercased()
 		}
 	}
 }

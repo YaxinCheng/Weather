@@ -11,6 +11,6 @@ import UIKit.UIAlertController
 
 extension UIAlertAction {
 	static var Cancel: UIAlertAction {
-		return UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+		return UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 	}
 }

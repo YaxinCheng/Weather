@@ -1,6 +1,6 @@
 ![Weather: Old bottle with new wine](https://cloud.githubusercontent.com/assets/13768613/18416937/508c493a-77f9-11e6-9c4f-53faf0828d45.png)
 ![Swift2.x](https://img.shields.io/badge/Swift2.x-support-green.svg)
-![Swift3.x](https://img.shields.io/badge/Swift3.x-ongoing-red.svg)
+![Swift3.x](https://img.shields.io/badge/Swift3-support-blue.svg)
 <br>
 Weather is a weather app built based on [WeatherKit](https://github.com/YaxinCheng/WeatherKit)<br>
 ## Disclaimers:

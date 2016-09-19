@@ -23,11 +23,11 @@ class ForecastController: UIViewController {
 	func forecastWeather() {
 		let weatherStation = WeatherStation.sharedStation
 		let city = CityManager.sharedManager.currentCity
-		let completion: (([Forecast], ErrorType?) -> Void) = { [weak self] in
+		let completion: (([Forecast], Error?) -> Void) = { [weak self] in
 			if $1 != nil || $0.isEmpty {
-				let alert = UIAlertController(title: "Error!", message: "\($1!)", preferredStyle: .Alert)
+				let alert = UIAlertController(title: "Error!", message: "\($1!)", preferredStyle: .alert)
 				alert.addAction(.Cancel)
-				self?.presentViewController(alert, animated: true, completion: nil)
+				self?.present(alert, animated: true, completion: nil)
 			} else {
 				self?.dataSource = $0
 			}
@@ -39,37 +39,37 @@ class ForecastController: UIViewController {
 		}
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		UIApplication.sharedApplication().statusBarStyle = .Default
+		UIApplication.shared.statusBarStyle = .default
 		forecastWeather()
 	}
 }
 
 extension ForecastController: UITableViewDelegate, UITableViewDataSource {
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return section == 0 ? 1 : dataSource.count
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 2
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		if indexPath.section == 0 {
-			let cell = tableView.dequeueReusableCellWithIdentifier(Common.headerCellIdentifier, forIndexPath: indexPath) as! HeaderCell
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		if (indexPath as NSIndexPath).section == 0 {
+			let cell = tableView.dequeueReusableCell(withIdentifier: Common.headerCellIdentifier, for: indexPath) as! HeaderCell
 			let currentCity = CityManager.sharedManager.currentCity
 			cell.titleLabel.text = currentCity?.name ?? "Forecast"
-			cell.subtitleLabel.text = NSDate().formatDate()
+			cell.subtitleLabel.text = Date().formatDate()
 			headerCell = cell
 			return cell
 		} else {
-			let cell = tableView.dequeueReusableCellWithIdentifier(Common.forcastCellidentifier, forIndexPath: indexPath) as! ForecastCell
-			let forecast = dataSource[indexPath.row]
+			let cell = tableView.dequeueReusableCell(withIdentifier: Common.forcastCellidentifier, for: indexPath) as! ForecastCell
+			let forecast = dataSource[(indexPath as NSIndexPath).row]
 			cell.weatherImageView.image = forecast.condition.icon
 			cell.forecastLabel.text = forecast.conditionDescription
-			cell.weekdayLabel.text = indexPath.row == 0 ? "Today" : forecast.date
+			cell.weekdayLabel.text = (indexPath as NSIndexPath).row == 0 ? "Today" : forecast.date
 			let temperatureUnit = WeatherStation.sharedStation.temperatureUnit
 			cell.highTempLabel.text = String(format: "%.0f", round(forecast.highTemp)) + "\(temperatureUnit)"
 			cell.lowTempLabel.text = String(format: "%.0f", round(forecast.lowTemp)) + "\(temperatureUnit)"
@@ -77,11 +77,11 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 		}
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		return indexPath.section == 0 ? 114 : 70
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return (indexPath as NSIndexPath).section == 0 ? 114 : 70
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }

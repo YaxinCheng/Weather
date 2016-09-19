@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum WeatherError: ErrorType {
-	case NotAuthorized(String)
-	case Restricted(String)
-	case NoRelatedWeather(String)
-	case NoAvailableLocation(String)
+enum WeatherError: Error {
+	case notAuthorized(String)
+	case restricted(String)
+	case noRelatedWeather(String)
+	case noAvailableLocation(String)
 }

@@ -14,7 +14,7 @@ class CityListCell: UITableViewCell {
 	@IBOutlet weak var deleteButton: UIButton!
 	weak var delegate: CityListViewDelegate?
 	
-	@IBAction func deleteButtonPressed(sender: AnyObject) {
+	@IBAction func deleteButtonPressed(_ sender: AnyObject) {
 		delegate?.deleteCity(of: self)
 	}
 }

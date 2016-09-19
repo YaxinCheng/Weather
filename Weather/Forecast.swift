@@ -15,10 +15,10 @@ struct Forecast {
 	let conditionDescription: String
 	let date: String
 	
-	init?(with JSON: NSDictionary) {
+	init?(with JSON: Dictionary<String, AnyObject>) {
 		guard
 			let time = JSON["date"] as? String,
-			let date = NSDate.date(string: time, format: "dd MMM yyyy"),
+			let date = Date.date(string: time, format: "dd MMM yyyy"),
 			let high = JSON["high"] as? Double,
 			let low = JSON["low"] as? Double,
 			let code = (JSON["code"] as? NSString)?.integerValue,
@@ -28,8 +28,8 @@ struct Forecast {
 		conditionDescription = conditionString
 		highTemp = high
 		lowTemp = low
-		let timeZone = CityManager.sharedManager.currentCity?.timeZone ?? NSTimeZone.localTimeZone()
-		let day = NSDateComponents(from: "6:00 am")! < NSDate().time(timeZone: timeZone) && NSDateComponents(from: "8:00 pm")! > NSDate().time(timeZone: timeZone)
+		let timeZone = CityManager.sharedManager.currentCity?.timeZone ?? TimeZone.autoupdatingCurrent
+		let day = DateComponents(from: "6:00 am")! < Date().time(timeZone: timeZone) && DateComponents(from: "8:00 pm")! > Date().time(timeZone: timeZone)
 		condition = WeatherCondition(rawValue: conditionString, code: code, day: day)
 	}
 }

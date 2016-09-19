@@ -14,14 +14,14 @@ class UnitSettingCell: UITableViewCell {
 	@IBOutlet weak var unitNameLabel: UILabel!
 	@IBOutlet weak var unitSegment: UISegmentedControl!
 	
-	@IBAction func segmentChanged(sender: UISegmentedControl) {
+	@IBAction func segmentChanged(_ sender: UISegmentedControl) {
 		guard let name = unitNameLabel.text else { return }
-		let userDefault = NSUserDefaults.standardUserDefaults()
-		userDefault.setInteger(sender.selectedSegmentIndex, forKey: name)
+		let userDefault = UserDefaults.standard
+		userDefault.set(sender.selectedSegmentIndex, forKey: name)
 		unitSet(name, unit: sender.selectedSegmentIndex)
 	}
 	
-	private func unitSet(unitName: String, unit: Int) {
+	fileprivate func unitSet(_ unitName: String, unit: Int) {
 		guard unit < 2 else { return }
 		switch unitName {
 		case "Temperature":

@@ -17,12 +17,12 @@ struct City: CustomStringConvertible {
 	let woeid: String
 	let latitude: Double
 	let longitude: Double
-	let timeZone: NSTimeZone
+	let timeZone: TimeZone
 	var region: String {
 		return province.isEmpty ? country : province + ", " + country
 	}
 	
-	init?(from JSON: NSDictionary) {
+	init?(from JSON: Dictionary<String, AnyObject>) {
 		guard
 			let name = JSON["name"] as? String,
 			let country = JSON["country"] as? String,
@@ -31,7 +31,7 @@ struct City: CustomStringConvertible {
 			let latitude = (JSON["centroid"]?["latitude"] as? NSString)?.doubleValue,
 			let longitude = (JSON["centroid"]?["longitude"] as? NSString)?.doubleValue,
 			let timeZoneString = JSON["timezone"] as? String,
-			let timeZone = NSTimeZone(name: timeZoneString)
+			let timeZone = TimeZone(identifier: timeZoneString)
 		else { return nil }
 		self.name = name
 		self.woeid = woeid
@@ -50,24 +50,24 @@ struct City: CustomStringConvertible {
 extension City: PropertySerializable {
 	var properties: [String : AnyObject] {
 		var newDict = [String: AnyObject]()
-		newDict["name"] = name
-		newDict["province"] = province
-		newDict["country"] = country
-		newDict["woeid"] = woeid
-		newDict["latitude"] = latitude
-		newDict["longitude"] = longitude
-		newDict["timezone"] = timeZone.name
+		newDict["name"] = name as AnyObject?
+		newDict["province"] = province as AnyObject?
+		newDict["country"] = country as AnyObject?
+		newDict["woeid"] = woeid as AnyObject?
+		newDict["latitude"] = latitude as AnyObject?
+		newDict["longitude"] = longitude as AnyObject?
+		newDict["timezone"] = timeZone.identifier as AnyObject?
 		return newDict
 	}
 	
 	init(with managedObject: NSManagedObject) {
-		name = managedObject.valueForKey("name") as! String
-		province = managedObject.valueForKey("province") as! String
-		country = managedObject.valueForKey("country") as! String
-		woeid = managedObject.valueForKey("woeid") as! String
-		latitude = managedObject.valueForKey("latitude") as! Double
-		longitude = managedObject.valueForKey("longitude") as! Double
-		timeZone = NSTimeZone(name: managedObject.valueForKey("timezone") as! String)!
+		name = managedObject.value(forKey: "name") as! String
+		province = managedObject.value(forKey: "province") as! String
+		country = managedObject.value(forKey: "country") as! String
+		woeid = managedObject.value(forKey: "woeid") as! String
+		latitude = managedObject.value(forKey: "latitude") as! Double
+		longitude = managedObject.value(forKey: "longitude") as! Double
+		timeZone = TimeZone(identifier: managedObject.value(forKey: "timezone") as! String)!
 	}
 }
 
@@ -77,6 +77,6 @@ extension City: Persistable {
 	}
 	
 	var primaryKeyValue: AnyObject {
-		return woeid
+		return woeid as AnyObject
 	}
 }

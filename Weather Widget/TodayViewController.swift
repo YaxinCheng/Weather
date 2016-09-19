@@ -21,11 +21,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view from its nib.
-		let userDefault = NSUserDefaults(suiteName: "group.NCGroup")
+		let userDefault = UserDefaults(suiteName: "group.NCGroup")
 		guard
-			let city = userDefault?.stringForKey("City"),
-			let temperature = userDefault?.stringForKey("Temperature"),
-			let icon = userDefault?.stringForKey("Icon")
+			let city = userDefault?.string(forKey: "City"),
+			let temperature = userDefault?.string(forKey: "Temperature"),
+			let icon = userDefault?.string(forKey: "Icon")
 		else { return }
 		weatherIconView.image = UIImage(named: icon)
 		cityLabel.text = city
@@ -33,33 +33,33 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		originalColour = viewControl.backgroundColor
 	}
 	
-	func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
 		// Perform any setup necessary in order to update the view.
 		
 		// If an error is encountered, use NCUpdateResult.Failed
 		// If there's no update required, use NCUpdateResult.NoData
 		// If there's an update, use NCUpdateResult.NewData
 		
-		completionHandler(NCUpdateResult.NewData)
+		completionHandler(NCUpdateResult.newData)
 	}
 	
-	@IBAction func viewTouched(sender: AnyObject) {
+	@IBAction func viewTouched(_ sender: AnyObject) {
 		(sender as? UIControl)?.backgroundColor = originalColour
-		extensionContext?.openURL(NSURL(string: "weatherX://main")!, completionHandler: nil)
+		extensionContext?.open(URL(string: "weatherX://main")!, completionHandler: nil)
 	}
 	
-	@IBAction func viewTouchedUpOutside(sender: UIControl) {
+	@IBAction func viewTouchedUpOutside(_ sender: UIControl) {
 		sender.backgroundColor = originalColour
 	}
 	
-	func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+	func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
 		var newMargin = defaultMarginInsets
 		newMargin.bottom = 10
 		newMargin.left = 10
 		return newMargin
 	}
 	
-	@IBAction func viewTouchedDown(sender: UIControl) {
+	@IBAction func viewTouchedDown(_ sender: UIControl) {
 		sender.backgroundColor = UIColor(white: 1, alpha: 0.7)
 	}
 }

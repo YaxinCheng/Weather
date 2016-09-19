@@ -20,7 +20,7 @@ class CityListViewController: UITableViewController {
 		} catch {
 			print("Error: \(error)")
 		}
-		popoverPresentationController?.backgroundColor = .clearColor()
+		popoverPresentationController?.backgroundColor = .clear
 		let count = cityList.count
 		if count < 6 {
 			let height = (count + 1) * 44
@@ -28,51 +28,51 @@ class CityListViewController: UITableViewController {
 		}
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 	
 	}
 	
 	// MARK: - Table view data source
 	
-	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	override func numberOfSections(in tableView: UITableView) -> Int {
 		// #warning Incomplete implementation, return the number of sections
 		return 2
 	}
 	
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// #warning Incomplete implementation, return the number of rows
 		return section == 0 ? 1 : cityList.count
 	}
 	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		if indexPath.section == 0 {
-			let cell = tableView.dequeueReusableCellWithIdentifier(Common.cityLocalCellIdentifier) as! CityLocalCell
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		if (indexPath as NSIndexPath).section == 0 {
+			let cell = tableView.dequeueReusableCell(withIdentifier: Common.cityLocalCellIdentifier) as! CityLocalCell
 			cell.nameLabel.text = "Local"
 			cell.imageView?.image = UIImage(named: "local")
 			return cell
 		} else {
-			let cell = tableView.dequeueReusableCellWithIdentifier(Common.cityListCellIdentifier) as! CityListCell
+			let cell = tableView.dequeueReusableCell(withIdentifier: Common.cityListCellIdentifier) as! CityListCell
 			cell.delegate = self
-			let city = cityList[indexPath.row]
+			let city = cityList[(indexPath as NSIndexPath).row]
 			cell.cityLabel.text = city.name
 			return cell
 		}
 	}
 	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		performSegueWithIdentifier(Common.unwindBackMain, sender: nil)
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		performSegue(withIdentifier: Common.unwindBackMain, sender: nil)
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
 	// MARK: - Navigation
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else { return }
 		if identifier == Common.unwindBackMain {
-			if indexPath.section != 0 {
-				let city = cityList[indexPath.row]
+			if (indexPath as NSIndexPath).section != 0 {
+				let city = cityList[(indexPath as NSIndexPath).row]
 				CityManager.sharedManager.currentCity = city
 				CityManager.sharedManager.isLocal = false
 			} else {
@@ -86,18 +86,18 @@ class CityListViewController: UITableViewController {
 extension CityListViewController: CityListViewDelegate {
 	func deleteCity(of cell: CityListCell) {
 		let alertFunction: ()->() = { [unowned self] in
-			let alert = UIAlertController(title: "City Delete Failed", message: nil, preferredStyle: .Alert)
+			let alert = UIAlertController(title: "City Delete Failed", message: nil, preferredStyle: .alert)
 			alert.addAction(.Cancel)
-			self.presentViewController(alert, animated: true, completion: nil)
+			self.present(alert, animated: true, completion: nil)
 		}
-		guard let indexPath = tableView.indexPathForCell(cell) where indexPath.section != 0 else {
+		guard let indexPath = tableView.indexPath(for: cell) , (indexPath as NSIndexPath).section != 0 else {
 			alertFunction()
 			return
 		}
 		do {
-			let city = cityList.removeAtIndex(indexPath.row)
+			let city = cityList.remove(at: (indexPath as NSIndexPath).row)
 			try city.deleteFromCache()
-			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+			tableView.deleteRows(at: [indexPath], with: .fade)
 		} catch {
 			alertFunction()
 		}

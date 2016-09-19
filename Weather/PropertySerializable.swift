@@ -18,7 +18,7 @@ protocol PropertySerializable {
 extension PropertySerializable {
 	static var attributeKeys: [String] {
 		let mirror = Mirror(reflecting: self)
-		guard let style = mirror.displayStyle where style == .Class || style == .Struct || style == .Dictionary else {
+		guard let style = mirror.displayStyle, style == .class || style == .struct || style == .dictionary else {
 			return []
 		}
 		return mirror.children.flatMap { $0.label }

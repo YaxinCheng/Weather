@@ -10,12 +10,12 @@ import Foundation
 
 struct CityManager {
 	static var sharedManager = CityManager()
-	private init() {}
+	fileprivate init() {}
 	
 	var currentCity: City? = nil {
 		didSet {
-			let notification = NSNotification(name: CityManagerNotification.currentCityDidChange.rawValue, object: nil)
-			NSNotificationCenter.defaultCenter().postNotification(notification)
+			let notification = Notification(name: Notification.Name(rawValue: CityManagerNotification.currentCityDidChange.rawValue), object: nil)
+			NotificationCenter.default.post(notification)
 		}
 	}
 	
