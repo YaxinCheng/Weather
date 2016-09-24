@@ -19,6 +19,8 @@
 		E38600B71D817B3D00922FD5 /* CityLocalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38600B61D817B3D00922FD5 /* CityLocalCell.swift */; };
 		E38600B91D81902500922FD5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38600B81D81902500922FD5 /* SettingViewController.swift */; };
 		E38600BC1D81930800922FD5 /* UnitSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38600BB1D81930800922FD5 /* UnitSettingCell.swift */; };
+		E38B440D1D96C8FD008AF91D /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B440C1D96C8FD008AF91D /* SearchCell.swift */; };
+		E38B440F1D96C972008AF91D /* SubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B440E1D96C972008AF91D /* SubtitleCell.swift */; };
 		E3C739641D4A910500F51623 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739631D4A910500F51623 /* AppDelegate.swift */; };
 		E3C739661D4A910500F51623 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739651D4A910500F51623 /* ViewController.swift */; };
 		E3C739691D4A910500F51623 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3C739671D4A910500F51623 /* Main.storyboard */; };
@@ -139,6 +141,8 @@
 		E38600B61D817B3D00922FD5 /* CityLocalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityLocalCell.swift; sourceTree = "<group>"; };
 		E38600B81D81902500922FD5 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		E38600BB1D81930800922FD5 /* UnitSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSettingCell.swift; sourceTree = "<group>"; };
+		E38B440C1D96C8FD008AF91D /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		E38B440E1D96C972008AF91D /* SubtitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleCell.swift; sourceTree = "<group>"; };
 		E3C739601D4A910500F51623 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3C739631D4A910500F51623 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3C739651D4A910500F51623 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -441,6 +445,8 @@
 				E3F0FBCB1D538DD3002DB74E /* CitySearchViewController.swift */,
 				E3F0FBD31D53C1C2002DB74E /* CityListCell.swift */,
 				E38600B61D817B3D00922FD5 /* CityLocalCell.swift */,
+				E38B440C1D96C8FD008AF91D /* SearchCell.swift */,
+				E38B440E1D96C972008AF91D /* SubtitleCell.swift */,
 				E3F0FBD71D53C262002DB74E /* CityListViewController.swift */,
 				E35F8E8A1D7D89D8008124CA /* CityListViewDelegate.swift */,
 			);
@@ -715,6 +721,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3F0FBCC1D538DD3002DB74E /* CitySearchViewController.swift in Sources */,
+				E38B440D1D96C8FD008AF91D /* SearchCell.swift in Sources */,
 				E3C7396C1D4A910500F51623 /* Weather.xcdatamodeld in Sources */,
 				E3C739E41D4AC7C900F51623 /* WeatherStation.swift in Sources */,
 				E33291101D589E2C00C5AED3 /* HeaderCell.swift in Sources */,
@@ -733,6 +740,7 @@
 				E3D6B6E71D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift in Sources */,
 				E35F8E8B1D7D89D8008124CA /* CityListViewDelegate.swift in Sources */,
 				E3C739EC1D4BCE9F00F51623 /* WeatherError.swift in Sources */,
+				E38B440F1D96C972008AF91D /* SubtitleCell.swift in Sources */,
 				E38600B91D81902500922FD5 /* SettingViewController.swift in Sources */,
 				E3F0FBE11D54E123002DB74E /* Forecast.swift in Sources */,
 				E38600BC1D81930800922FD5 /* UnitSettingCell.swift in Sources */,

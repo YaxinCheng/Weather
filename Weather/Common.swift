@@ -17,6 +17,8 @@ struct Common {
 	static let forcastCellidentifier = "ForecastCell"
 	static let headerCellIdentifier = "HeaderCell"
 	static let unitCellIdentifier = "unitSetting"
+	static let searchCellIdentifier = "SearchCell"
+	static let subtitleCellIdentifier = "subtitleCell"
 	
 	static let segueCityView = "showCityView"
 	static let segueCitySearch = "showCitySearch"
