@@ -73,7 +73,8 @@ extension CitySearchViewController: UITableViewDelegate, UITableViewDataSource {
 		let city = cityList[indexPath.row]
 		do {
 			try city.saveToCache()
-			tabBarController?.selectedIndex = 0
+			let cell = tableView.cellForRow(at: indexPath) as! CityCell
+			cell.indicatorView.image = UIImage(named: "indicator")?.withRenderingMode(.alwaysTemplate)
 		} catch {
 			print(error)
 		}

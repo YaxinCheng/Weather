@@ -788,6 +788,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f6b-rk-MYh">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="55" id="v5l-lV-07P" customClass="HeaderCell" customModule="Weather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="55"/>
@@ -863,11 +864,11 @@
                                             <outlet property="subtitleLabel" destination="mMb-nH-x8u" id="eLY-c6-RB1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cityCell" rowHeight="63" id="Bt9-6p-COk" customClass="CityCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="171" width="375" height="63"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cityCell" rowHeight="66" id="Bt9-6p-COk" customClass="CityCell" customModule="Weather" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="171" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bt9-6p-COk" id="8hu-7H-jTo">
-                                            <frame key="frameInset" width="375" height="62"/>
+                                            <frame key="frameInset" width="375" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REB-ZR-m2X">
@@ -880,19 +881,27 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dwW-gJ-Yvz">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="18" id="Lt3-Dl-40Y"/>
+                                                        <constraint firstAttribute="height" constant="18" id="V7c-RM-6aX"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="dwW-gJ-Yvz" firstAttribute="top" secondItem="REB-ZR-m2X" secondAttribute="top" id="7lb-qs-DKM"/>
                                                 <constraint firstItem="n7M-6M-kUy" firstAttribute="top" secondItem="REB-ZR-m2X" secondAttribute="bottom" constant="3" id="8mf-Ai-Brs"/>
                                                 <constraint firstItem="n7M-6M-kUy" firstAttribute="leading" secondItem="REB-ZR-m2X" secondAttribute="leading" id="RLX-Fq-XkS"/>
                                                 <constraint firstItem="REB-ZR-m2X" firstAttribute="leading" secondItem="8hu-7H-jTo" secondAttribute="leadingMargin" constant="16" id="TaE-Yv-4gv"/>
                                                 <constraint firstAttribute="topMargin" secondItem="REB-ZR-m2X" secondAttribute="top" id="bg8-U7-ZJr"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="REB-ZR-m2X" secondAttribute="trailing" constant="8" id="hLA-WN-Tn6"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="n7M-6M-kUy" secondAttribute="bottom" constant="4" id="jDW-hP-y4u"/>
-                                                <constraint firstItem="n7M-6M-kUy" firstAttribute="trailing" secondItem="REB-ZR-m2X" secondAttribute="trailing" id="osM-hn-WMI"/>
+                                                <constraint firstItem="n7M-6M-kUy" firstAttribute="trailing" secondItem="REB-ZR-m2X" secondAttribute="trailing" constant="4" id="osM-hn-WMI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="dwW-gJ-Yvz" secondAttribute="trailing" id="paS-cc-YtJ"/>
+                                                <constraint firstItem="dwW-gJ-Yvz" firstAttribute="leading" secondItem="REB-ZR-m2X" secondAttribute="trailing" constant="8" id="w5i-nd-dIY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="n7M-6M-kUy" id="P8H-wd-tyz"/>
+                                            <outlet property="indicatorView" destination="dwW-gJ-Yvz" id="d3z-LF-y0G"/>
                                             <outlet property="nameLabel" destination="REB-ZR-m2X" id="gxo-AA-mzE"/>
                                         </connections>
                                     </tableViewCell>
@@ -904,6 +913,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="f6b-rk-MYh" firstAttribute="leading" secondItem="26F-cz-0XZ" secondAttribute="leadingMargin" constant="-16" id="AAq-L6-pf7"/>
                             <constraint firstItem="MsU-OX-er0" firstAttribute="top" secondItem="f6b-rk-MYh" secondAttribute="bottom" id="LpS-e0-v3h"/>
