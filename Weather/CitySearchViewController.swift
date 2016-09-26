@@ -69,10 +69,11 @@ extension CitySearchViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		guard indexPath.section == 1 else { return }
 		let city = cityList[indexPath.row]
 		do {
 			try city.saveToCache()
-			performSegue(withIdentifier: Common.unwindFromCityView, sender: nil)
+			tabBarController?.selectedIndex = 0
 		} catch {
 			print(error)
 		}
