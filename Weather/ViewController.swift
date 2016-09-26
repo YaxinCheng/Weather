@@ -254,6 +254,8 @@ class ViewController: UIViewController {
 	}
 	
 	// MARK: - Navigation
+	@IBAction func prepareForUnwindSegue(_ segue: UIStoryboardSegue) {
+	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let identifier = segue.identifier else { return }
