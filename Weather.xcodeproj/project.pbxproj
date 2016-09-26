@@ -69,10 +69,10 @@
 		E3C739E41D4AC7C900F51623 /* WeatherStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739E31D4AC7C900F51623 /* WeatherStation.swift */; };
 		E3C739E61D4AC9A500F51623 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739E51D4AC9A500F51623 /* WeatherCondition.swift */; };
 		E3C739EC1D4BCE9F00F51623 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739EB1D4BCE9F00F51623 /* WeatherError.swift */; };
-		E3C739EE1D4BD02400F51623 /* NSDate+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739ED1D4BD02400F51623 /* NSDate+Localization.swift */; };
+		E3C739EE1D4BD02400F51623 /* Date+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739ED1D4BD02400F51623 /* Date+Localization.swift */; };
 		E3C739F01D4BD65C00F51623 /* UIAlertAction+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */; };
 		E3C739F21D4BD72F00F51623 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C739F11D4BD72F00F51623 /* Weather.swift */; };
-		E3D6B6E71D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6B6E61D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift */; };
+		E3D6B6E71D7BBDF5004B6ADC /* DateComponents+InitFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6B6E61D7BBDF5004B6ADC /* DateComponents+InitFromString.swift */; };
 		E3D6B6EB1D7D2500004B6ADC /* AnimationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6B6EA1D7D2500004B6ADC /* AnimationGenerator.swift */; };
 		E3E42A5A1D5CBAEB0039BF2B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E42A591D5CBAEB0039BF2B /* NotificationCenter.framework */; };
 		E3E42A5D1D5CBAEB0039BF2B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A5C1D5CBAEB0039BF2B /* TodayViewController.swift */; };
@@ -198,10 +198,10 @@
 		E3C739E31D4AC7C900F51623 /* WeatherStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStation.swift; sourceTree = "<group>"; };
 		E3C739E51D4AC9A500F51623 /* WeatherCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		E3C739EB1D4BCE9F00F51623 /* WeatherError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
-		E3C739ED1D4BD02400F51623 /* NSDate+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Localization.swift"; sourceTree = "<group>"; };
+		E3C739ED1D4BD02400F51623 /* Date+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Localization.swift"; sourceTree = "<group>"; };
 		E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Cancel.swift"; sourceTree = "<group>"; };
 		E3C739F11D4BD72F00F51623 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		E3D6B6E61D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateComponents+InitFromString.swift"; sourceTree = "<group>"; };
+		E3D6B6E61D7BBDF5004B6ADC /* DateComponents+InitFromString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponents+InitFromString.swift"; sourceTree = "<group>"; };
 		E3D6B6EA1D7D2500004B6ADC /* AnimationGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationGenerator.swift; sourceTree = "<group>"; };
 		E3E42A581D5CBAEB0039BF2B /* Weather Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Weather Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E42A591D5CBAEB0039BF2B /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -419,8 +419,8 @@
 		E3F0FBDD1D53C662002DB74E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E3D6B6E61D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift */,
-				E3C739ED1D4BD02400F51623 /* NSDate+Localization.swift */,
+				E3D6B6E61D7BBDF5004B6ADC /* DateComponents+InitFromString.swift */,
+				E3C739ED1D4BD02400F51623 /* Date+Localization.swift */,
 				E3C739EF1D4BD65C00F51623 /* UIAlertAction+Cancel.swift */,
 			);
 			name = Extension;
@@ -741,14 +741,14 @@
 				E33291121D589EB100C5AED3 /* ForecastController.swift in Sources */,
 				E3F0FBD41D53C1C2002DB74E /* CityListCell.swift in Sources */,
 				E3F0FBDC1D53C654002DB74E /* PropertySerializable.swift in Sources */,
-				E3D6B6E71D7BBDF5004B6ADC /* NSDateComponents+InitFromString.swift in Sources */,
+				E3D6B6E71D7BBDF5004B6ADC /* DateComponents+InitFromString.swift in Sources */,
 				E35F8E8B1D7D89D8008124CA /* CityListViewDelegate.swift in Sources */,
 				E3C739EC1D4BCE9F00F51623 /* WeatherError.swift in Sources */,
 				E38B440F1D96C972008AF91D /* SubtitleCell.swift in Sources */,
 				E38600B91D81902500922FD5 /* SettingViewController.swift in Sources */,
 				E3F0FBE11D54E123002DB74E /* Forecast.swift in Sources */,
 				E38600BC1D81930800922FD5 /* UnitSettingCell.swift in Sources */,
-				E3C739EE1D4BD02400F51623 /* NSDate+Localization.swift in Sources */,
+				E3C739EE1D4BD02400F51623 /* Date+Localization.swift in Sources */,
 				E3F0FBD21D5398E4002DB74E /* City.swift in Sources */,
 				E3C739F01D4BD65C00F51623 /* UIAlertAction+Cancel.swift in Sources */,
 				E30A85661D7A65DD0073EC44 /* CityManager.swift in Sources */,

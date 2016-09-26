@@ -61,7 +61,6 @@ extension CitySearchViewController: UITableViewDelegate, UITableViewDataSource {
 		} else {
 			let cell = tableView.dequeueReusableCell(withIdentifier: Common.cityCellIdentifier, for: indexPath) as! CityCell
 			let city = cityList[indexPath.row]
-			print(city)
 			cell.nameLabel?.text = city.name
 			cell.descriptionLabel?.text = city.region
 			return cell
