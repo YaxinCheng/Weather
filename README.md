@@ -15,16 +15,15 @@ Concise UI design simplified the app logic<br>
 
 ## Screenshot:
 ### Main View:
-![Weather in Chengdu](https://cloud.githubusercontent.com/assets/13768613/18417052/4d412414-77fc-11e6-9fde-4244a873bb27.png)
-![Weather in Lasa](https://cloud.githubusercontent.com/assets/13768613/18417056/4d42dffc-77fc-11e6-9259-33f77a9e5463.png)
-![Weather fullscreen](https://cloud.githubusercontent.com/assets/13768613/18417055/4d422e4a-77fc-11e6-9dc5-1095984a6d18.png)
+![Weather in Lhasa](https://cloud.githubusercontent.com/assets/13768613/18854608/03f8e016-8423-11e6-9cc6-8a61acd343ee.png)
+![Weather fullscreen](https://cloud.githubusercontent.com/assets/13768613/18854620/21256db2-8423-11e6-987c-e80effd302d4.png)
 ### City list:
-![City List](https://cloud.githubusercontent.com/assets/13768613/18417051/4d31b1f0-77fc-11e6-9b0f-4baf7c53ef82.png)
-![Search a city](https://cloud.githubusercontent.com/assets/13768613/18417054/4d4142be-77fc-11e6-91eb-e037a7e84959.png)
+![City List](https://cloud.githubusercontent.com/assets/13768613/18854604/03e9831e-8423-11e6-88ce-9cb257d46860.png)
+![Search a city](https://cloud.githubusercontent.com/assets/13768613/18854607/03f7ee36-8423-11e6-8745-c21f1c57497e.png)
 ### Forecasts:
-![Forecast](https://cloud.githubusercontent.com/assets/13768613/18417053/4d411046-77fc-11e6-8937-126c92e554ea.png)
+![Forecast](https://cloud.githubusercontent.com/assets/13768613/18854605/03f78090-8423-11e6-9850-40ed380c124a.png)
 ### Setting:
-![Setting](https://cloud.githubusercontent.com/assets/13768613/18417057/4d43af7c-77fc-11e6-82e0-2025ada0e836.png)
+![Setting](https://cloud.githubusercontent.com/assets/13768613/18854606/03f7a890-8423-11e6-8847-c6ba9882f4f4.png)
 
 ## License
 
