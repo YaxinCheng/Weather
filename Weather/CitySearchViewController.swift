@@ -18,8 +18,9 @@ class CitySearchViewController: UIViewController {
 		}
 	}
 	fileprivate let identifiers = [Common.headerCellIdentifier, Common.searchCellIdentifier, Common.subtitleCellIdentifier]
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		UIApplication.shared.statusBarStyle = .default
 	}
@@ -38,10 +39,7 @@ class CitySearchViewController: UIViewController {
 			destinationVC.refreshWeather()
 		}
 	}
-	
-	@IBAction func cancelButtonPressed(_ sender: AnyObject) {
-		dismiss(animated: true, completion: nil)
-	}
+
 }
 
 // MARK: - Table view data source
@@ -59,16 +57,15 @@ extension CitySearchViewController: UITableViewDelegate, UITableViewDataSource {
 			let identifier = identifiers[indexPath.row]
 			let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 			cell.separatorInset = UIEdgeInsets(top: 0, left: tableView.bounds.size.width * 2, bottom: 0, right: 0)
-			if let searchCell = cell as? SearchCell {
-				searchCell.searchBar.delegate = self
-			}
+			return cell
+		} else {
+			let cell = tableView.dequeueReusableCell(withIdentifier: Common.cityCellIdentifier, for: indexPath) as! CityCell
+			let city = cityList[indexPath.row]
+			print(city)
+			cell.nameLabel?.text = city.name
+			cell.descriptionLabel?.text = city.region
 			return cell
 		}
-		let cell = tableView.dequeueReusableCell(withIdentifier: Common.cityCellIdentifier, for: indexPath)
-		let city = cityList[indexPath.row]
-		cell.textLabel?.text = city.name
-		cell.detailTextLabel?.text = city.region
-		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -86,27 +83,22 @@ extension CitySearchViewController: UITableViewDelegate, UITableViewDataSource {
 		if indexPath.section == 0 && indexPath.row == 0 {
 			return 65
 		}
+		else if indexPath.section == 1 {
+			return 55
+		}
 		return UITableViewAutomaticDimension
 	}
 }
 
-extension CitySearchViewController: UISearchBarDelegate, UISearchResultsUpdating {
-	func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-		let searchVC = UISearchController(searchResultsController: nil)
-		searchVC.hidesNavigationBarDuringPresentation = false
-		searchVC.searchBar.placeholder = "Your City"
-		searchVC.searchResultsUpdater = self
-		searchVC.dimsBackgroundDuringPresentation = true
-		searchVC.searchBar.sizeToFit()
-		present(searchVC, animated: true, completion: nil)
-		return false
-	}
-	
-	func updateSearchResults(for searchController: UISearchController) {
-		guard let text = searchController.searchBar.text else { return }
-		let cityLoader = CityLoader()
-		cityLoader.loadCity(city: text) { [weak self] (json) in
-			self?.cityList = json.flatMap { City(from: $0) }
+extension CitySearchViewController: UISearchBarDelegate {
+	func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+		if text == "\n", let searchText = searchBar.text {
+			searchBar.resignFirstResponder()
+			let cityLoader = CityLoader()
+			cityLoader.loadCity(city: searchText) { [weak self] (JSONs) in
+				self?.cityList = JSONs.flatMap { City(from: $0) }
+			}
 		}
+		return true
 	}
 }

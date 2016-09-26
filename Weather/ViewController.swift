@@ -156,7 +156,7 @@ class ViewController: UIViewController {
 		conditionIcon.image = weather.condition.icon
 		pressureTrendLabel.text = weather.pressureTrend
 		
-		windsTempLabel.text = "WINDS TEMPERATURE: \(weather.windTemperatue)\(WeatherStation.sharedStation.temperatureUnit)"
+		windsTempLabel.text = "WINDS CHILL: \(weather.windTemperatue)\(WeatherStation.sharedStation.temperatureUnit)"
 		windsDirectionLabel.text = "WINDS DIRECTION: " + weather.windsDirection + "\(WeatherStation.sharedStation.directionUnit)"
 		windsSpeedLabel.text = "WINDS SPEED: \(weather.windsSpeed)\(WeatherStation.sharedStation.speedUnit)"
 	}
@@ -201,7 +201,7 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func addButtonPressed(_ sender: UIButton) {
-		performSegue(withIdentifier: Common.segueCitySearch, sender: nil)
+		tabBarController?.selectedIndex = 2
 	}
 	
 	@IBAction func touchToFullScreen() {
@@ -247,10 +247,6 @@ class ViewController: UIViewController {
 	
 	@IBAction func cityButtonPressed(_ sender: UIButton) {
 		performSegue(withIdentifier: Common.segueCityView, sender: nil)
-	}
-	
-	@IBAction func cityButtonLongPressed(_ sender: UILongPressGestureRecognizer) {
-		performSegue(withIdentifier: Common.segueCitySearch, sender: nil)
 	}
 	
 	@IBAction func swipeDownPanel(_ sender: UISwipeGestureRecognizer) {

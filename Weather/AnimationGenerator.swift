@@ -10,7 +10,7 @@ import UIKit
 
 struct AnimationGenerator {
 	func moveAnimation(axis: Axis, duration: Double, removeOnCompletion: Bool = true, fillMode: String = kCAFillModeBoth) -> CABasicAnimation {
-		let path = axis == .x ? "position.x" : "position.y"
+		let path = axis.position
 		let animation = CABasicAnimation(keyPath: path)
 		animation.duration = duration
 		animation.isRemovedOnCompletion = removeOnCompletion

@@ -78,7 +78,7 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return (indexPath as NSIndexPath).section == 0 ? 114 : 70
+		return (indexPath as NSIndexPath).section == 0 ? 114 : 60
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
