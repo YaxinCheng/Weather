@@ -200,6 +200,10 @@ class ViewController: UIViewController {
 		}
 	}
 	
+	@IBAction func syncButtonLongPressed(_ sender: AnyObject) {
+		WeatherStation.sharedStation.clearCache()
+	}
+	
 	@IBAction func addButtonPressed(_ sender: UIButton) {
 		tabBarController?.selectedIndex = 2
 	}

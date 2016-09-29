@@ -80,7 +80,7 @@ struct WeatherStation {
 		}
 	}
 	
-	func all(for city: City, completion: @escaping (Weather?, Error?) -> Void) {
+	func all(for city: City, ignoreCache: Bool = false, completion: @escaping (Weather?, Error?) -> Void) {
 		weatherSource.weather(city: city.name, province: city.province, country: city.country) {
 			switch $0 {
 			case .success(let JSON):
@@ -140,6 +140,10 @@ struct WeatherStation {
 		userDefault?.set(CityManager.sharedManager.currentCity!.name, forKey: "City")
 		userDefault?.set(weather.temprature, forKey: "Temperature")
 		userDefault?.set(weather.condition.iconName, forKey: "Icon")
+	}
+	
+	func clearCache() {
+		weatherSource.clearCache()
 	}
 }
 

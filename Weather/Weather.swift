@@ -21,7 +21,7 @@ struct Weather {
 	let windsSpeed: Double
 	let pressureTrend: String
 	
-	init?(with JSON: Dictionary<String, AnyObject>) {
+	init?(with JSON: Dictionary<String, Any>) {
 		guard
 			let temprature = JSON["temperature"] as? Double,
 			let pressure = JSON["pressure"] as? String,

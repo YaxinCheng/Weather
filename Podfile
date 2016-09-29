@@ -3,5 +3,5 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'Weather' do
-	pod 'WeatherKit', '~> 0.1.5'
+	pod 'WeatherKit', '~> 0.1.7'
 end

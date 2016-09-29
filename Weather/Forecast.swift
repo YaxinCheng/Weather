@@ -15,7 +15,7 @@ struct Forecast {
 	let conditionDescription: String
 	let date: String
 	
-	init?(with JSON: Dictionary<String, AnyObject>) {
+	init?(with JSON: Dictionary<String, Any>) {
 		guard
 			let time = JSON["date"] as? String,
 			let date = Date.date(string: time, format: "dd MMM yyyy"),
