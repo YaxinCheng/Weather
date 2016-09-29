@@ -186,7 +186,7 @@ class ViewController: UIViewController {
 	
 	// MARK: - Outlet actions
 	
-	@IBAction func syncButtonPressedUp(_ sender: UIButton) {
+	@IBAction func syncButtonPressedUp(_ sender: AnyObject) {
 		syncButton.setImage(UIImage(named: "sync")!, for: UIControlState())
 		let generator = AnimationGenerator()
 		let animation = generator.rotationAnimation(axis: .z, duration: 2, removeOnCompletion: false, fillMode: kCAFillModeForwards, from: 2 * M_PI, to: 0, repeatCount: 5)
@@ -202,6 +202,7 @@ class ViewController: UIViewController {
 	
 	@IBAction func syncButtonLongPressed(_ sender: AnyObject) {
 		WeatherStation.sharedStation.clearCache()
+		syncButtonPressedUp(sender)
 	}
 	
 	@IBAction func addButtonPressed(_ sender: UIButton) {
