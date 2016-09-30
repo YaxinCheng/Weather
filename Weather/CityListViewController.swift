@@ -46,7 +46,7 @@ class CityListViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if (indexPath as NSIndexPath).section == 0 {
+		if indexPath.section == 0 {
 			let cell = tableView.dequeueReusableCell(withIdentifier: Common.cityLocalCellIdentifier) as! CityLocalCell
 			cell.nameLabel.text = "Local"
 			cell.imageView?.image = UIImage(named: "local")
@@ -54,7 +54,7 @@ class CityListViewController: UITableViewController {
 		} else {
 			let cell = tableView.dequeueReusableCell(withIdentifier: Common.cityListCellIdentifier) as! CityListCell
 			cell.delegate = self
-			let city = cityList[(indexPath as NSIndexPath).row]
+			let city = cityList[indexPath.row]
 			cell.cityLabel.text = city.name
 			return cell
 		}
@@ -71,8 +71,8 @@ class CityListViewController: UITableViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let identifier = segue.identifier, let indexPath = tableView.indexPathForSelectedRow else { return }
 		if identifier == Common.unwindBackMain {
-			if (indexPath as NSIndexPath).section != 0 {
-				let city = cityList[(indexPath as NSIndexPath).row]
+			if indexPath.section != 0 {
+				let city = cityList[indexPath.row]
 				CityManager.sharedManager.currentCity = city
 				CityManager.sharedManager.isLocal = false
 			} else {
@@ -90,12 +90,12 @@ extension CityListViewController: CityListViewDelegate {
 			alert.addAction(.Cancel)
 			self.present(alert, animated: true, completion: nil)
 		}
-		guard let indexPath = tableView.indexPath(for: cell) , (indexPath as NSIndexPath).section != 0 else {
+		guard let indexPath = tableView.indexPath(for: cell) , indexPath.section != 0 else {
 			alertFunction()
 			return
 		}
 		do {
-			let city = cityList.remove(at: (indexPath as NSIndexPath).row)
+			let city = cityList.remove(at: indexPath.row)
 			try city.deleteFromCache()
 			tableView.deleteRows(at: [indexPath], with: .fade)
 		} catch {

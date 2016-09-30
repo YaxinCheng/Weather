@@ -27,7 +27,7 @@ extension Date {
 	func time(timeZone zone: TimeZone = .current) -> DateComponents {
 		var calendar = Calendar.autoupdatingCurrent
 		calendar.timeZone = zone
-		let component = (calendar as NSCalendar).components([.hour, .minute], from: self)
+		let component = calendar.dateComponents([.hour, .minute], from: self)
 		return component
 	}
 	

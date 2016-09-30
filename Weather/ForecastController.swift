@@ -57,7 +57,7 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if (indexPath as NSIndexPath).section == 0 {
+		if indexPath.section == 0 {
 			let cell = tableView.dequeueReusableCell(withIdentifier: Common.headerCellIdentifier, for: indexPath) as! HeaderCell
 			let currentCity = CityManager.sharedManager.currentCity
 			cell.titleLabel.text = currentCity?.name ?? "Forecast"
@@ -66,10 +66,10 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 			return cell
 		} else {
 			let cell = tableView.dequeueReusableCell(withIdentifier: Common.forcastCellidentifier, for: indexPath) as! ForecastCell
-			let forecast = dataSource[(indexPath as NSIndexPath).row]
+			let forecast = dataSource[indexPath.row]
 			cell.weatherImageView.image = forecast.condition.icon
 			cell.forecastLabel.text = forecast.conditionDescription
-			cell.weekdayLabel.text = (indexPath as NSIndexPath).row == 0 ? "Today" : forecast.date
+			cell.weekdayLabel.text = indexPath.row == 0 ? "Today" : forecast.date
 			let temperatureUnit = WeatherStation.sharedStation.temperatureUnit
 			cell.highTempLabel.text = String(format: "%.0f", round(forecast.highTemp)) + "\(temperatureUnit)"
 			cell.lowTempLabel.text = String(format: "%.0f", round(forecast.lowTemp)) + "\(temperatureUnit)"
@@ -78,7 +78,7 @@ extension ForecastController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return (indexPath as NSIndexPath).section == 0 ? 114 : 60
+		return indexPath.section == 0 ? 114 : 60
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

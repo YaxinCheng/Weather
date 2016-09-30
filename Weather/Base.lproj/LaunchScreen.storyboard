@@ -91,15 +91,28 @@
                                     <constraint firstAttribute="bottom" secondItem="3Po-Mz-0eJ" secondAttribute="bottom" id="se7-7k-esN"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ic9-JO-gd7">
+                                <gestureRecognizers/>
+                                <state key="normal" image="sync"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTi-9e-ZES" userLabel="Add button">
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="add"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="7Vu-uw-uJX" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-16" id="0jX-bw-yJZ"/>
                             <constraint firstItem="sHB-go-GqU" firstAttribute="trailing" secondItem="7Vu-uw-uJX" secondAttribute="trailing" id="9FA-tK-O18"/>
+                            <constraint firstItem="dTi-9e-ZES" firstAttribute="top" secondItem="Ic9-JO-gd7" secondAttribute="top" id="APP-7V-EMd"/>
+                            <constraint firstItem="dTi-9e-ZES" firstAttribute="bottom" secondItem="Ic9-JO-gd7" secondAttribute="bottom" id="HS5-2M-QmH"/>
                             <constraint firstItem="7Vu-uw-uJX" firstAttribute="top" secondItem="sHB-go-GqU" secondAttribute="bottom" id="Jwj-x1-V6h"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="7Vu-uw-uJX" secondAttribute="bottom" id="Yi5-dJ-aiY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7Vu-uw-uJX" secondAttribute="trailing" constant="-16" id="bsf-Wy-iOf"/>
+                            <constraint firstItem="Ic9-JO-gd7" firstAttribute="leading" secondItem="dTi-9e-ZES" secondAttribute="trailing" constant="8" id="fou-6P-nqQ"/>
                             <constraint firstItem="sHB-go-GqU" firstAttribute="leading" secondItem="7Vu-uw-uJX" secondAttribute="leading" id="igC-jJ-qeG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ic9-JO-gd7" secondAttribute="trailing" id="joB-z5-rbf"/>
+                            <constraint firstItem="Ic9-JO-gd7" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="8" id="pI7-xi-fbg"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -110,8 +123,10 @@
     </scenes>
     <resources>
         <image name="Weather" width="25" height="25"/>
+        <image name="add" width="25" height="25"/>
         <image name="forecast" width="25" height="25"/>
         <image name="search" width="25" height="25"/>
         <image name="setting" width="25" height="25"/>
+        <image name="sync" width="25" height="25"/>
     </resources>
 </document>

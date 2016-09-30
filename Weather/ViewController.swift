@@ -60,12 +60,12 @@ class ViewController: UIViewController {
 		tabBarController?.tabBar.shadowImage = UIImage()
 		tabBarController?.tabBar.tintColor = view.tintColor
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(loopVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: NSNotification.Name(rawValue: CityManagerNotification.currentCityDidChange.rawValue), object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: NSNotification.Name(rawValue: LocationStorageNotification.locationUpdated.rawValue), object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: NSNotification.Name(rawValue: LocationStorageNotification.noNewLocation.rawValue), object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(loopVideo), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: Notification.Name(rawValue: CityManagerNotification.currentCityDidChange.rawValue), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: Notification.Name(rawValue: LocationStorageNotification.locationUpdated.rawValue), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: Notification.Name(rawValue: LocationStorageNotification.noNewLocation.rawValue), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: Notification.Name.UIDeviceOrientationDidChange, object: nil)
 		cityButton.titleLabel?.numberOfLines = 1
 		cityButton.titleLabel?.adjustsFontSizeToFitWidth = true
 	}

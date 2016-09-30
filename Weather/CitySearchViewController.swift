@@ -33,7 +33,7 @@ class CitySearchViewController: UIViewController {
 			return
 		}
 		if identifier == Common.unwindFromCityView {
-			let city = cityList[(indexPath as NSIndexPath).row]
+			let city = cityList[indexPath.row]
 			CityManager.sharedManager.currentCity = city
 			let destinationVC = segue.destination as! ViewController
 			destinationVC.refreshWeather()

@@ -33,11 +33,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if (indexPath as NSIndexPath).section == 0 {
+		if indexPath.section == 0 {
 			return tableView.dequeueReusableCell(withIdentifier: Common.headerCellIdentifier) as! HeaderCell
 		} else {
 			let cell = tableView.dequeueReusableCell(withIdentifier: Common.unitCellIdentifier) as! UnitSettingCell
-			let unit = units[(indexPath as NSIndexPath).row]
+			let unit = units[indexPath.row]
 			cell.unitNameLabel.text = unit.0
 			cell.unitSegment.setTitle(unit.1, forSegmentAt: _DefaultIndex)
 			cell.unitSegment.setTitle(unit.2, forSegmentAt: _OptionalIndex)
@@ -48,6 +48,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return (indexPath as NSIndexPath).section == 0 ? 114 : 44
+		return indexPath.section == 0 ? 114 : 44
 	}
 }
