@@ -21,7 +21,7 @@ struct Forecast {
 			let date = Date.date(string: time, format: "dd MMM yyyy"),
 			let high = JSON["high"] as? Double,
 			let low = JSON["low"] as? Double,
-			let code = (JSON["code"] as? NSString)?.integerValue,
+			let code = (JSON["code"] as? String)?.integerValue,
 			let conditionString = JSON["text"] as? String
 		else { return nil }
 		self.date = date.formatDate()

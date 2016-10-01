@@ -28,8 +28,8 @@ struct City: CustomStringConvertible {
 			let country = JSON["country"] as? String,
 			let woeid = JSON["woeid"] as? String,
 			let province = JSON["admin1"] as? String,
-			let latitude = ((JSON["centroid"] as? Dictionary<String, Any>)?["latitude"] as? NSString)?.doubleValue,
-			let longitude = ((JSON["centroid"] as? Dictionary<String, Any>)?["longitude"] as? NSString)?.doubleValue,
+			let latitude = ((JSON["centroid"] as? Dictionary<String, Any>)?["latitude"] as? String)?.doubleValue,
+			let longitude = ((JSON["centroid"] as? Dictionary<String, Any>)?["longitude"] as? String)?.doubleValue,
 			let timeZoneString = JSON["timezone"] as? String,
 			let timeZone = TimeZone(identifier: timeZoneString)
 		else { return nil }

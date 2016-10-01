@@ -163,7 +163,7 @@ class ViewController: UIViewController {
 	
 	// MARK: - Weather and location
 	
-	func refreshWeather() {
+	func refreshWeather(ignoreCache: Bool = false) {
 		let city = CityManager.sharedManager.currentCity
 		let weatherDidRefresh: (Weather?, Error?) -> Void = { [weak self] in
 			self?.syncButton.layer.removeAllAnimations()
@@ -174,7 +174,7 @@ class ViewController: UIViewController {
 			}
 		}
 		if CityManager.sharedManager.currentCity != nil {
-			WeatherStation.sharedStation.all(for: city!, completion: weatherDidRefresh)
+			WeatherStation.sharedStation.all(for: city!, ignoreCache: ignoreCache, completion: weatherDidRefresh)
 		} else {
 			WeatherStation.sharedStation.all(weatherDidRefresh)
 		}
@@ -186,11 +186,15 @@ class ViewController: UIViewController {
 	
 	// MARK: - Outlet actions
 	
-	@IBAction func syncButtonPressedUp(_ sender: AnyObject) {
+	private func animateSyncButton() {
 		syncButton.setImage(UIImage(named: "sync")!, for: UIControlState())
 		let generator = AnimationGenerator()
 		let animation = generator.rotationAnimation(axis: .z, duration: 2, removeOnCompletion: false, fillMode: kCAFillModeForwards, from: 2 * M_PI, to: 0, repeatCount: 5)
-		sender.layer.add(animation, forKey: "rotation")
+		syncButton.layer.add(animation, forKey: "rotation")
+	}
+	
+	@IBAction func syncButtonPressedUp(_ sender: AnyObject) {
+		animateSyncButton()
 		let local = CityManager.sharedManager.isLocal
 		if local {
 			refreshLocation()
@@ -201,8 +205,14 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func syncButtonLongPressed(_ sender: AnyObject) {
-		WeatherStation.sharedStation.clearCache()
-		syncButtonPressedUp(sender)
+		animateSyncButton()
+		let local = CityManager.sharedManager.isLocal
+		if local {
+			refreshLocation()
+			CityManager.sharedManager.currentCity = nil
+		} else {
+			refreshWeather(ignoreCache: true)
+		}
 	}
 	
 	@IBAction func addButtonPressed(_ sender: UIButton) {

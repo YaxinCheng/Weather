@@ -81,7 +81,7 @@ struct WeatherStation {
 	}
 	
 	func all(for city: City, ignoreCache: Bool = false, completion: @escaping (Weather?, Error?) -> Void) {
-		weatherSource.weather(city: city.name, province: city.province, country: city.country) {
+		weatherSource.weather(city: city.name, province: city.province, country: city.country, ignoreCache: ignoreCache) {
 			switch $0 {
 			case .success(let JSON):
 				guard let weather = Weather(with: JSON) else {
@@ -137,7 +137,7 @@ struct WeatherStation {
 	
 	fileprivate func saveForWidget(_ weather: Weather) {
 		let userDefault = UserDefaults(suiteName: "group.NCGroup")
-		userDefault?.set(CityManager.sharedManager.currentCity!.name, forKey: "City")
+		userDefault?.set(CityManager.sharedManager.currentCity?.name ?? "Local", forKey: "City")
 		userDefault?.set(weather.temprature, forKey: "Temperature")
 		userDefault?.set(weather.condition.iconName, forKey: "Icon")
 	}
