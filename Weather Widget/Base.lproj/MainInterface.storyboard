@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -15,67 +16,60 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mkN-ox-n0I">
-                                <rect key="frame" x="16" y="9" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="i3s-Qg-rRX"/>
-                                    <constraint firstAttribute="width" constant="40" id="x2r-7Z-Ugl"/>
+                                    <constraint firstAttribute="height" constant="66" id="i3s-Qg-rRX"/>
+                                    <constraint firstAttribute="width" constant="66" id="x2r-7Z-Ugl"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojq-2r-nBm">
-                                <rect key="frame" x="170" y="8" width="31" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current City:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUQ-ap-wVF">
-                                <rect key="frame" x="64" y="8" width="98" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yu4-9E-Qqv">
-                                <rect key="frame" x="64" y="28" width="107" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9N-hd-Pj2">
-                                <rect key="frame" x="179" y="29" width="43" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="tintColor" white="0.69999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.69999998807907104" green="0.69999998807907104" blue="0.69999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mkN-ox-n0I" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="14f-Yi-hDS"/>
-                            <constraint firstItem="Ojq-2r-nBm" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="DPI-n6-cnd"/>
                             <constraint firstItem="t9N-hd-Pj2" firstAttribute="leading" secondItem="Yu4-9E-Qqv" secondAttribute="trailing" constant="8" id="E9Y-OP-Csm"/>
                             <constraint firstAttribute="leadingMargin" secondItem="mkN-ox-n0I" secondAttribute="leading" id="GLc-Kb-adT"/>
+                            <constraint firstItem="Yu4-9E-Qqv" firstAttribute="top" secondItem="AUQ-ap-wVF" secondAttribute="bottom" constant="4" id="Htr-Ss-cx3"/>
                             <constraint firstItem="AUQ-ap-wVF" firstAttribute="leading" secondItem="mkN-ox-n0I" secondAttribute="trailing" constant="8" id="KTq-pF-V7w"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Yu4-9E-Qqv" secondAttribute="bottom" constant="9" id="LAA-2Q-2vB"/>
                             <constraint firstItem="Ojq-2r-nBm" firstAttribute="leading" secondItem="AUQ-ap-wVF" secondAttribute="trailing" constant="8" id="R6t-Ss-DOP"/>
-                            <constraint firstItem="AUQ-ap-wVF" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="XYE-3g-BEo"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="t9N-hd-Pj2" secondAttribute="bottom" constant="8" id="hH7-ms-vph"/>
+                            <constraint firstItem="t9N-hd-Pj2" firstAttribute="centerY" secondItem="Yu4-9E-Qqv" secondAttribute="centerY" id="Wqq-uM-PR8"/>
+                            <constraint firstItem="Ojq-2r-nBm" firstAttribute="centerY" secondItem="AUQ-ap-wVF" secondAttribute="centerY" id="fWN-R4-j4R"/>
+                            <constraint firstItem="AUQ-ap-wVF" firstAttribute="top" secondItem="mkN-ox-n0I" secondAttribute="top" id="piG-8G-P2n"/>
                             <constraint firstItem="Yu4-9E-Qqv" firstAttribute="leading" secondItem="mkN-ox-n0I" secondAttribute="trailing" constant="8" id="ynS-E3-BEo"/>
                         </constraints>
                         <connections>
                             <action selector="viewTouched:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="hqp-fJ-mK5"/>
-                            <action selector="viewTouchedDown:" destination="M4Y-Lb-cyx" eventType="touchDown" id="Z7w-Hu-3Ko"/>
-                            <action selector="viewTouchedUpOutside:" destination="M4Y-Lb-cyx" eventType="touchUpOutside" id="Z77-As-knj"/>
                         </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="58"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="68"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="58"/>
+                    <size key="freeformSize" width="320" height="68"/>
                     <connections>
                         <outlet property="cityLabel" destination="Ojq-2r-nBm" id="bk1-K1-Eia"/>
                         <outlet property="tempLabel" destination="t9N-hd-Pj2" id="rWR-Re-qgR"/>
@@ -88,4 +82,9 @@
             <point key="canvasLocation" x="516" y="285"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

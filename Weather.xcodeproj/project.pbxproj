@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D71F6116225E8825D1AB8405 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EB11A7FD31FD77F6F72846 /* Pods_Weather.framework */; };
+		E3074AD01DA0201D004433B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3C7396D1D4A910500F51623 /* Assets.xcassets */; };
 		E30A85661D7A65DD0073EC44 /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30A85651D7A65DD0073EC44 /* CityManager.swift */; };
 		E332910E1D589E2100C5AED3 /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332910D1D589E2100C5AED3 /* ForecastCell.swift */; };
 		E33291101D589E2C00C5AED3 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332910F1D589E2C00C5AED3 /* HeaderCell.swift */; };
@@ -79,7 +80,6 @@
 		E3E42A5D1D5CBAEB0039BF2B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A5C1D5CBAEB0039BF2B /* TodayViewController.swift */; };
 		E3E42A601D5CBAEB0039BF2B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E42A5E1D5CBAEB0039BF2B /* MainInterface.storyboard */; };
 		E3E42A641D5CBAEB0039BF2B /* Weather Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E3E42A581D5CBAEB0039BF2B /* Weather Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E3E42A6C1D5CBE3D0039BF2B /* weatherIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3E42A6B1D5CBE3D0039BF2B /* weatherIcons.xcassets */; };
 		E3F0FBCA1D538D6E002DB74E /* Cities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F0FBC91D538D6E002DB74E /* Cities.storyboard */; };
 		E3F0FBCC1D538DD3002DB74E /* CitySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FBCB1D538DD3002DB74E /* CitySearchViewController.swift */; };
 		E3F0FBD21D5398E4002DB74E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F0FBD11D5398E4002DB74E /* City.swift */; };
@@ -210,7 +210,6 @@
 		E3E42A5C1D5CBAEB0039BF2B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		E3E42A5F1D5CBAEB0039BF2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		E3E42A611D5CBAEB0039BF2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E3E42A6B1D5CBE3D0039BF2B /* weatherIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = weatherIcons.xcassets; sourceTree = "<group>"; };
 		E3E42A6D1D5CC2EE0039BF2B /* Weather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Weather.entitlements; sourceTree = "<group>"; };
 		E3E42A6E1D5CC3320039BF2B /* Weather Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Weather Widget.entitlements"; sourceTree = "<group>"; };
 		E3F0FBC91D538D6E002DB74E /* Cities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cities.storyboard; sourceTree = "<group>"; };
@@ -413,7 +412,6 @@
 				E3E42A5C1D5CBAEB0039BF2B /* TodayViewController.swift */,
 				E3E42A5E1D5CBAEB0039BF2B /* MainInterface.storyboard */,
 				E3E42A611D5CBAEB0039BF2B /* Info.plist */,
-				E3E42A6B1D5CBE3D0039BF2B /* weatherIcons.xcassets */,
 			);
 			path = "Weather Widget";
 			sourceTree = "<group>";
@@ -667,7 +665,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3E42A601D5CBAEB0039BF2B /* MainInterface.storyboard in Resources */,
-				E3E42A6C1D5CBE3D0039BF2B /* weatherIcons.xcassets in Resources */,
+				E3074AD01DA0201D004433B4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,8 +16,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	@IBOutlet weak var tempLabel: UILabel!
 	@IBOutlet weak var viewControl: UIControl!
 	
-	var originalColour: UIColor?
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view from its nib.
@@ -30,7 +28,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		weatherIconView.image = UIImage(named: icon)
 		cityLabel.text = city
 		tempLabel.text = temperature + "°C"
-		originalColour = viewControl.backgroundColor
 	}
 	
 	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -44,12 +41,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	}
 	
 	@IBAction func viewTouched(_ sender: AnyObject) {
-		(sender as? UIControl)?.backgroundColor = originalColour
 		extensionContext?.open(URL(string: "weatherX://main")!, completionHandler: nil)
-	}
-	
-	@IBAction func viewTouchedUpOutside(_ sender: UIControl) {
-		sender.backgroundColor = originalColour
 	}
 	
 	func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
@@ -57,9 +49,5 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		newMargin.bottom = 10
 		newMargin.left = 10
 		return newMargin
-	}
-	
-	@IBAction func viewTouchedDown(_ sender: UIControl) {
-		sender.backgroundColor = UIColor(white: 1, alpha: 0.7)
 	}
 }
