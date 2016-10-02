@@ -31,16 +31,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9N-hd-Pj2">
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Condition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGW-do-nPh">
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="H" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcx-6B-huy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcx-6B-huy">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,9 +50,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yf-BK-AMd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yf-BK-AMd">
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGS-ON-xwK">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -62,7 +67,9 @@
                             <constraint firstItem="mPw-BF-zR1" firstAttribute="leading" secondItem="Kcx-6B-huy" secondAttribute="trailing" id="6x5-v9-WgD"/>
                             <constraint firstItem="Ojq-2r-nBm" firstAttribute="top" secondItem="mkN-ox-n0I" secondAttribute="top" id="FWI-CU-c8C"/>
                             <constraint firstAttribute="leadingMargin" secondItem="mkN-ox-n0I" secondAttribute="leading" id="GLc-Kb-adT"/>
+                            <constraint firstItem="5Yf-BK-AMd" firstAttribute="trailing" secondItem="t9N-hd-Pj2" secondAttribute="trailing" id="SAK-En-LFl"/>
                             <constraint firstItem="5Yf-BK-AMd" firstAttribute="centerY" secondItem="mPw-BF-zR1" secondAttribute="centerY" id="Tvj-KM-jaQ"/>
+                            <constraint firstItem="Kcx-6B-huy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nGS-ON-xwK" secondAttribute="trailing" constant="8" id="X80-cN-vEK"/>
                             <constraint firstItem="t9N-hd-Pj2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HGW-do-nPh" secondAttribute="trailing" constant="8" id="adf-uN-p5C"/>
                             <constraint firstItem="Ojq-2r-nBm" firstAttribute="leading" secondItem="mkN-ox-n0I" secondAttribute="trailing" constant="8" id="anh-vX-geP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="t9N-hd-Pj2" secondAttribute="trailing" id="bhM-73-Krl"/>
@@ -70,10 +77,11 @@
                             <constraint firstItem="Kcx-6B-huy" firstAttribute="centerY" secondItem="mPw-BF-zR1" secondAttribute="centerY" id="fw4-2e-BOq"/>
                             <constraint firstItem="mPw-BF-zR1" firstAttribute="top" secondItem="t9N-hd-Pj2" secondAttribute="bottom" constant="-2.5" id="jEK-vd-dDi"/>
                             <constraint firstItem="Kcx-6B-huy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HGW-do-nPh" secondAttribute="trailing" constant="8" id="kxF-GU-tUw"/>
-                            <constraint firstItem="mPw-BF-zR1" firstAttribute="centerX" secondItem="t9N-hd-Pj2" secondAttribute="centerX" id="pH1-ys-DRl"/>
+                            <constraint firstItem="nGS-ON-xwK" firstAttribute="leading" secondItem="HGW-do-nPh" secondAttribute="leading" id="nhv-Fy-THj"/>
                             <constraint firstItem="t9N-hd-Pj2" firstAttribute="top" secondItem="Ojq-2r-nBm" secondAttribute="top" id="qIl-7K-tNx"/>
                             <constraint firstItem="HGW-do-nPh" firstAttribute="top" secondItem="Ojq-2r-nBm" secondAttribute="bottom" constant="2.5" id="s9a-ox-ncm"/>
                             <constraint firstItem="5Yf-BK-AMd" firstAttribute="leading" secondItem="mPw-BF-zR1" secondAttribute="trailing" constant="4" id="uMi-cu-63m"/>
+                            <constraint firstItem="nGS-ON-xwK" firstAttribute="top" secondItem="HGW-do-nPh" secondAttribute="bottom" constant="5" id="vPB-cf-LBi"/>
                         </constraints>
                         <connections>
                             <action selector="viewTouched:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="hqp-fJ-mK5"/>
@@ -90,6 +98,7 @@
                         <outlet property="cityLabel" destination="Ojq-2r-nBm" id="bk1-K1-Eia"/>
                         <outlet property="conditionLabel" destination="HGW-do-nPh" id="rRh-Xk-OBV"/>
                         <outlet property="highLabel" destination="Kcx-6B-huy" id="d3z-QO-a35"/>
+                        <outlet property="humidityLabel" destination="nGS-ON-xwK" id="Ola-GG-pen"/>
                         <outlet property="lowLabel" destination="5Yf-BK-AMd" id="kwg-iv-aEC"/>
                         <outlet property="tempLabel" destination="t9N-hd-Pj2" id="rWR-Re-qgR"/>
                         <outlet property="viewControl" destination="S3S-Oj-5AN" id="DFu-as-QJ0"/>

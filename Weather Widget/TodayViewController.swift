@@ -16,6 +16,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	@IBOutlet weak var tempLabel: UILabel!
 	@IBOutlet weak var viewControl: UIControl!
 	@IBOutlet weak var conditionLabel: UILabel!
+	@IBOutlet weak var humidityLabel: UILabel!
 	@IBOutlet weak var highLabel: UILabel!
 	@IBOutlet weak var lowLabel: UILabel!
 	
@@ -31,6 +32,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			let city = userDefault?.string(forKey: "City"),
 			let temperature = userDefault?.string(forKey: "Temperature"),
 			let condition = userDefault?.string(forKey: "Condition"),
+			let humidity = userDefault?.string(forKey: "Humidity"),
 			let icon = userDefault?.string(forKey: "Icon"),
 			let unit = userDefault?.string(forKey: "unit")
 			else { return }
@@ -38,6 +40,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		cityLabel.text = city
 		tempLabel.text = temperature + unit
 		conditionLabel.text = condition
+		humidityLabel.text = "Humidity: " + humidity + "%"
 		guard let highTemp = userDefault?.double(forKey: "highTemp"),
 			let lowTemp = userDefault?.double(forKey: "lowTemp")
 			else { return }

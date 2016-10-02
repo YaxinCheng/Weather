@@ -112,7 +112,7 @@
                             <constraint firstItem="Ic9-JO-gd7" firstAttribute="leading" secondItem="dTi-9e-ZES" secondAttribute="trailing" constant="8" id="fou-6P-nqQ"/>
                             <constraint firstItem="sHB-go-GqU" firstAttribute="leading" secondItem="7Vu-uw-uJX" secondAttribute="leading" id="igC-jJ-qeG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ic9-JO-gd7" secondAttribute="trailing" id="joB-z5-rbf"/>
-                            <constraint firstItem="Ic9-JO-gd7" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="8" id="pI7-xi-fbg"/>
+                            <constraint firstItem="Ic9-JO-gd7" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="20" id="pI7-xi-fbg"/>
                         </constraints>
                     </view>
                 </viewController>

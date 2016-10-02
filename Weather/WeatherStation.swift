@@ -146,6 +146,7 @@ struct WeatherStation {
 		userDefault?.set(CityManager.sharedManager.currentCity?.name ?? "Local", forKey: "City")
 		userDefault?.set(weather.temprature, forKey: "Temperature")
 		userDefault?.set(weather.condition.rawValue, forKey: "Condition")
+		userDefault?.set(weather.humidity, forKey: "Humidity")
 		userDefault?.set(weather.condition.iconName, forKey: "Icon")
 		userDefault?.set(temperatureUnit.description, forKey: "unit")
 	}
