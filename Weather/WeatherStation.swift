@@ -116,6 +116,9 @@ struct WeatherStation {
 			switch $0 {
 			case .success(let JSONs):
 				let forecasts = JSONs.flatMap { Forecast(with: $0) }
+				if forecasts.count != 0 && CityManager.sharedManager.isLocal {
+					self.saveForWidget(forecasts.first!)
+				}
 				completion(forecasts, nil)
 			case .failure(let error):
 				completion([], error)
@@ -128,6 +131,9 @@ struct WeatherStation {
 			switch $0 {
 			case .success(let JSONs):
 				let forecasts = JSONs.flatMap { Forecast(with: $0) }
+				if forecasts.count != 0 && CityManager.sharedManager.isLocal {
+					self.saveForWidget(forecasts.first!)
+				}
 				completion(forecasts, nil)
 			case .failure(let error):
 				completion([], error)
@@ -139,7 +145,15 @@ struct WeatherStation {
 		let userDefault = UserDefaults(suiteName: "group.NCGroup")
 		userDefault?.set(CityManager.sharedManager.currentCity?.name ?? "Local", forKey: "City")
 		userDefault?.set(weather.temprature, forKey: "Temperature")
+		userDefault?.set(weather.condition.rawValue, forKey: "Condition")
 		userDefault?.set(weather.condition.iconName, forKey: "Icon")
+		userDefault?.set(temperatureUnit.description, forKey: "unit")
+	}
+	
+	fileprivate func saveForWidget(_ forecast: Forecast) {
+		let userDefault = UserDefaults(suiteName: "group.NCGroup")
+		userDefault?.set(forecast.highTemp, forKey: "highTemp")
+		userDefault?.set(forecast.lowTemp, forKey: "lowTemp")
 	}
 	
 	func clearCache() {

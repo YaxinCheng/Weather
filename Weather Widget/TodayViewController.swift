@@ -15,19 +15,34 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	@IBOutlet weak var cityLabel: UILabel!
 	@IBOutlet weak var tempLabel: UILabel!
 	@IBOutlet weak var viewControl: UIControl!
+	@IBOutlet weak var conditionLabel: UILabel!
+	@IBOutlet weak var highLabel: UILabel!
+	@IBOutlet weak var lowLabel: UILabel!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view from its nib.
+		
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
 		let userDefault = UserDefaults(suiteName: "group.NCGroup")
 		guard
 			let city = userDefault?.string(forKey: "City"),
 			let temperature = userDefault?.string(forKey: "Temperature"),
-			let icon = userDefault?.string(forKey: "Icon")
-		else { return }
+			let condition = userDefault?.string(forKey: "Condition"),
+			let icon = userDefault?.string(forKey: "Icon"),
+			let unit = userDefault?.string(forKey: "unit")
+			else { return }
 		weatherIconView.image = UIImage(named: icon)
 		cityLabel.text = city
-		tempLabel.text = temperature + "°C"
+		tempLabel.text = temperature + unit
+		conditionLabel.text = condition
+		guard let highTemp = userDefault?.double(forKey: "highTemp"),
+			let lowTemp = userDefault?.double(forKey: "lowTemp")
+			else { return }
+		highLabel.text = String(format: "%.0f°", highTemp)//highTemp + "°"
+		lowLabel.text = String(format: "%.0f°", lowTemp)//lowTemp + "°"
 	}
 	
 	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
