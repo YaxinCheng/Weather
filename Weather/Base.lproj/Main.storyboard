@@ -17,7 +17,7 @@
             </objects>
             <point key="canvasLocation" x="1011.5" y="604"/>
         </scene>
-        <!--Forecasts-->
+        <!--Forecast Controller-->
         <scene sceneID="rW3-yR-UXr">
             <objects>
                 <viewController id="zZQ-fD-jQm" customClass="ForecastController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -26,17 +26,17 @@
                         <viewControllerLayoutGuide type="bottom" id="730-S4-Dcn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Rf8-7p-UdK">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DCE-DI-gts">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="114" id="s9B-am-ziU" customClass="HeaderCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="114"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s9B-am-ziU" id="Ywi-cS-XwC">
-                                            <frame key="frameInset" width="768" height="114"/>
+                                            <frame key="frameInset" width="1000" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcY-Pw-HmR">
@@ -72,10 +72,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="20" reuseIdentifier="ForecastCell" rowHeight="80" id="mB1-Lt-uQB" customClass="ForecastCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="142" width="768" height="80"/>
+                                        <rect key="frame" x="0.0" y="142" width="1000" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mB1-Lt-uQB" id="khY-jO-Puv">
-                                            <frame key="frameInset" width="768" height="80"/>
+                                            <frame key="frameInset" width="1000" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hbh-gr-I2b">
@@ -181,7 +181,7 @@
                             <constraint firstItem="DCE-DI-gts" firstAttribute="leading" secondItem="Rf8-7p-UdK" secondAttribute="leading" id="hPb-EO-OEX"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Forecasts" image="forecast" id="BjP-oQ-9vh"/>
+                    <tabBarItem key="tabBarItem" title="" image="forecast" id="BjP-oQ-9vh"/>
                     <connections>
                         <outlet property="tableView" destination="DCE-DI-gts" id="k7p-ni-I8X"/>
                     </connections>
@@ -190,7 +190,7 @@
             </objects>
             <point key="canvasLocation" x="583" y="897"/>
         </scene>
-        <!--Now-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -199,7 +199,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3NY-kM-6vJ">
@@ -597,7 +597,7 @@
                             <action selector="touchToFullScreen" destination="BYZ-38-t0r" eventType="touchUpInside" id="s8N-Xz-y0F"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Now" image="Weather" id="nNY-OA-2zX"/>
+                    <tabBarItem key="tabBarItem" title="" image="Weather" id="nNY-OA-2zX"/>
                     <connections>
                         <outlet property="cityButton" destination="q9E-EU-m2O" id="ZtL-jV-0ma"/>
                         <outlet property="conditionIcon" destination="bkM-H7-ofx" id="VXa-Yi-d2p"/>
@@ -632,7 +632,7 @@
             </objects>
             <point key="canvasLocation" x="1011" y="124"/>
         </scene>
-        <!--Setting-->
+        <!--Setting View Controller-->
         <scene sceneID="lSi-AS-qIW">
             <objects>
                 <viewController id="ehC-0m-uc2" customClass="SettingViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -641,7 +641,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Lsn-H3-jO1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mzH-4I-U6b">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d4h-NX-VfZ">
@@ -649,10 +649,10 @@
                                 <color key="tintColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="114" id="opc-05-5LO" customClass="HeaderCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="114"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="opc-05-5LO" id="XvS-Bo-WLN">
-                                            <frame key="frameInset" width="768" height="114"/>
+                                            <frame key="frameInset" width="1000" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kf2-dx-Ob6">
@@ -682,10 +682,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="unitSetting" id="sbf-11-OiV" customClass="UnitSettingCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="142" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="142" width="1000" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sbf-11-OiV" id="FKn-fz-mcI">
-                                            <frame key="frameInset" width="768" height="44"/>
+                                            <frame key="frameInset" width="1000" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2x-uY-c5X">
@@ -753,7 +753,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Setting" image="setting" id="7z4-nu-zbW"/>
+                    <tabBarItem key="tabBarItem" title="" image="setting" id="7z4-nu-zbW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEN-Cs-KnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -762,7 +762,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Xol-TB-3n0">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="BsN-JN-bRi" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="BsN-JN-bRi" customClass="TabBarController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="lVc-Q8-gIP">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -781,7 +781,7 @@
             </objects>
             <point key="canvasLocation" x="199" y="125"/>
         </scene>
-        <!--Search-->
+        <!--City Search View Controller-->
         <scene sceneID="UKG-6M-B6X">
             <objects>
                 <viewController id="yRS-Vl-Olw" customClass="CitySearchViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -790,7 +790,7 @@
                         <viewControllerLayoutGuide type="bottom" id="MsU-OX-er0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="26F-cz-0XZ">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f6b-rk-MYh">
@@ -798,10 +798,10 @@
                                 <color key="tintColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="55" id="v5l-lV-07P" customClass="HeaderCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="760" height="55"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v5l-lV-07P" id="pCK-58-Qnr">
-                                            <frame key="frameInset" width="760" height="55"/>
+                                            <frame key="frameInset" width="1000" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vx-es-R1m">
@@ -821,10 +821,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchCell" id="hC6-hI-wMU" customClass="SearchCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="83" width="760" height="44"/>
+                                        <rect key="frame" x="0.0" y="83" width="1000" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hC6-hI-wMU" id="Dv6-dx-9LH">
-                                            <frame key="frameInset" width="760" height="44"/>
+                                            <frame key="frameInset" width="1000" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Your city" translatesAutoresizingMaskIntoConstraints="NO" id="IXI-Kd-xCN">
@@ -848,10 +848,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="subtitleCell" id="v5z-4M-BEZ" customClass="SubtitleCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="127" width="760" height="44"/>
+                                        <rect key="frame" x="0.0" y="127" width="1000" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v5z-4M-BEZ" id="L58-oz-m44">
-                                            <frame key="frameInset" width="760" height="44"/>
+                                            <frame key="frameInset" width="1000" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMb-nH-x8u">
@@ -872,10 +872,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cityCell" rowHeight="66" id="Bt9-6p-COk" customClass="CityCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="171" width="760" height="66"/>
+                                        <rect key="frame" x="0.0" y="171" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bt9-6p-COk" id="8hu-7H-jTo">
-                                            <frame key="frameInset" width="760" height="66"/>
+                                            <frame key="frameInset" width="375" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REB-ZR-m2X">
@@ -900,6 +900,7 @@
                                                 <constraint firstItem="n7M-6M-kUy" firstAttribute="top" secondItem="REB-ZR-m2X" secondAttribute="bottom" constant="3" id="8mf-Ai-Brs"/>
                                                 <constraint firstItem="n7M-6M-kUy" firstAttribute="leading" secondItem="REB-ZR-m2X" secondAttribute="leading" id="RLX-Fq-XkS"/>
                                                 <constraint firstItem="REB-ZR-m2X" firstAttribute="leading" secondItem="8hu-7H-jTo" secondAttribute="leadingMargin" constant="16" id="TaE-Yv-4gv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="n7M-6M-kUy" secondAttribute="bottom" constant="8" id="aLQ-Qc-uBX"/>
                                                 <constraint firstAttribute="topMargin" secondItem="REB-ZR-m2X" secondAttribute="top" id="bg8-U7-ZJr"/>
                                                 <constraint firstItem="n7M-6M-kUy" firstAttribute="trailing" secondItem="REB-ZR-m2X" secondAttribute="trailing" constant="4" id="osM-hn-WMI"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dwW-gJ-Yvz" secondAttribute="trailing" id="paS-cc-YtJ"/>
@@ -928,7 +929,7 @@
                             <constraint firstItem="f6b-rk-MYh" firstAttribute="top" secondItem="Gcr-gg-shw" secondAttribute="bottom" id="RZS-aU-fUK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="search" id="6vt-TJ-4CP"/>
+                    <tabBarItem key="tabBarItem" title="" image="search" id="6vt-TJ-4CP"/>
                     <connections>
                         <outlet property="tableView" destination="f6b-rk-MYh" id="4vg-zj-1S6"/>
                     </connections>

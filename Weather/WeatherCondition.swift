@@ -17,7 +17,7 @@ struct WeatherCondition {
 	init(rawValue: String, code: Int, day: Bool) {
 		self.code = code
 		
-		let initializer: (String) -> (String, Bool) = {
+		(self.rawValue, dayTime) = {
 			if let range = $0.range(of: " (day)") {
 				return ($0.replacingCharacters(in: range, with: ""), true)
 			} else if let range = $0.range(of: " (night)") {
@@ -25,17 +25,13 @@ struct WeatherCondition {
 			} else {
 				return ($0, day)
 			}
-		}
-		
-		(self.rawValue, dayTime) = initializer(rawValue)
+		} (rawValue)
 	}
 	
 	var videoName: String {
 		switch code {
-		case 32...34:
+		case 31...34:
 			return dayTime ? "weather_sunny" : "weather_clear"
-		case 31:
-			return "weather_clear"
 		case 26...29:
 			return dayTime ? "weather_cloudy_day" : "weather_cloudy_night"
 		case 6, 8...12, 18, 40:
@@ -61,10 +57,8 @@ struct WeatherCondition {
 	
 	var landscapeVideoName: String {
 		switch code {
-		case 32...34:
+		case 31...34:
 			return dayTime ? "weather_l_sunny" : "weather_l_clear"
-		case 31:
-			return "weather_l_clear"
 		case 26...29:
 			return dayTime ? "weather_l_cloudy_day" : "weather_l_cloudy_night"
 		case 6, 8...12, 18, 40:

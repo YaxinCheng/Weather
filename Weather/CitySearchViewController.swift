@@ -12,7 +12,7 @@ import WeatherKit
 class CitySearchViewController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
-	var cityList: Array<City>! = [] {
+	var cityList: Array<City> = [] {
 		didSet {
 			tableView.reloadData()
 		}
