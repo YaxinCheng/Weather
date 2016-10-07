@@ -19,6 +19,12 @@ class CitySearchViewController: UIViewController {
 	}
 	fileprivate let identifiers = [Common.headerCellIdentifier, Common.searchCellIdentifier, Common.subtitleCellIdentifier]
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		tableView.estimatedRowHeight = 71
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
@@ -63,6 +69,7 @@ extension CitySearchViewController: UITableViewDelegate, UITableViewDataSource {
 			let city = cityList[indexPath.row]
 			cell.nameLabel?.text = city.name
 			cell.descriptionLabel?.text = city.region
+			cell.indicatorView.image = UIImage()
 			return cell
 		}
 	}
@@ -83,11 +90,9 @@ extension CitySearchViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if indexPath.section == 0 && indexPath.row == 0 {
 			return 65
+		} else {
+			return UITableViewAutomaticDimension
 		}
-		else if indexPath.section == 1 {
-			return 55
-		}
-		return UITableViewAutomaticDimension
 	}
 }
 
