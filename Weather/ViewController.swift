@@ -16,6 +16,7 @@ class ViewController: UIViewController {
 	var player: AVPlayer?
 	weak var playerLayer: AVPlayerLayer?
 	@IBOutlet weak var infoPanel: UIView!
+	@IBOutlet var infoLabel: [UILabel]!
 	
 	@IBOutlet weak var syncButton: UIButton!
 	@IBOutlet weak var cityButton: UIButton!
@@ -138,6 +139,11 @@ class ViewController: UIViewController {
 		
 		backgroundView.contentMode = .scaleToFill
 		view.insertSubview(backgroundView, at: 0)
+		
+		let labelInfo = ["PRESSUE", "HUMIDITY", "VISIBILITY", "SUNRISE", "SUNSET", "TREND"]
+		for (eachLabel, eachInfo) in zip(infoLabel, labelInfo) {
+			eachLabel.text = eachInfo
+		}
 		
 		if let city = CityManager.sharedManager.currentCity {
 			cityButton.setTitle(city.name, for: UIControlState())
@@ -287,7 +293,7 @@ class ViewController: UIViewController {
 	// MARK: - App out and in
 	func enterForeground() {
 		player?.play()
-		syncButtonPressedUp(syncButton)
+		refreshWeather()
 	}
 }
 

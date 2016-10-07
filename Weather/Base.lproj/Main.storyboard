@@ -33,10 +33,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="114" id="s9B-am-ziU" customClass="HeaderCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="114"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s9B-am-ziU" id="Ywi-cS-XwC">
-                                            <frame key="frameInset" width="1000" height="114"/>
+                                            <frame key="frameInset" width="375" height="113.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcY-Pw-HmR">
@@ -72,10 +72,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="20" reuseIdentifier="ForecastCell" rowHeight="80" id="mB1-Lt-uQB" customClass="ForecastCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="142" width="1000" height="80"/>
+                                        <rect key="frame" x="0.0" y="142" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mB1-Lt-uQB" id="khY-jO-Puv">
-                                            <frame key="frameInset" width="1000" height="80"/>
+                                            <frame key="frameInset" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hbh-gr-I2b">
@@ -216,7 +216,7 @@
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="HUMIDITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="JfJ-En-bhT">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="JfJ-En-bhT">
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -226,12 +226,12 @@
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="VISIBILITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="No1-8Z-IjQ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="No1-8Z-IjQ">
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="SUNRISE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="cCZ-Jz-GNb">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="cCZ-Jz-GNb">
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -241,7 +241,7 @@
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="SUNSET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="WwE-f6-NwR">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="WwE-f6-NwR">
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -251,7 +251,7 @@
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="PRESSURE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gAH-6T-Uma">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gAH-6T-Uma">
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -261,7 +261,7 @@
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="TREND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="fVU-qn-9mg">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="fVU-qn-9mg">
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -615,6 +615,12 @@
                         <outlet property="windsDirectionLabel" destination="anJ-6Q-gCm" id="he0-yh-29p"/>
                         <outlet property="windsSpeedLabel" destination="VRv-qd-BXw" id="E2h-tb-qdQ"/>
                         <outlet property="windsTempLabel" destination="Gue-Qb-OOh" id="ajo-KN-YLc"/>
+                        <outletCollection property="infoLabel" destination="gAH-6T-Uma" collectionClass="NSMutableArray" id="Ydw-K2-JhA"/>
+                        <outletCollection property="infoLabel" destination="JfJ-En-bhT" collectionClass="NSMutableArray" id="MMX-kj-EeI"/>
+                        <outletCollection property="infoLabel" destination="No1-8Z-IjQ" collectionClass="NSMutableArray" id="H5c-2p-jTh"/>
+                        <outletCollection property="infoLabel" destination="cCZ-Jz-GNb" collectionClass="NSMutableArray" id="cA4-ny-xLO"/>
+                        <outletCollection property="infoLabel" destination="WwE-f6-NwR" collectionClass="NSMutableArray" id="RYd-nq-q0t"/>
+                        <outletCollection property="infoLabel" destination="fVU-qn-9mg" collectionClass="NSMutableArray" id="vga-4k-iA3"/>
                         <segue destination="kro-Vb-0ib" kind="presentation" identifier="showCityView" id="gKq-Ow-d26"/>
                     </connections>
                 </viewController>
@@ -649,10 +655,10 @@
                                 <color key="tintColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="114" id="opc-05-5LO" customClass="HeaderCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="114"/>
+                                        <rect key="frame" x="0.0" y="28" width="383" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="opc-05-5LO" id="XvS-Bo-WLN">
-                                            <frame key="frameInset" width="1000" height="114"/>
+                                            <frame key="frameInset" width="383" height="113.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kf2-dx-Ob6">
@@ -682,10 +688,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="unitSetting" id="sbf-11-OiV" customClass="UnitSettingCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="142" width="1000" height="44"/>
+                                        <rect key="frame" x="0.0" y="142" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sbf-11-OiV" id="FKn-fz-mcI">
-                                            <frame key="frameInset" width="1000" height="44"/>
+                                            <frame key="frameInset" width="383" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2x-uY-c5X">
@@ -798,10 +804,10 @@
                                 <color key="tintColor" red="0.1843137255" green="0.37254901959999998" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="55" id="v5l-lV-07P" customClass="HeaderCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="55"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v5l-lV-07P" id="pCK-58-Qnr">
-                                            <frame key="frameInset" width="1000" height="55"/>
+                                            <frame key="frameInset" width="375" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vx-es-R1m">
@@ -812,7 +818,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="0Vx-es-R1m" secondAttribute="trailing" constant="8" id="BKd-TS-Efv"/>
-                                                <constraint firstItem="0Vx-es-R1m" firstAttribute="leading" secondItem="pCK-58-Qnr" secondAttribute="leadingMargin" constant="12" id="C75-pi-dca"/>
+                                                <constraint firstItem="0Vx-es-R1m" firstAttribute="leading" secondItem="pCK-58-Qnr" secondAttribute="leadingMargin" constant="8" id="C75-pi-dca"/>
                                                 <constraint firstItem="0Vx-es-R1m" firstAttribute="top" secondItem="pCK-58-Qnr" secondAttribute="topMargin" constant="3" id="kke-p6-bL0"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -821,10 +827,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchCell" id="hC6-hI-wMU" customClass="SearchCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="83" width="1000" height="44"/>
+                                        <rect key="frame" x="0.0" y="83" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hC6-hI-wMU" id="Dv6-dx-9LH">
-                                            <frame key="frameInset" width="1000" height="44"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Your city" translatesAutoresizingMaskIntoConstraints="NO" id="IXI-Kd-xCN">
@@ -837,7 +843,7 @@
                                                 </searchBar>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="IXI-Kd-xCN" firstAttribute="leading" secondItem="Dv6-dx-9LH" secondAttribute="leadingMargin" constant="6" id="2qu-Dc-9OK"/>
+                                                <constraint firstItem="IXI-Kd-xCN" firstAttribute="leading" secondItem="Dv6-dx-9LH" secondAttribute="leadingMargin" id="2qu-Dc-9OK"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="IXI-Kd-xCN" secondAttribute="trailing" constant="-8" id="QKX-lK-CbI"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="IXI-Kd-xCN" secondAttribute="bottom" constant="-8" id="Vey-f4-Cuw"/>
                                                 <constraint firstItem="IXI-Kd-xCN" firstAttribute="top" secondItem="Dv6-dx-9LH" secondAttribute="topMargin" constant="-8" id="zYU-za-tdm"/>
@@ -848,10 +854,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="subtitleCell" id="v5z-4M-BEZ" customClass="SubtitleCell" customModule="Weather" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="127" width="1000" height="44"/>
+                                        <rect key="frame" x="0.0" y="127" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v5z-4M-BEZ" id="L58-oz-m44">
-                                            <frame key="frameInset" width="1000" height="44"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMb-nH-x8u">
@@ -862,7 +868,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="mMb-nH-x8u" firstAttribute="top" secondItem="L58-oz-m44" secondAttribute="topMargin" constant="4" id="8n0-wm-E18"/>
-                                                <constraint firstItem="mMb-nH-x8u" firstAttribute="leading" secondItem="L58-oz-m44" secondAttribute="leadingMargin" constant="16" id="SEd-id-WOd"/>
+                                                <constraint firstItem="mMb-nH-x8u" firstAttribute="leading" secondItem="L58-oz-m44" secondAttribute="leadingMargin" constant="8" id="SEd-id-WOd"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="mMb-nH-x8u" secondAttribute="bottom" constant="3" id="Xol-lO-JGf"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="mMb-nH-x8u" secondAttribute="trailing" constant="8" id="qmB-US-wEI"/>
                                             </constraints>
@@ -875,7 +881,7 @@
                                         <rect key="frame" x="0.0" y="171" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bt9-6p-COk" id="8hu-7H-jTo">
-                                            <frame key="frameInset" width="375" height="66"/>
+                                            <frame key="frameInset" width="375" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REB-ZR-m2X">
@@ -899,7 +905,7 @@
                                                 <constraint firstItem="dwW-gJ-Yvz" firstAttribute="top" secondItem="REB-ZR-m2X" secondAttribute="top" id="7lb-qs-DKM"/>
                                                 <constraint firstItem="n7M-6M-kUy" firstAttribute="top" secondItem="REB-ZR-m2X" secondAttribute="bottom" constant="3" id="8mf-Ai-Brs"/>
                                                 <constraint firstItem="n7M-6M-kUy" firstAttribute="leading" secondItem="REB-ZR-m2X" secondAttribute="leading" id="RLX-Fq-XkS"/>
-                                                <constraint firstItem="REB-ZR-m2X" firstAttribute="leading" secondItem="8hu-7H-jTo" secondAttribute="leadingMargin" constant="16" id="TaE-Yv-4gv"/>
+                                                <constraint firstItem="REB-ZR-m2X" firstAttribute="leading" secondItem="8hu-7H-jTo" secondAttribute="leadingMargin" constant="8" id="TaE-Yv-4gv"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="n7M-6M-kUy" secondAttribute="bottom" constant="8" id="aLQ-Qc-uBX"/>
                                                 <constraint firstAttribute="topMargin" secondItem="REB-ZR-m2X" secondAttribute="top" id="bg8-U7-ZJr"/>
                                                 <constraint firstItem="n7M-6M-kUy" firstAttribute="trailing" secondItem="REB-ZR-m2X" secondAttribute="trailing" constant="4" id="osM-hn-WMI"/>
