@@ -181,7 +181,7 @@
                             <constraint firstItem="DCE-DI-gts" firstAttribute="leading" secondItem="Rf8-7p-UdK" secondAttribute="leading" id="hPb-EO-OEX"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="forecast" id="BjP-oQ-9vh"/>
+                    <tabBarItem key="tabBarItem" title="" image="forecast" selectedImage="forecast-selected" id="BjP-oQ-9vh"/>
                     <connections>
                         <outlet property="tableView" destination="DCE-DI-gts" id="k7p-ni-I8X"/>
                     </connections>
@@ -597,7 +597,7 @@
                             <action selector="touchToFullScreen" destination="BYZ-38-t0r" eventType="touchUpInside" id="s8N-Xz-y0F"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Weather" id="nNY-OA-2zX"/>
+                    <tabBarItem key="tabBarItem" title="" image="Weather" selectedImage="Weather-selected" id="nNY-OA-2zX"/>
                     <connections>
                         <outlet property="cityButton" destination="q9E-EU-m2O" id="ZtL-jV-0ma"/>
                         <outlet property="conditionIcon" destination="bkM-H7-ofx" id="VXa-Yi-d2p"/>
@@ -759,7 +759,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="setting" id="7z4-nu-zbW"/>
+                    <tabBarItem key="tabBarItem" title="" image="setting" selectedImage="setting-selected" id="7z4-nu-zbW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEN-Cs-KnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -881,7 +881,7 @@
                                         <rect key="frame" x="0.0" y="171" width="375" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bt9-6p-COk" id="8hu-7H-jTo">
-                                            <frame key="frameInset" width="375" height="70"/>
+                                            <frame key="frameInset" width="375" height="71"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REB-ZR-m2X">
@@ -941,7 +941,7 @@
                             <constraint firstItem="f6b-rk-MYh" firstAttribute="top" secondItem="Gcr-gg-shw" secondAttribute="bottom" id="RZS-aU-fUK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="search" id="6vt-TJ-4CP"/>
+                    <tabBarItem key="tabBarItem" title="" image="search" selectedImage="search-selected" id="6vt-TJ-4CP"/>
                     <connections>
                         <outlet property="tableView" destination="f6b-rk-MYh" id="4vg-zj-1S6"/>
                     </connections>
@@ -953,10 +953,14 @@
     </scenes>
     <resources>
         <image name="Weather" width="25" height="25"/>
+        <image name="Weather-selected" width="25" height="25"/>
         <image name="add" width="23" height="23"/>
         <image name="forecast" width="25" height="25"/>
+        <image name="forecast-selected" width="25" height="25"/>
         <image name="search" width="25" height="25"/>
+        <image name="search-selected" width="25" height="25"/>
         <image name="setting" width="24" height="24"/>
+        <image name="setting-selected" width="25" height="25"/>
         <image name="sync" width="23" height="23"/>
     </resources>
 </document>

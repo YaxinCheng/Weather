@@ -57,10 +57,6 @@ class ViewController: UIViewController {
 		
 		infoPanel.layer.opacity = 0.7
 		
-		tabBarController?.tabBar.backgroundImage = UIImage()
-		tabBarController?.tabBar.shadowImage = UIImage()
-		tabBarController?.tabBar.tintColor = view.tintColor
-		
 		NotificationCenter.default.addObserver(self, selector: #selector(loopVideo), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(refreshWeather), name: Notification.Name(rawValue: CityManagerNotification.currentCityDidChange.rawValue), object: nil)

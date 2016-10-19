@@ -17,4 +17,11 @@ class TabBarController: UITabBarController {
 		tabBar.frame = tabFrame
 	}
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		tabBar.backgroundImage = UIImage()
+		tabBar.shadowImage = UIImage()
+		tabBar.tintColor = .black
+	}
 }
