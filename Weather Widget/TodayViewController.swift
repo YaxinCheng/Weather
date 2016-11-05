@@ -35,7 +35,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			let humidity = userDefault?.string(forKey: "Humidity"),
 			let icon = userDefault?.string(forKey: "Icon"),
 			let unit = userDefault?.string(forKey: "unit")
-			else { return }
+		else { return }
 		weatherIconView.image = UIImage(named: icon)
 		cityLabel.text = city
 		tempLabel.text = temperature + unit

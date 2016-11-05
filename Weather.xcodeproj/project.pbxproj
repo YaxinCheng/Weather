@@ -545,7 +545,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Yaxin Cheng";
 				TargetAttributes = {
 					E3C7395F1D4A910500F51623 = {

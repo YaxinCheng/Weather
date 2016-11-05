@@ -17,6 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		do {
+			let cityList = try City.restoreFromCache()
+			guard !cityList.isEmpty else { return true }
+			var firstThreeCities = [City]()
+			for index in 0...2 where index < cityList.count {
+				firstThreeCities.append(cityList[index])
+			}
+			let cityShortCut = firstThreeCities.map { UIApplicationShortcutItem(type: (Bundle.main.bundleIdentifier ?? "") + ":" + $0.name, localizedTitle: $0.name) }
+			UIApplication.shared.shortcutItems?.append(contentsOf: cityShortCut)
+		} catch { }
+		
 		return true
 	}
 
