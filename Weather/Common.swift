@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIApplicationShortcutItem
 
 struct Common {
 	static let locationIdentifier = "LocationIdentifier"
@@ -24,4 +25,5 @@ struct Common {
 	static let unwindBackMain = "citySelected"
 	static let unwindFromCityView = "backFromCityView"
 	
+	static var shortCuts: Set<UIApplicationShortcutItem> = Set()
 }

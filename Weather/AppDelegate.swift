@@ -17,16 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-		do {
-			let cityList = try City.restoreFromCache()
-			guard !cityList.isEmpty else { return true }
-			var firstThreeCities = [City]()
-			for index in 0...2 where index < cityList.count {
-				firstThreeCities.append(cityList[index])
-			}
-			let cityShortCut = firstThreeCities.map { UIApplicationShortcutItem(type: (Bundle.main.bundleIdentifier ?? "") + ":" + $0.name, localizedTitle: $0.name) }
-			UIApplication.shared.shortcutItems?.append(contentsOf: cityShortCut)
-		} catch { }
 		
 		return true
 	}
@@ -34,6 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 		// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+		do {
+			let cityList = try City.restoreFromCache()
+			guard Common.shortCuts.count < 3 && !cityList.isEmpty else { return }
+			for index in 0..<(cityList.count > 3 ? 3 : cityList.count) {
+				let city = cityList[index]
+				let cityShortCut = UIApplicationShortcutItem(type: (Bundle.main.bundleIdentifier ?? "") + ":" + city.name, localizedTitle: city.name)
+				Common.shortCuts.insert(cityShortCut)
+			}
+			UIApplication.shared.shortcutItems?.removeAll(keepingCapacity: true)
+			UIApplication.shared.shortcutItems?.append(contentsOf: Common.shortCuts)
+		} catch {
+			print("Program crashes")
+		}
 	}
 
 	func applicationDidEnterBackground(_ application: UIApplication) {
@@ -53,6 +56,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 		// Saves changes in the application's managed object context before the application terminates.
 		self.saveContext()
+	}
+	
+	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+		let cityList: Array<City>
+		do {
+			cityList = try City.restoreFromCache()
+		} catch {
+			completionHandler(false)
+			return
+		}
+		for each in cityList {
+			if each.name == shortcutItem.localizedTitle {
+				CityManager.sharedManager.currentCity = each
+				completionHandler(true)
+				return
+			}
+		}
+		completionHandler(false)
 	}
 
 	// MARK: - Core Data stack
