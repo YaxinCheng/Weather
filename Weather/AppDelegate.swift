@@ -69,11 +69,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		for each in cityList {
 			if each.name == shortcutItem.localizedTitle {
 				CityManager.sharedManager.currentCity = each
+				CityManager.sharedManager.isLocal = false
 				completionHandler(true)
 				return
 			}
 		}
 		completionHandler(false)
+	}
+	
+	func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+		if url.absoluteString == "weatherX://main" {
+			CityManager.sharedManager.currentCity = nil
+			CityManager.sharedManager.isLocal = true
+		}
+		return true
 	}
 
 	// MARK: - Core Data stack
@@ -140,4 +149,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 }
-
