@@ -45,6 +45,12 @@ class ForecastController: UIViewController {
 		UIApplication.shared.statusBarStyle = .default
 		forecastWeather()
 	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(forecastWeather), name: Notification.Name(rawValue: CityManagerNotification.currentCityDidChange.rawValue), object: nil)
+	}
 }
 
 extension ForecastController: UITableViewDelegate, UITableViewDataSource {
