@@ -34,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 			UIApplication.shared.shortcutItems?.removeAll(keepingCapacity: true)
 			UIApplication.shared.shortcutItems?.append(contentsOf: Common.shortCuts)
+//			let addCity = UIApplicationShortcutItem(type: (Bundle.main.bundleIdentifier ?? "") + ":" + "add", localizedTitle: "Add City")
+//			UIApplication.shared.shortcutItems?.append(addCity)
 		} catch {
 			print("Program crashes")
 		}
